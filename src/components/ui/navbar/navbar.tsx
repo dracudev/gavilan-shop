@@ -8,10 +8,11 @@ export const Navbar = () => {
       {/* Logo */}
       <div>
         <Link href="/">
-          <span className={`${titleFont.className} antialiased font-bold`}>
+          <span
+            className={`${titleFont.className} antialiased font-bold text-xl`}
+          >
             El Gavilán
           </span>
-          <span> | Shop</span>
         </Link>
       </div>
 
@@ -19,21 +20,21 @@ export const Navbar = () => {
       <div className="hidden sm:block">
         <Link
           href="/category/men"
-          className="m-2 p-2 rounded-md transition-all hover:bg-orange-600"
+          className="m-2 p-2 rounded-md transition-all hover:text-orange-600"
         >
           Men
         </Link>
 
         <Link
           href="/category/women"
-          className="m-2 p-2 rounded-md transition-all hover:bg-orange-600"
+          className="m-2 p-2 rounded-md transition-all hover:text-orange-600"
         >
           Women
         </Link>
 
         <Link
           href="/category/kids"
-          className="m-2 p-2 rounded-md transition-all hover:bg-orange-600"
+          className="m-2 p-2 rounded-md transition-all hover:text-orange-600"
         >
           Kids
         </Link>
@@ -47,14 +48,14 @@ export const Navbar = () => {
 
         <Link href="/cart" className="mx-2">
           <div className="relative">
-            <span className="absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white">
+            <span className="absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-orange-600 text-white">
               3
             </span>
             <IoCartOutline className="w-5 h-5" />
           </div>
         </Link>
 
-        <button className="m-2 p-2 rounded-md transition-all hover:bg-orange-600">
+        <button className="m-2 p-2 rounded-md transition-all hover:text-orange-600">
           Menu
         </button>
       </div>
