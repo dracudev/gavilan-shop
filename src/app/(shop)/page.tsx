@@ -1,9 +1,9 @@
-import { inter } from "@/config/fonts";
+import { Title } from "@/components";
 
 export default function Shop() {
   return (
-    <div className=" items-center justify-center flex h-screen">
-      <h1 className={`${inter.className} text-4xl`}>Sombrerería El Gavilán</h1>
-    </div>
+    <>
+      <Title title="Shop" subtitle="All Products" className="mb-2" />
+    </>
   );
 }
