@@ -19,21 +19,21 @@ export const Navbar = () => {
       <div className="hidden sm:block">
         <Link
           href="/category/men"
-          className="m-2 p-2 rounded-md transition-all hover:bg-zinc-600"
+          className="m-2 p-2 rounded-md transition-all hover:bg-orange-600"
         >
           Men
         </Link>
 
         <Link
           href="/category/women"
-          className="m-2 p-2 rounded-md transition-all hover:bg-zinc-600"
+          className="m-2 p-2 rounded-md transition-all hover:bg-orange-600"
         >
           Women
         </Link>
 
         <Link
           href="/category/kids"
-          className="m-2 p-2 rounded-md transition-all hover:bg-zinc-600"
+          className="m-2 p-2 rounded-md transition-all hover:bg-orange-600"
         >
           Kids
         </Link>
@@ -54,7 +54,7 @@ export const Navbar = () => {
           </div>
         </Link>
 
-        <button className="m-2 p-2 rounded-md transition-all hover:bg-zinc-600">
+        <button className="m-2 p-2 rounded-md transition-all hover:bg-orange-600">
           Menu
         </button>
       </div>
