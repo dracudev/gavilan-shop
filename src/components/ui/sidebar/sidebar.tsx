@@ -24,7 +24,10 @@ export function Sidebar() {
       )}
 
       {isSideBarOpen && (
-        <div className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"></div>
+        <div
+          onClick={toggleSideBar}
+          className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+        ></div>
       )}
 
       {/* Sidebar */}
@@ -61,7 +64,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoPersonOutline size={30} />
-          <span className="ml-3 text-xl  ">Account</span>
+          <span className="ml-3 text-xl">Account</span>
         </Link>
 
         <Link
@@ -69,7 +72,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoTicketOutline size={30} />
-          <span className="ml-3 text-xl  ">Orders</span>
+          <span className="ml-3 text-xl">Orders</span>
         </Link>
 
         <Link
@@ -77,7 +80,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoLogInOutline size={30} />
-          <span className="ml-3 text-xl  ">Login</span>
+          <span className="ml-3 text-xl">Login</span>
         </Link>
 
         <Link
@@ -85,7 +88,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoLogOutOutline size={30} />
-          <span className="ml-3 text-xl  ">Logout</span>
+          <span className="ml-3 text-xl">Logout</span>
         </Link>
 
         {/* Separator */}
@@ -96,7 +99,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <FaRedhat size={30} />
-          <span className="ml-3 text-xl  ">Products</span>
+          <span className="ml-3 text-xl">Products</span>
         </Link>
 
         <Link
@@ -104,7 +107,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoTicketOutline size={30} />
-          <span className="ml-3 text-xl  ">Orders</span>
+          <span className="ml-3 text-xl">Orders</span>
         </Link>
 
         <Link
@@ -112,7 +115,7 @@ export function Sidebar() {
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoPeopleOutline size={30} />
-          <span className="ml-3 text-xl  ">Users</span>
+          <span className="ml-3 text-xl">Users</span>
         </Link>
       </nav>
     </div>

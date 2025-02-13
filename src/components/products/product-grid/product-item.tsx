@@ -14,7 +14,7 @@ export function ProductItem({ product }: ProductItemProps) {
 
   return (
     <div className="rounded-md overflow-hidden fade-in">
-      <Link href={`/products/${product.slug}`}>
+      <Link href={`/product/${product.slug}`}>
         <Image
           src={`/products/${isHovered}`}
           alt={product.title}

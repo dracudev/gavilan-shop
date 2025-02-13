@@ -1,20 +1,34 @@
-import { inter } from "@/config/fonts";
+import { ProductGrid, Title } from "@/components";
 import { notFound } from "next/navigation";
+import { initialData } from "@/seed/seed";
+import { Category } from "@/interfaces";
+
+const products = initialData.products;
 
 interface CategoryPageProps {
-  params: { id: string };
+  params: { id: Category };
 }
 
 export default function CategoryPage({ params }: CategoryPageProps) {
   const { id } = params;
 
-  if (id === "kids") {
-    notFound();
+  const categoryProducts = products.filter((product) => product.gender === id);
+
+  const labels: Record<Category, string> = {
+    men: "Men",
+    women: "Women",
+    kid: "Kids",
+    unisex: "Unisex",
+  };
+
+  if (!categoryProducts.length) {
+    return notFound();
   }
 
   return (
-    <div className=" items-center justify-center flex h-screen">
-      <h1 className={`${inter.className} text-4xl`}>Category Page {id}</h1>
-    </div>
+    <>
+      <Title title={labels[id]} className="mb-2" />
+      <ProductGrid products={categoryProducts} />
+    </>
   );
 }
