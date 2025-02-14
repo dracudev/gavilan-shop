@@ -18,7 +18,7 @@ export function ProductItem({ product }: ProductItemProps) {
         <Image
           src={`/products/${isHovered}`}
           alt={product.title}
-          className="w-full object-cover md:rounded"
+          className="w-full object-cover sm:rounded"
           width={500}
           height={500}
           onMouseEnter={() => setIsHovered(product.images[1])}

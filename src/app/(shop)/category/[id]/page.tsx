@@ -27,7 +27,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <>
-      <Title title={labels[id]} className="mb-2" />
+      <Title title={labels[id]} className="mb-2 ps-5 sm:ps-0" />
       <ProductGrid products={categoryProducts} />
     </>
   );
