@@ -4,3 +4,4 @@ export * from "./ui/title/title";
 export * from "./products/product-grid/product-grid";
 export * from "./products/product-grid/product-item";
 export * from "./ui/sidebar/sidebar";
+export * from "./product/size-selector/size-selector";
