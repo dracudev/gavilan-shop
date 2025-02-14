@@ -1,7 +1,9 @@
 "use client";
+
 import { useUIStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
+import { useEffect } from "react";
 import { FaRedhat } from "react-icons/fa";
 import {
   IoCloseOutline,
@@ -16,6 +18,14 @@ import {
 export function Sidebar() {
   const isSideBarOpen = useUIStore((state) => state.isSideBarOpen);
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
+
+  useEffect(() => {
+    if (isSideBarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isSideBarOpen]);
 
   return (
     <div>
@@ -33,7 +43,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <nav
         className={clsx(
-          "fixed p-5 right-0 top-0 w-screen sm:w-[500px] h-screen bg-white dark:bg-[var(--background)] z-20 shadow-2xl transform transition-all duration-300",
+          "fixed overflow-y-auto p-5 mt-10 right-0 top-0 w-screen sm:w-[500px] h-screen bg-white dark:bg-[var(--background)] z-20 shadow-2xl transform transition-all duration-300",
           {
             "translate-x-full": !isSideBarOpen,
           }
