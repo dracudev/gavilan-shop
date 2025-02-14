@@ -9,7 +9,7 @@ export const Navbar = () => {
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
 
   return (
-    <nav className="flex px-5 justify-between items-center w-full">
+    <nav className="fixed top-0 left-0 right-0 flex px-5 justify-between items-center w-full bg-[var(--background)] shadow-md z-50">
       {/* Logo */}
       <div>
         <Link href="/">
@@ -17,7 +17,8 @@ export const Navbar = () => {
             className={`${titleFont.className} antialiased font-bold text-xl`}
           >
             El Gavilán
-          </span>
+          </span>{" "}
+          | <span className="text-orange-500">Hat Shop</span>
         </Link>
       </div>
 

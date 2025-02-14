@@ -4,11 +4,11 @@ export default function ShopLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screenn pt-10">
       <Navbar />
       <Sidebar />
 
-      <div className="px-0 sm:px-10">{children}</div>
+      <div className="px-0 md:px-10">{children}</div>
     </main>
   );
 }

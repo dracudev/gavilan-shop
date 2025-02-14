@@ -33,7 +33,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <nav
         className={clsx(
-          "fixed p-5 right-0 top-0 w-[500px] h-screen bg-white dark:bg-[var(--background)] z-20 shadow-2xl transform transition-all duration-300",
+          "fixed p-5 right-0 top-0 w-screen sm:w-[500px] h-screen bg-white dark:bg-[var(--background)] z-20 shadow-2xl transform transition-all duration-300",
           {
             "translate-x-full": !isSideBarOpen,
           }

@@ -13,12 +13,12 @@ export function ProductItem({ product }: ProductItemProps) {
   const [isHovered, setIsHovered] = useState(product.images[0]);
 
   return (
-    <div className="rounded-md overflow-hidden fade-in">
+    <div className="md:rounded-md overflow-hidden fade-in">
       <Link href={`/product/${product.slug}`}>
         <Image
           src={`/products/${isHovered}`}
           alt={product.title}
-          className="w-full object-cover rounded"
+          className="w-full object-cover md:rounded"
           width={500}
           height={500}
           onMouseEnter={() => setIsHovered(product.images[1])}

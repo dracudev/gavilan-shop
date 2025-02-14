@@ -5,3 +5,6 @@ export * from "./products/product-grid/product-grid";
 export * from "./products/product-grid/product-item";
 export * from "./ui/sidebar/sidebar";
 export * from "./product/size-selector/size-selector";
+export * from "./product/qty-selector/qty-selector";
+export * from "./product/slideshow/product-slideshow";
+export * from "./product/slideshow/product-slideshow-mobile";

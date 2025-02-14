@@ -18,9 +18,12 @@ export function SizeSelector({
         {availableSizes.map((size) => (
           <button
             key={size}
-            className={clsx("mx-2 hover:underline text-lg", {
-              underline: size === selectedSize,
-            })}
+            className={clsx(
+              "mx-2 hover:underline decoration-orange-600 decoration-2 text-lg",
+              {
+                underline: size === selectedSize,
+              }
+            )}
           >
             {size}
           </button>

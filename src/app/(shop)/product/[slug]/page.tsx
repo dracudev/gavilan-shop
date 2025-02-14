@@ -1,4 +1,9 @@
-import { SizeSelector } from "@/components";
+import {
+  ProductSlideshow,
+  ProductSlideshowMobile,
+  QtySelector,
+  SizeSelector,
+} from "@/components";
 import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
@@ -18,10 +23,21 @@ export default function ProductPage({ params }: Props) {
   }
 
   return (
-    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div className="mt-5 mb-10 grid grid-cols-1 md:grid-cols-3 gap-3">
       {/* Slideshow */}
       <div className="col-span-1 md:col-span-2">
-        <h1>Hola Mundo</h1>
+        {/* Mobile */}
+        <ProductSlideshowMobile
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+        />
+        {/* Desktop */}
+        <ProductSlideshow
+          title={product.title}
+          images={product.images}
+          className="hidden md:block"
+        />
       </div>
 
       {/* Product Details */}
@@ -37,10 +53,11 @@ export default function ProductPage({ params }: Props) {
           selectedSize={product.sizes[0]}
           availableSizes={product.sizes}
         />
+        <QtySelector quantity={1} />
 
         <button className="btn-primary my-5">Add to cart</button>
 
-        <h3 className="font-bold text-sm">Description</h3>
+        <h3 className="font-bold text-sm mb-3">Description</h3>
         <p className="font-light">{product.description}</p>
       </div>
     </div>
