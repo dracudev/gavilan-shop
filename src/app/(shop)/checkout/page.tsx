@@ -40,10 +40,6 @@ export default function CartPage() {
                   <p>{product.title}</p>
                   <p>{product.price}€ x 3</p>
                   <p className="font-bold">Subtotal: ${product.price * 3}</p>
-
-                  <button className="underline mt-3 decoration-orange-600 decoration-2">
-                    Delete
-                  </button>
                 </div>
               </div>
             ))}
@@ -90,7 +86,7 @@ export default function CartPage() {
                 className="flex btn-primary justify-center "
                 href="/orders/1"
               >
-                Continue to Payment
+                Place Order
               </Link>
             </div>
           </div>
