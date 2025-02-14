@@ -86,7 +86,7 @@ export function Sidebar() {
         </Link>
 
         <Link
-          href="/"
+          href="/auth/login"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:text-white dark:hover:text-black  rounded transition-all text-zinc-700 hover:text-orange-600 transform duration-500"
         >
           <IoLogInOutline size={30} />

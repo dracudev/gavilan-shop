@@ -1,9 +1,42 @@
-import { inter } from "@/config/fonts";
+import { titleFont } from "@/config/fonts";
+import Link from "next/link";
 
-export default function SignUp() {
+export default function Login() {
   return (
-    <div className=" items-center justify-center flex h-screen">
-      <h1 className={`${inter.className} text-4xl`}>Sign Up Page</h1>
+    <div className="flex flex-col min-h-screen pt-32 sm:pt-52">
+      <h1 className={`${titleFont.className} text-4xl mb-5`}>Sign Up</h1>
+
+      <div className="flex flex-col">
+        <label htmlFor="text">Username</label>
+        <input
+          className="px-5 py-2 border bg-gray-200 dark:text-black rounded mb-5"
+          type="text"
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          className="px-5 py-2 border bg-gray-200 dark:text-black rounded mb-5"
+          type="email"
+        />
+
+        <label htmlFor="text">Password</label>
+        <input
+          className="px-5 py-2 border bg-gray-200 dark:text-black rounded mb-5"
+          type="email"
+        />
+
+        <button className="btn-primary">Sign Up</button>
+
+        <div className="flex items-center my-5">
+          <div className="flex-1 border-t border-gray-500"></div>
+          <div className="px-2 text-gray-800 dark:text-white">O</div>
+          <div className="flex-1 border-t border-gray-500"></div>
+        </div>
+
+        <Link href="/auth/login" className="btn-secondary text-center">
+          Login
+        </Link>
+      </div>
     </div>
   );
 }
