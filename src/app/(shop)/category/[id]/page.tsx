@@ -9,8 +9,8 @@ interface CategoryPageProps {
   params: { id: Category };
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const { id } = params;
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { id } = await params;
 
   const categoryProducts = products.filter((product) => product.gender === id);
 

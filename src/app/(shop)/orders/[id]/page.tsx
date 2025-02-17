@@ -16,8 +16,8 @@ interface Props {
   };
 }
 
-export default function CartPage({ params }: Props) {
-  const { id } = params;
+export default async function CartPage({ params }: Props) {
+  const { id } = await params;
 
   // TODO: Validate id and fetch order data
 
