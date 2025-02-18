@@ -1,18 +1,18 @@
+"use client";
+
 import { ProductGrid, Title } from "@/components";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { initialData } from "@/seed/seed";
-import { Category } from "@/interfaces";
+import { type Category } from "@/interfaces";
 
 const products = initialData.products;
 
-interface CategoryPageProps {
-  params: { id: Category };
-}
+export default function CategoryPage() {
+  const params = useParams<{ id: Category }>();
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { id } = await params;
-
-  const categoryProducts = products.filter((product) => product.gender === id);
+  const categoryProducts = products.filter(
+    (product) => product.gender === params.id
+  );
 
   const labels: Record<Category, string> = {
     men: "Men",
@@ -27,7 +27,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <>
-      <Title title={labels[id]} className="mb-2 ps-5 sm:ps-0" />
+      <Title title={labels[params.id]} className="mb-2 ps-5 sm:ps-0" />
       <ProductGrid products={categoryProducts} />
     </>
   );

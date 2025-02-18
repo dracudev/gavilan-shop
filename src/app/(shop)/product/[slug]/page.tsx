@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ProductSlideshow,
   ProductSlideshowMobile,
@@ -5,21 +7,19 @@ import {
   SizeSelector,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
+import useFetchProduct from "@/hooks/use-fetch-product";
+import { notFound, useParams } from "next/navigation";
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
+export default function ProductPage() {
+  const params = useParams<{ slug: string }>();
+  const { product, loading: productLoading } = useFetchProduct(params.slug);
 
-export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
-  const product = initialData.products.find((product) => product.slug === slug);
+  if (productLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (!product) {
-    notFound();
+    return notFound();
   }
 
   return (
@@ -41,7 +41,7 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {/* Product Details */}
-      <div className="col-span-1 px-5 ">
+      <div className="col-span-1 px-5">
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>

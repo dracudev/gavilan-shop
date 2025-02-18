@@ -1,7 +1,10 @@
+"use client";
+
 import { Title } from "@/components";
 import { initialData } from "@/seed/seed";
 import clsx from "clsx";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
 const productsInCart = [
@@ -10,21 +13,14 @@ const productsInCart = [
   initialData.products[2],
 ];
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
-
-export default async function CartPage({ params }: Props) {
-  const { id } = await params;
-
+export default function CartPage() {
+  const params = useParams<{ id: string }>();
   // TODO: Validate id and fetch order data
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
       <div className="flex flex-col w-[1000px]">
-        <Title title={`Order #${id}`} />
+        <Title title={`Order #${params.id}`} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
           {/* Cart Items */}
