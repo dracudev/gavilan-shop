@@ -20,8 +20,7 @@ export const Navbar = () => {
             className={`${titleFont.className} antialiased font-bold text-xl`}
           >
             El Gavilán
-          </span>{" "}
-          | <span className="text-orange-500">Hat Shop</span>
+          </span>
         </Link>
       </div>
 
