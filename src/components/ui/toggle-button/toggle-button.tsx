@@ -19,7 +19,7 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
   <label
     className={`${styles.container} ${
       isDark ? styles.IsDark : styles.IsLight
-    } mx-2`}
+    } mx-2 cursor-pointer`}
     title={isDark ? "Activate light mode" : "Activate dark mode"}
     aria-label={isDark ? "Activate light mode" : "Activate dark mode"}
   >
