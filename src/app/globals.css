@@ -13,8 +13,10 @@
 }
 
 :root {
-  --color-toggle-light: #ea5a0cbe;
-  --color-toggle-dark: #ea5a0cbe;
+  --primary-color: #0c8aea; /*#ea5a0c*/
+  --dark-primary-color: #563bdf; /*#9a3412*/
+  --secondary-color: #f6f5f6;
+  --dark-secondary-color: #d1d5db;
 }
 
 body {
@@ -52,9 +54,9 @@ body {
 }
 
 .btn-primary {
-  @apply bg-orange-600 hover:bg-orange-800 text-white py-1 px-4 rounded transition-all duration-300;
+  @apply bg-[var(--primary-color)] hover:bg-[var(--dark-primary-color)] text-white py-1 px-4 rounded transition-all duration-300;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all duration-300;
+  @apply bg-[var(--secondary-color)] hover:bg-[var(--dark-secondary-color)] text-black py-2 px-4 rounded transition-all duration-300;
 }

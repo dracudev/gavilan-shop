@@ -23,7 +23,7 @@ export default function CartPage() {
           <div className="flex flex-col mt-5">
             <Link
               href="/"
-              className="underline mb-5 decoration-orange-600 decoration-2"
+              className="underline mb-5 decoration-[var(--primary-color)] decoration-2"
             >
               Continue Shopping
             </Link>
@@ -44,7 +44,7 @@ export default function CartPage() {
                   <p>{product.price}€</p>
                   <QtySelector quantity={3} />
 
-                  <button className="underline mt-3 decoration-orange-600 decoration-2">
+                  <button className="underline mt-3 decoration-[var(--primary-color)] decoration-2">
                     Delete
                   </button>
                 </div>

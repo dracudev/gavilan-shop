@@ -12,7 +12,7 @@ export default function EmptyPage() {
           You have no items in your cart.{" "}
           <Link
             href="/"
-            className="text-orange-600 hover:underline decoration-orange-600"
+            className="text-[var(--primary-color)] hover:underline decoration-[var(--primary-color)]"
           >
             Start adding some!
           </Link>

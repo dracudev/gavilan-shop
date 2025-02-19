@@ -53,7 +53,7 @@ export default function OrdersPage() {
               <td className="text-sm text-gray-900 dark:text-white font-light px-6 ">
                 <Link
                   href="/orders/1"
-                  className="hover:underline hover:text-orange-600 decoration-orange-600"
+                  className="hover:underline hover:text-[var(--primary-color)] decoration-[var(--primary-color)]"
                 >
                   View order
                 </Link>
@@ -74,7 +74,7 @@ export default function OrdersPage() {
               <td className="text-sm text-gray-900 dark:text-white font-light px-6 ">
                 <Link
                   href="/orders/2"
-                  className="hover:underline hover:text-orange-600 decoration-orange-600"
+                  className="hover:underline hover:text-[var(--primary-color)] decoration-[var(--primary-color)]"
                 >
                   View order
                 </Link>

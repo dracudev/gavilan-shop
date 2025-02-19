@@ -12,7 +12,7 @@ export function NotFound() {
           <span>You can come back to </span>
           <Link
             href="/"
-            className="font-normal text-orange-600 hover:underline transition-all"
+            className="font-normal text-[var(--primary-color)] hover:underline transition-all"
           >
             home
           </Link>

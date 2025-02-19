@@ -7,7 +7,7 @@
   width: 20px;
   height: 20px;
   position: relative;
-  box-shadow: inset 6px -6px 0 0 var(--color-toggle-dark, #000);
+  box-shadow: inset 6px -6px 0 0 var(--dark-primary-color, #000);
   transform: scale(1) rotate(-2deg);
   transition: box-shadow 0.5s ease 0s, transform 0.4s ease 0.1s;
 }
@@ -32,14 +32,14 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  box-shadow: 0 -13px 0 var(--color-toggle-light, #eee),
-    0 13px 0 var(--color-toggle-light, #eee),
-    13px 0 0 var(--color-toggle-light, #eee),
-    -13px 0 0 var(--color-toggle-light, #eee),
-    10px 10px 0 var(--color-toggle-light, #eee),
-    -10px 10px 0 var(--color-toggle-light, #eee),
-    10px -10px 0 var(--color-toggle-light, #eee),
-    -10px -10px 0 var(--color-toggle-light, #eee);
+  box-shadow: 0 -13px 0 var(--dark-primary-color, #eee),
+    0 13px 0 var(--dark-primary-color, #eee),
+    13px 0 0 var(--dark-primary-color, #eee),
+    -13px 0 0 var(--dark-primary-color, #eee),
+    10px 10px 0 var(--dark-primary-color, #eee),
+    -10px 10px 0 var(--dark-primary-color, #eee),
+    10px -10px 0 var(--dark-primary-color, #eee),
+    -10px -10px 0 var(--dark-primary-color, #eee);
   transform: scale(0);
   transition: all 0.3s ease;
 }
@@ -51,7 +51,7 @@
 }
 
 .container input:checked + div::before {
-  background: var(--color-toggle-light, #eee);
+  background: var(--dark-primary-color, #eee);
   transition: background 0.3s ease 0.1s;
 }
 

@@ -20,7 +20,7 @@ export default function CartPage() {
           <div className="flex flex-col mt-5">
             <Link
               href="/cart"
-              className="underline mb-5 decoration-orange-600 decoration-2"
+              className="underline mb-5 decoration-[var(--primary-color)] decoration-2"
             >
               Edit Cart
             </Link>
@@ -76,7 +76,7 @@ export default function CartPage() {
                 By placing your order, you agree to our{" "}
                 <a
                   href="www.wikipedia.com"
-                  className="text-orange-600 hover:underline decoration-orange-600"
+                  className="text-[var(--primary-color)] hover:underline decoration-[var(--primary-color)]"
                 >
                   Terms of Use and Privacy Policy
                 </a>

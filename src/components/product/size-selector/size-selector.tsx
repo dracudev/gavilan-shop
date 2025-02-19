@@ -19,7 +19,7 @@ export function SizeSelector({
           <button
             key={size}
             className={clsx(
-              "mx-2 hover:underline decoration-orange-600 decoration-2 text-lg",
+              "mx-2 hover:underline decoration-[var(--primary-color)] decoration-2 text-lg",
               {
                 underline: size === selectedSize,
               }
