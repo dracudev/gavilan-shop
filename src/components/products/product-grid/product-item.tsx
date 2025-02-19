@@ -28,7 +28,7 @@ export function ProductItem({ product }: ProductItemProps) {
 
       <div className="p-4 flex flex-col">
         <Link
-          className="dark:text-white hover:text-[var(--primary-color)]"
+          className=" hover:text-[var(--primary-color)] dark:hover:text-[var(--primary-color)] transition-all duration-300"
           href={`/products/${product.slug}`}
         >
           {product.title}
