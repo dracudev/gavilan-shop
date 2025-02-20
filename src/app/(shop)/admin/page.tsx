@@ -10,7 +10,8 @@ interface CustomJwtPayload extends JwtPayload {
 export default async function PrivatePage() {
   const supabase = await createClient();
 
-  const { subscription: authListener } = supabase.auth.onAuthStateChange(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: authListener } = supabase.auth.onAuthStateChange(
     async (event, session) => {
       if (session) {
         const jwt = jwtDecode<CustomJwtPayload>(session.access_token);
