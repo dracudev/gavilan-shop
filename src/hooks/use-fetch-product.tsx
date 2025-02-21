@@ -1,6 +1,6 @@
 import { Product } from "@/interfaces";
 import { useState, useEffect } from "react";
-import { FetchApi } from "../utils/fetch-api";
+import { getProducts } from "../utils/get-products";
 
 function useFetchProduct(slug: string | undefined) {
   const [product, setProduct] = useState<Product | null>(null);
@@ -14,7 +14,7 @@ function useFetchProduct(slug: string | undefined) {
 
     async function fetchProduct() {
       try {
-        const fetchedProducts = await FetchApi();
+        const fetchedProducts = (await getProducts()) ?? [];
         const foundProduct = fetchedProducts.find(
           (product: Product) => product.slug === slug
         );

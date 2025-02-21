@@ -2,13 +2,16 @@
 
 import { ProductGrid, Title } from "@/components";
 import { notFound, useParams } from "next/navigation";
-import { initialData } from "@/seed/seed";
 import { type Category } from "@/interfaces";
-
-const products = initialData.products;
+import { useFetchProducts } from "@/hooks/use-fetch-products";
 
 export default function CategoryPage() {
   const params = useParams<{ id: Category }>();
+  const { products, loading } = useFetchProducts();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const categoryProducts = products.filter(
     (product) => product.gender === params.id

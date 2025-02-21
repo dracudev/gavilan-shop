@@ -1,20 +1,19 @@
 "use client";
 
 import { Title } from "@/components";
-import { initialData } from "@/seed/seed";
+import { useFetchProducts } from "@/hooks/use-fetch-products";
 import clsx from "clsx";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
-const productsInCart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-];
-
-export default function CartPage() {
+export default function OrderPage() {
   const params = useParams<{ id: string }>();
+  const { products } = useFetchProducts();
+  const productsInCart = [products[0], products[1], products[2]].filter(
+    Boolean
+  );
+
   // TODO: Validate id and fetch order data
 
   return (
