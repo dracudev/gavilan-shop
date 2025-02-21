@@ -1,16 +1,27 @@
+// src/app/(shop)/category/[id]/page.tsx
 import { ProductGrid, Title } from "@/components";
 import { notFound } from "next/navigation";
-import { Product, type Category } from "@/interfaces";
+import { Category } from "@/interfaces";
 import { getProducts } from "@/utils/get-products";
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { id: Category };
-}) {
-  const { id } = await params;
-  const data: Product[] = (await getProducts()) ?? [];
+interface Props {
+  params: Promise<{
+    id: string;
+  }>;
+}
 
+export default async function CategoryPage({ params }: Props) {
+  const { id } = await params;
+
+  const isValidCategory = (value: string): value is Category => {
+    return ["men", "women", "kid", "unisex"].includes(value);
+  };
+
+  if (!isValidCategory(id)) {
+    return notFound();
+  }
+
+  const data = await getProducts();
   const categoryProducts = data.filter((product) => product.gender === id);
 
   const labels: Record<Category, string> = {
@@ -26,7 +37,7 @@ export default async function CategoryPage({
 
   return (
     <>
-      <Title title={labels[id]} className="mb-2 ps-5 sm:ps-0" />
+      <Title title={labels[id as Category]} className="mb-2 ps-5 sm:ps-0" />
       <ProductGrid products={categoryProducts} />
     </>
   );

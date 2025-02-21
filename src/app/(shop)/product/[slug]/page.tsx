@@ -9,11 +9,13 @@ import { Product } from "@/interfaces";
 import { getProducts } from "@/utils/get-products";
 import { notFound } from "next/navigation";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface Props {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const data: Product[] = (await getProducts()) ?? [];
   const foundProduct = data.find((product: Product) => product.slug === slug);

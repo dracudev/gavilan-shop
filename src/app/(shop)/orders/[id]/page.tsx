@@ -5,11 +5,13 @@ import clsx from "clsx";
 import Image from "next/image";
 import { IoCardOutline } from "react-icons/io5";
 
-export default async function OrderPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface Props {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function OrderPage({ params }: Props) {
   const { id } = await params;
   const data: Product[] = (await getProducts()) ?? [];
   const productsInCart = [data[0], data[1], data[2]].filter(Boolean);

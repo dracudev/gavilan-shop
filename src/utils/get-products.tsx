@@ -1,9 +1,18 @@
 import { Product } from "@/interfaces";
-import { createClient } from "./supabase/client";
+import { createClient } from "./supabase/server";
 
-export async function getProducts(): Promise<Product[] | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase.from("products").select("*");
-  if (error) console.error("Error fetching products:", error);
-  return data;
+export async function getProducts(): Promise<Product[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .throwOnError();
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
 }

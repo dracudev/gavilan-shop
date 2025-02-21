@@ -10,3 +10,4 @@ export * from "./product/slideshow/product-slideshow";
 export * from "./product/slideshow/product-slideshow-mobile";
 export * from "./ui/footer/footer";
 export * from "./ui/toggle-button/toggle-button";
+export * from "./ui/loading/loading";
