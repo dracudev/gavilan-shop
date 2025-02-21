@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ProductSlideshow,
   ProductSlideshowMobile,
@@ -7,18 +5,20 @@ import {
   SizeSelector,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import useFetchProduct from "@/hooks/use-fetch-product";
-import { notFound, useParams } from "next/navigation";
+import { Product } from "@/interfaces";
+import { getProducts } from "@/utils/get-products";
+import { notFound } from "next/navigation";
 
-export default function ProductPage() {
-  const params = useParams<{ slug: string }>();
-  const { product, loading: productLoading } = useFetchProduct(params.slug);
+export default async function ProductPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = await params;
+  const data: Product[] = (await getProducts()) ?? [];
+  const foundProduct = data.find((product: Product) => product.slug === slug);
 
-  if (productLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!product) {
+  if (!foundProduct) {
     return notFound();
   }
 
@@ -28,14 +28,14 @@ export default function ProductPage() {
       <div className="col-span-1 md:col-span-2">
         {/* Mobile */}
         <ProductSlideshowMobile
-          title={product.title}
-          images={product.images}
+          title={foundProduct.title}
+          images={foundProduct.images}
           className="block md:hidden"
         />
         {/* Desktop */}
         <ProductSlideshow
-          title={product.title}
-          images={product.images}
+          title={foundProduct.title}
+          images={foundProduct.images}
           className="hidden md:block"
         />
       </div>
@@ -43,22 +43,22 @@ export default function ProductPage() {
       {/* Product Details */}
       <div className="col-span-1 px-5">
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
-          {product.title}
+          {foundProduct.title}
         </h1>
 
-        <p className="text-lg mb-5">{product.price}€</p>
+        <p className="text-lg mb-5">{foundProduct.price}€</p>
 
         {/* Selectors */}
         <SizeSelector
-          selectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
+          selectedSize={foundProduct.sizes[0]}
+          availableSizes={foundProduct.sizes}
         />
         <QtySelector quantity={1} />
 
         <button className="btn-primary my-5">Add to cart</button>
 
         <h3 className="font-bold text-sm mb-3">Description</h3>
-        <p className="font-light">{product.description}</p>
+        <p className="font-light">{foundProduct.description}</p>
       </div>
     </div>
   );

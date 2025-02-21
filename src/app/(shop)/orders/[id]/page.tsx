@@ -1,25 +1,25 @@
-"use client";
-
 import { Title } from "@/components";
-import { useFetchProducts } from "@/hooks/use-fetch-products";
+import { Product } from "@/interfaces";
+import { getProducts } from "@/utils/get-products";
 import clsx from "clsx";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
-export default function OrderPage() {
-  const params = useParams<{ id: string }>();
-  const { products } = useFetchProducts();
-  const productsInCart = [products[0], products[1], products[2]].filter(
-    Boolean
-  );
+export default async function OrderPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = await params;
+  const data: Product[] = (await getProducts()) ?? [];
+  const productsInCart = [data[0], data[1], data[2]].filter(Boolean);
 
   // TODO: Validate id and fetch order data
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
       <div className="flex flex-col w-[1000px]">
-        <Title title={`Order #${params.id}`} />
+        <Title title={`Order #${id}`} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
           {/* Cart Items */}

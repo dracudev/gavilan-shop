@@ -1,21 +1,17 @@
-"use client";
-
 import { ProductGrid, Title } from "@/components";
-import { notFound, useParams } from "next/navigation";
-import { type Category } from "@/interfaces";
-import { useFetchProducts } from "@/hooks/use-fetch-products";
+import { notFound } from "next/navigation";
+import { Product, type Category } from "@/interfaces";
+import { getProducts } from "@/utils/get-products";
 
-export default function CategoryPage() {
-  const params = useParams<{ id: Category }>();
-  const { products, loading } = useFetchProducts();
+export default async function CategoryPage({
+  params,
+}: {
+  params: { id: Category };
+}) {
+  const { id } = await params;
+  const data: Product[] = (await getProducts()) ?? [];
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  const categoryProducts = products.filter(
-    (product) => product.gender === params.id
-  );
+  const categoryProducts = data.filter((product) => product.gender === id);
 
   const labels: Record<Category, string> = {
     men: "Men",
@@ -30,7 +26,7 @@ export default function CategoryPage() {
 
   return (
     <>
-      <Title title={labels[params.id]} className="mb-2 ps-5 sm:ps-0" />
+      <Title title={labels[id]} className="mb-2 ps-5 sm:ps-0" />
       <ProductGrid products={categoryProducts} />
     </>
   );
