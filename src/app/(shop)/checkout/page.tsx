@@ -4,6 +4,8 @@ import { getProducts } from "@/utils/get-products";
 import Image from "next/image";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function CheckoutPage() {
   const data: Product[] = (await getProducts()) ?? [];
   const productsInCart = [data[0], data[1], data[2]];

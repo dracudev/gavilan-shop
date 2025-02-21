@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function CartPage() {
   const data: Product[] = (await getProducts()) ?? [];
   const productsInCart = [data[0], data[1], data[2]];
