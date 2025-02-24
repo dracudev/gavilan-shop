@@ -1,11 +1,14 @@
 import { ProductGrid, Title } from "@/components";
-import { Product } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
+import { fetcher } from "@/utils/get-products";
+import useSWR from "swr";
 
-export const dynamic = "force-dynamic";
+//export const dynamic = "force-dynamic";
 
-export default async function Shop() {
-  const data: Product[] = (await getProducts()) ?? [];
+export default function Shop() {
+  const { data, error } = useSWR("products", fetcher);
+
+  if (error) return <div>Failed to load products</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <>

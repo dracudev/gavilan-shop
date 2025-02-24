@@ -16,3 +16,8 @@ export async function getProducts(): Promise<Product[]> {
     return [];
   }
 }
+
+export const fetcher = async () => {
+  const data: Product[] = await getProducts();
+  return data;
+};
