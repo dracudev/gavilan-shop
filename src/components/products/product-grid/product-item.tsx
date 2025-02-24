@@ -11,18 +11,23 @@ interface ProductItemProps {
 
 export function ProductItem({ product }: ProductItemProps) {
   const [isHovered, setIsHovered] = useState(product.images[0]);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <div className="md:rounded-md overflow-hidden fade-in">
-      <Link href={`/product/${product.slug}`}>
+      <Link href={`/product/${product.slug}`} prefetch={false}>
         <Image
-          src={`/products/${isHovered}`}
+          src={
+            imageError ? "/imgs/fallback-image.webp" : `/products/${isHovered}`
+          }
           alt={product.title}
           className="w-full object-cover sm:rounded"
           width={500}
           height={500}
           onMouseEnter={() => setIsHovered(product.images[1])}
           onMouseLeave={() => setIsHovered(product.images[0])}
+          onError={() => setImageError(true)}
+          unoptimized
         ></Image>
       </Link>
 
@@ -30,6 +35,7 @@ export function ProductItem({ product }: ProductItemProps) {
         <Link
           className=" hover:text-[var(--primary-color)] dark:hover:text-[var(--primary-color)] transition-all duration-300"
           href={`/products/${product.slug}`}
+          prefetch={false}
         >
           {product.title}
         </Link>

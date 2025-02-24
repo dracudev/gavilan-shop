@@ -54,7 +54,7 @@ export const Navbar = () => {
           isDark={theme === "dark"}
           onChange={toggleTheme}
         ></ToggleButton>
-        <Link href="/search" className="mx-2">
+        <Link href="#" className="mx-2">
           <IoSearchOutline className="w-5 h-5 hover:text-[var(--primary-color)] transform duration-500" />
         </Link>
 

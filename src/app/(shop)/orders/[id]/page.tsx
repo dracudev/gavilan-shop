@@ -11,11 +11,9 @@ interface Props {
   }>;
 }
 
-export const dynamic = "force-dynamic";
-
 export default async function OrderPage({ params }: Props) {
   const { id } = await params;
-  const data: Product[] = (await getProducts()) ?? [];
+  const data: Product[] = await getProducts();
   const productsInCart = [data[0], data[1], data[2]].filter(Boolean);
 
   // TODO: Validate id and fetch order data

@@ -1,9 +1,11 @@
 import { Product } from "@/interfaces";
-import { createClient } from "./supabase/server";
+import { createClient } from "./supabase/client";
+import { cache } from "react";
 
-export async function getProducts(): Promise<Product[]> {
+const getProducts = cache(async (): Promise<Product[]> => {
   try {
-    const supabase = await createClient();
+    const supabase = createClient();
+
     const { data, error } = await supabase
       .from("products")
       .select("*")
@@ -15,9 +17,6 @@ export async function getProducts(): Promise<Product[]> {
     console.error("Error fetching products:", error);
     return [];
   }
-}
+});
 
-export const fetcher = async () => {
-  const data: Product[] = await getProducts();
-  return data;
-};
+export { getProducts };
