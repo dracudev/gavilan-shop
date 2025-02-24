@@ -5,7 +5,7 @@ import { login } from "../actions";
 export default function Login() {
   return (
     <form>
-      <div className="flex flex-col min-h-screen pt-32 sm:pt-52">
+      <div className="flex flex-col min-h-screen items-center justify-center">
         <h1 className={`${titleFont.className} text-4xl mb-5`}>Login</h1>
 
         <div className="flex flex-col">

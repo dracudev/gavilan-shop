@@ -1,8 +1,7 @@
 import { Product } from "@/interfaces";
 import { createClient } from "./supabase/client";
-import { cache } from "react";
 
-const getProducts = cache(async (): Promise<Product[]> => {
+const getProducts = async (): Promise<Product[]> => {
   try {
     const supabase = createClient();
 
@@ -17,6 +16,6 @@ const getProducts = cache(async (): Promise<Product[]> => {
     console.error("Error fetching products:", error);
     return [];
   }
-});
+};
 
 export { getProducts };
