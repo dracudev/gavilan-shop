@@ -1,22 +1,17 @@
+"use client";
+
 import { Title } from "@/components";
-import { Product } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
+import { useCartStore } from "@/store";
 import clsx from "clsx";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
-interface Props {
-  params: Promise<{
-    id: string;
-  }>;
-}
+export default function OrderPage() {
+  const { id } = useParams();
+  const { items, totalAmount } = useCartStore();
 
-export default async function OrderPage({ params }: Props) {
-  const { id } = await params;
-  const data: Product[] = await getProducts();
-  const productsInCart = [data[0], data[1], data[2]].filter(Boolean);
-
-  // TODO: Validate id and fetch order data
+  // TODO: Validate id and fetch order data from DB
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
@@ -39,10 +34,13 @@ export default async function OrderPage({ params }: Props) {
               <span className="mx-2">Paid</span>
             </div>
 
-            {productsInCart.map((product) => (
-              <div key={product.slug} className="flex mb-5 truncate">
+            {items.map((product) => (
+              <div
+                key={`${product.id}-${product.size}`}
+                className="flex mb-5 truncate"
+              >
                 <Image
-                  src={`/products/${product.images[0]}`}
+                  src={`/products/${product.image}`}
                   alt={product.title}
                   style={{ width: "100px", height: "100px" }}
                   width={100}
@@ -52,8 +50,12 @@ export default async function OrderPage({ params }: Props) {
 
                 <div>
                   <p>{product.title}</p>
-                  <p>{product.price}€ x 3</p>
-                  <p className="font-bold">Subtotal: ${product.price * 3}</p>
+                  <p>
+                    {product.price}€ x {product.quantity}
+                  </p>
+                  <p className="font-bold">
+                    Subtotal: ${product.price * product.quantity}
+                  </p>
                 </div>
               </div>
             ))}
@@ -81,7 +83,9 @@ export default async function OrderPage({ params }: Props) {
               <span className="text-right">4,99€</span>
 
               <span className="mt-5 font-bold text-2xl">Total:</span>
-              <span className="text-right mt-5 font-bold text-2xl">300€</span>
+              <span className="text-right mt-5 font-bold text-2xl">
+                {totalAmount}€
+              </span>
             </div>
 
             <div className="mt-5 mb-2 w-full">

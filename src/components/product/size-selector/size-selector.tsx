@@ -4,11 +4,13 @@ import clsx from "clsx";
 interface SizeSelectorProps {
   availableSizes: Size[];
   selectedSize: Size;
+  onSizeChange: (size: Size) => void;
 }
 
 export function SizeSelector({
   selectedSize,
   availableSizes,
+  onSizeChange,
 }: SizeSelectorProps) {
   return (
     <div className="my-5 ">
@@ -24,6 +26,7 @@ export function SizeSelector({
                 underline: size === selectedSize,
               }
             )}
+            onClick={() => onSizeChange(size)}
           >
             {size}
           </button>

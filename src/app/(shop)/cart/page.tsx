@@ -1,15 +1,24 @@
+"use client";
+
 import { QtySelector, Title } from "@/components";
-import { Product } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { useCartStore } from "@/store/cart/cart-store";
+import { useEffect } from "react";
 
-export default async function CartPage() {
-  const data: Product[] = await getProducts();
-  const productsInCart = [data[0], data[1], data[2]];
+export default function CartPage() {
+  const { items, removeItem, totalAmount } = useCartStore();
 
-  if (productsInCart.length === 0) redirect("/empty");
+  useEffect(() => {
+    if (items.length === 0) {
+      redirect("/empty");
+    }
+  }, [items]);
+
+  if (items.length === 0) {
+    return null;
+  }
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
@@ -26,11 +35,14 @@ export default async function CartPage() {
               Continue Shopping
             </Link>
 
-            {productsInCart.map((product) => (
-              <div key={product.slug} className="flex mb-5 truncate">
+            {items.map((item) => (
+              <div
+                key={`${item.id}-${item.size}`}
+                className="flex mb-5 truncate"
+              >
                 <Image
-                  src={`/products/${product.images[0]}`}
-                  alt={product.title}
+                  src={`/products/${item.image}`}
+                  alt={item.title}
                   style={{ width: "100px", height: "100px" }}
                   width={100}
                   height={100}
@@ -38,11 +50,15 @@ export default async function CartPage() {
                 />
 
                 <div>
-                  <p>{product.title}</p>
-                  <p>{product.price}€</p>
-                  <QtySelector quantity={3} />
+                  <p>{item.title}</p>
+                  <p>{item.price}€</p>
+                  <p>Size: {item.size}</p>
+                  <QtySelector id={item.id} />
 
-                  <button className="underline mt-3 decoration-[var(--primary-color)] decoration-2">
+                  <button
+                    className="underline mt-3 decoration-[var(--primary-color)] decoration-2"
+                    onClick={() => removeItem(item.id, item.size)}
+                  >
                     Delete
                   </button>
                 </div>
@@ -61,7 +77,9 @@ export default async function CartPage() {
               <span className="text-right">4,99€</span>
 
               <span className="mt-5 font-bold text-2xl">Subtotal:</span>
-              <span className="text-right mt-5 font-bold text-2xl">300€</span>
+              <span className="text-right mt-5 font-bold text-2xl">
+                {totalAmount}€
+              </span>
             </div>
 
             <div className="mt-5 mb-2 w-full">

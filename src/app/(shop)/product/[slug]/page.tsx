@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ProductSlideshow,
   ProductSlideshowMobile,
@@ -5,24 +7,48 @@ import {
   SizeSelector,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { Product } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
-import { notFound } from "next/navigation";
+import useFetchProduct from "@/hooks/use-fetch-product";
+import { Size } from "@/interfaces";
+import { useCartStore } from "@/store/cart/cart-store";
+import { notFound, useParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
-interface Props {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+export default function ProductPage() {
+  const { slug } = useParams();
+  const { product, loading } = useFetchProduct(
+    Array.isArray(slug) ? slug[0] : slug
+  );
+  const { addItem } = useCartStore();
+  const [selectedSize, setSelectedSize] = useState<Size>("XS");
+  const [quantity, setQuantity] = useState(1);
 
-export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
-  const data: Product[] = await getProducts();
-  const foundProduct = data.find((product: Product) => product.slug === slug);
+  useEffect(() => {
+    if (product && product.sizes.length > 0) {
+      setSelectedSize(product.sizes[0]);
+    }
+  }, [product]);
 
-  if (!foundProduct) {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!product) {
     return notFound();
   }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) return;
+
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      quantity,
+      size: selectedSize,
+      slug: product.slug,
+      image: product.images[0],
+    });
+  };
 
   return (
     <div className="md:mt-10 mb-10 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -30,14 +56,14 @@ export default async function ProductPage({ params }: Props) {
       <div className="col-span-1 md:col-span-2">
         {/* Mobile */}
         <ProductSlideshowMobile
-          title={foundProduct.title}
-          images={foundProduct.images}
+          title={product.title}
+          images={product.images}
           className="block md:hidden"
         />
         {/* Desktop */}
         <ProductSlideshow
-          title={foundProduct.title}
-          images={foundProduct.images}
+          title={product.title}
+          images={product.images}
           className="hidden md:block"
         />
       </div>
@@ -45,22 +71,25 @@ export default async function ProductPage({ params }: Props) {
       {/* Product Details */}
       <div className="col-span-1 px-5">
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
-          {foundProduct.title}
+          {product.title}
         </h1>
-
-        <p className="text-lg mb-5">{foundProduct.price}€</p>
-
+        <p className="text-lg mb-5">{product.price}€</p>
         {/* Selectors */}
         <SizeSelector
-          selectedSize={foundProduct.sizes[0]}
-          availableSizes={foundProduct.sizes}
+          selectedSize={selectedSize}
+          availableSizes={product.sizes}
+          onSizeChange={setSelectedSize}
         />
-        <QtySelector quantity={1} />
-
-        <button className="btn-primary my-5">Add to cart</button>
-
+        <QtySelector
+          id={product.id}
+          updateCart={false}
+          onQuantityChange={setQuantity}
+        />
+        <button className="btn-primary my-5" onClick={handleAddToCart}>
+          Add to cart
+        </button>
         <h3 className="font-bold text-sm mb-3">Description</h3>
-        <p className="font-light">{foundProduct.description}</p>
+        <p className="font-light">{product.description}</p>
       </div>
     </div>
   );

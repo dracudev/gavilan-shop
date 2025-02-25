@@ -1,12 +1,12 @@
+"use client";
+
 import { Title } from "@/components";
-import { Product } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
+import { useCartStore } from "@/store";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function CheckoutPage() {
-  const data: Product[] = await getProducts();
-  const productsInCart = [data[0], data[1], data[2]];
+export default function CheckoutPage() {
+  const { items, totalAmount } = useCartStore();
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
@@ -23,10 +23,13 @@ export default async function CheckoutPage() {
               Edit Cart
             </Link>
 
-            {productsInCart.map((product) => (
-              <div key={product.slug} className="flex mb-5 truncate">
+            {items.map((product) => (
+              <div
+                key={`${product.id}-${product.size}`}
+                className="flex mb-5 truncate"
+              >
                 <Image
-                  src={`/products/${product.images[0]}`}
+                  src={`/products/${product.image}`}
                   alt={product.title}
                   style={{ width: "100px", height: "100px" }}
                   width={100}
@@ -36,8 +39,12 @@ export default async function CheckoutPage() {
 
                 <div>
                   <p>{product.title}</p>
-                  <p>{product.price}€ x 3</p>
-                  <p className="font-bold">Subtotal: ${product.price * 3}</p>
+                  <p>
+                    {product.price}€ x <span>{product.quantity}</span>
+                  </p>
+                  <p className="font-bold">
+                    Subtotal: ${product.price * product.quantity}
+                  </p>
                 </div>
               </div>
             ))}
@@ -65,7 +72,9 @@ export default async function CheckoutPage() {
               <span className="text-right">4,99€</span>
 
               <span className="mt-5 font-bold text-2xl">Total:</span>
-              <span className="text-right mt-5 font-bold text-2xl">300€</span>
+              <span className="text-right mt-5 font-bold text-2xl">
+                {totalAmount}€
+              </span>
             </div>
 
             <div className="mt-5 mb-2 w-full">
@@ -83,6 +92,7 @@ export default async function CheckoutPage() {
               <Link
                 className="flex btn-primary justify-center "
                 href="/orders/1"
+                // onClick={clearItems}
               >
                 Place Order
               </Link>

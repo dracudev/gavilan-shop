@@ -2,7 +2,7 @@
 
 import { titleFont } from "@/config/fonts";
 import { useTheme } from "@/context/theme-context";
-import { useUIStore } from "@/store";
+import { useCartStore, useUIStore } from "@/store";
 import Link from "next/link";
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 import { ToggleButton } from "../toggle-button/toggle-button";
@@ -10,6 +10,7 @@ import { ToggleButton } from "../toggle-button/toggle-button";
 export const Navbar = () => {
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
   const { theme, toggleTheme } = useTheme();
+  const totalItems = useCartStore((state) => state.totalItems);
 
   return (
     <nav className="fixed top-0 left-0 right-0 flex px-5 justify-between items-center w-full bg-[var(--background)] shadow-md z-50">
@@ -60,9 +61,12 @@ export const Navbar = () => {
 
         <Link href="/cart" className="mx-2">
           <div className="relative">
-            <span className="absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-[var(--primary-color)] text-white">
-              3
-            </span>
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[var(--primary-color)] text-[var(--background)] rounded-full px-0.5 text-xs">
+                {totalItems}
+              </span>
+            )}
+
             <IoCartOutline className="w-5 h-5 hover:text-[var(--primary-color)] transform duration-500" />
           </div>
         </Link>
