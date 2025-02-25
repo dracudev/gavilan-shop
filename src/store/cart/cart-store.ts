@@ -18,9 +18,6 @@ interface State {
   removeItem: (id: string, size: string) => void;
   updateItemQuantity: (id: string, quantity: number) => void;
   clearItems: () => void;
-  incrementTotalAmount: (amount: number) => void;
-  decrementTotalAmount: (amount: number) => void;
-  resetTotalAmount: () => void;
 }
 
 export const useCartStore = create<State>()((set) => ({
@@ -81,9 +78,4 @@ export const useCartStore = create<State>()((set) => ({
       };
     }),
   clearItems: () => set({ items: [], totalItems: 0, totalAmount: 0 }),
-  incrementTotalAmount: (amount: number) =>
-    set((state) => ({ totalAmount: state.totalAmount + amount })),
-  decrementTotalAmount: (amount: number) =>
-    set((state) => ({ totalAmount: state.totalAmount - amount })),
-  resetTotalAmount: () => set({ totalAmount: 0 }),
 }));
