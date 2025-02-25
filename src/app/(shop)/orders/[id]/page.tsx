@@ -62,7 +62,7 @@ export default function OrderPage() {
           </div>
 
           {/* Checkout */}
-          <div className="bg-white dark:bg-zinc-800  shadow-xl p-7 rounded">
+          <div className="bg-white dark:bg-zinc-800  shadow-xl p-7 rounded h-fit">
             <h2 className="text-2xl mb-2">Address</h2>
             <div className="mb-10">
               <p>Javier Andreu</p>
