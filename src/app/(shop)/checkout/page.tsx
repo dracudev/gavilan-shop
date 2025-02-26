@@ -2,11 +2,24 @@
 
 import { Title } from "@/components";
 import { useCartStore } from "@/store";
+import { useOrderStore } from "@/store/order/order-store";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function CheckoutPage() {
-  const { items, totalAmount } = useCartStore();
+  const { items, totalAmount, clearItems } = useCartStore();
+  const { shipmentInfo, setItems, setTotalAmount, placeOrder, orderId } =
+    useOrderStore();
+
+  const handlePlaceOrder = async () => {
+    setItems(items);
+    setTotalAmount(totalAmount);
+    await placeOrder();
+    if (!orderId) return;
+    clearItems();
+    redirect(`/orders/${orderId}`);
+  };
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
@@ -54,10 +67,14 @@ export default function CheckoutPage() {
           <div className="bg-white dark:bg-zinc-800  shadow-xl p-7 rounded h-fit">
             <h2 className="text-2xl mb-2">Address</h2>
             <div className="mb-10">
-              <p>Javier Andreu</p>
-              <p>Carrer Aurora</p>
-              <p>Barcelona, 08001</p>
-              <p>637358834</p>
+              <p>
+                {shipmentInfo.name} {shipmentInfo.surname}
+              </p>
+              <p>{shipmentInfo.address}</p>
+              <p>
+                {shipmentInfo.city}, {shipmentInfo.postalCode}
+              </p>
+              <p>{shipmentInfo.telephone}</p>
             </div>
 
             <div className="w-full h-0.5 rounded bg-gray-200 mb-10" />
@@ -89,13 +106,12 @@ export default function CheckoutPage() {
                 </a>
                 .
               </p>
-              <Link
-                className="flex btn-primary justify-center "
-                href="/orders/1"
-                // onClick={clearItems}
+              <div
+                className="flex btn-primary justify-center"
+                onClick={handlePlaceOrder}
               >
                 Place Order
-              </Link>
+              </div>
             </div>
           </div>
         </div>

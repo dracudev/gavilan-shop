@@ -1,5 +1,4 @@
 import { titleFont } from "@/config/fonts";
-import Image from "next/image";
 import Link from "next/link";
 
 export function NotFound() {
@@ -17,16 +16,6 @@ export function NotFound() {
             home
           </Link>
         </p>
-      </div>
-
-      <div className="px-5 mx-5">
-        <Image
-          src="/imgs/not-found.png"
-          alt="Not Found Image"
-          width={550}
-          height={550}
-          className="p-5 sm:p-0"
-        />
       </div>
     </div>
   );

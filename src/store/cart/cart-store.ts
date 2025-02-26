@@ -1,14 +1,5 @@
 import { create } from "zustand";
-
-interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  quantity: number;
-  size: string;
-  slug: string;
-  image: string;
-}
+import { CartItem } from "@/interfaces";
 
 interface State {
   items: CartItem[];

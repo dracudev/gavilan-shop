@@ -14,6 +14,7 @@ import {
   IoSearchOutline,
   IoTicketOutline,
 } from "react-icons/io5";
+import { logout } from "@/app/(shop)/auth/actions";
 
 export function Sidebar() {
   const isSideBarOpen = useUIStore((state) => state.isSideBarOpen);
@@ -93,13 +94,13 @@ export function Sidebar() {
           <span className="ml-3 text-xl">Login</span>
         </Link>
 
-        <Link
-          href="/"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+        <div
+          onClick={logout}
+          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black cursor-pointer  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
         >
           <IoLogOutOutline size={30} />
           <span className="ml-3 text-xl">Logout</span>
-        </Link>
+        </div>
 
         {/* Separator */}
         <div className="w-full h-px bg-gray-300 my-5"></div>
