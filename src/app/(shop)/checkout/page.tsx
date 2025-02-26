@@ -5,22 +5,23 @@ import { useCartStore } from "@/store";
 import { useOrderStore } from "@/store/order/order-store";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
   const { items, totalAmount, clearItems } = useCartStore();
   const { shipmentInfo, setItems, setTotalAmount, placeOrder, clearOrder } =
     useOrderStore();
+  const router = useRouter();
 
   const handlePlaceOrder = async () => {
     setItems(items);
     setTotalAmount(totalAmount);
     const orderId = await placeOrder();
     if (!orderId) return;
+    router.push(`/orders/${orderId}`);
     setTimeout(() => {
       clearItems();
       clearOrder();
-      redirect(`/orders/${orderId}`);
     }, 3000);
   };
 

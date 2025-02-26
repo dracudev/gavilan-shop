@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { CartItem } from "@/interfaces";
 import { ShipmentInfo } from "@/interfaces";
 import { createClient } from "@/services/supabase/client";
+import { insertOrder } from "@/services/order-service";
 
 interface OrderState {
   userId: string;
@@ -50,67 +51,18 @@ export const useOrderStore = create<OrderState>((set, get) => ({
     }
     const userId = user.id;
 
-    const { data: orderData, error: orderError } = await supabase
-      .from("orders")
-      .insert([
-        {
-          user_id: userId,
-          total_amount: state.totalAmount,
-        },
-      ])
-      .select("order_id")
-      .single();
+    const orderId = await insertOrder(
+      userId,
+      state.totalAmount,
+      state.items,
+      state.shipmentInfo
+    );
 
-    if (orderError) {
-      console.error("Error placing order:", orderError);
-      return null;
+    if (orderId) {
+      set({ orderId });
+      set({ shipmentInfo: {} as ShipmentInfo, items: [], totalAmount: 0 });
     }
 
-    const orderId = orderData.order_id;
-    set({ orderId });
-
-    const orderItems = state.items.map((item) => ({
-      order_id: orderId,
-      title: item.title,
-      image: item.image,
-      product_id: item.id,
-      quantity: item.quantity,
-      size: item.size,
-      price: item.price,
-    }));
-
-    const { error: orderItemsError } = await supabase
-      .from("order_items")
-      .insert(orderItems);
-
-    if (orderItemsError) {
-      console.error("Error inserting order items:", orderItemsError);
-      return null;
-    }
-
-    const { error: shipmentError } = await supabase
-      .from("order_shipment")
-      .insert([
-        {
-          order_id: orderId,
-          user_id: userId,
-          name: state.shipmentInfo.name,
-          surname: state.shipmentInfo.surname,
-          address: state.shipmentInfo.address,
-          address_2: state.shipmentInfo.address2,
-          postal_code: state.shipmentInfo.postalCode,
-          city: state.shipmentInfo.city,
-          country: state.shipmentInfo.country,
-          telephone: state.shipmentInfo.telephone,
-        },
-      ]);
-
-    if (shipmentError) {
-      console.error("Error inserting shipment info:", shipmentError);
-      return null;
-    }
-
-    console.log("Order placed successfully");
     return orderId;
   },
 

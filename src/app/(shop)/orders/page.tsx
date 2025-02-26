@@ -1,6 +1,7 @@
 "use client";
 
 import { Title } from "@/components";
+import Loading from "@/components/ui/loading/loading";
 import { useFetchOrders } from "@/hooks/order/use-fetch-orders";
 import Link from "next/link";
 import { IoCardOutline } from "react-icons/io5";
@@ -9,37 +10,37 @@ export default function OrdersPage() {
   const { orders, loading } = useFetchOrders();
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
   return (
     <>
       <Title title="Orders" />
 
       <div className="mb-10">
-        <table className="min-w-full">
-          <thead className="bg-gray-200 dark:bg-zinc-800 border-b">
+        <table className="min-w-full rounded-lg overflow-hidden">
+          <thead className="bg-gray-300 dark:bg-zinc-700  border-b">
             <tr>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium px-6 py-4 text-left"
               >
                 #ID
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium  px-6 py-4 text-left"
               >
                 Full Name
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium px-6 py-4 text-left"
               >
                 Status
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium  px-6 py-4 text-left"
               >
                 Options
               </th>
@@ -49,7 +50,7 @@ export default function OrdersPage() {
             {orders.map((order) => (
               <tr
                 key={order.order_id}
-                className="bg-white dark:bg-zinc-500 border-b transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-zinc-600"
+                className="bg-white dark:bg-slate-100 border-b transition duration-300 ease-in-out hover:bg-orange-100 dark:hover:bg-orange-100"
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {order.order_id}

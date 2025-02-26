@@ -1,6 +1,7 @@
 "use client";
 
 import { Title } from "@/components";
+import Loading from "@/components/ui/loading/loading";
 import { useFetchOrder } from "@/hooks/order/use-fetch-order";
 import clsx from "clsx";
 import Image from "next/image";
@@ -12,7 +13,7 @@ export default function OrderPage() {
   const { order, loading } = useFetchOrder(id);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (!order) {

@@ -6,6 +6,7 @@ import {
   QtySelector,
   SizeSelector,
 } from "@/components";
+import Loading from "@/components/ui/loading/loading";
 import { titleFont } from "@/config/fonts";
 import useFetchProduct from "@/hooks/product/use-fetch-product";
 import { Size } from "@/interfaces";
@@ -29,7 +30,7 @@ export default function ProductPage() {
   }, [product]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (!product) {
