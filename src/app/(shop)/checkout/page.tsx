@@ -9,16 +9,19 @@ import { redirect } from "next/navigation";
 
 export default function CheckoutPage() {
   const { items, totalAmount, clearItems } = useCartStore();
-  const { shipmentInfo, setItems, setTotalAmount, placeOrder, orderId } =
+  const { shipmentInfo, setItems, setTotalAmount, placeOrder, clearOrder } =
     useOrderStore();
 
   const handlePlaceOrder = async () => {
     setItems(items);
     setTotalAmount(totalAmount);
-    await placeOrder();
+    const orderId = await placeOrder();
     if (!orderId) return;
-    clearItems();
-    redirect(`/orders/${orderId}`);
+    setTimeout(() => {
+      clearItems();
+      clearOrder();
+      redirect(`/orders/${orderId}`);
+    }, 3000);
   };
 
   return (
@@ -65,7 +68,7 @@ export default function CheckoutPage() {
 
           {/* Checkout */}
           <div className="bg-white dark:bg-zinc-800  shadow-xl p-7 rounded h-fit">
-            <h2 className="text-2xl mb-2">Address</h2>
+            <h2 className="text-2xl mb-2">Shipment</h2>
             <div className="mb-10">
               <p>
                 {shipmentInfo.name} {shipmentInfo.surname}
@@ -107,7 +110,7 @@ export default function CheckoutPage() {
                 .
               </p>
               <div
-                className="flex btn-primary justify-center"
+                className="flex btn-primary justify-center cursor-pointer"
                 onClick={handlePlaceOrder}
               >
                 Place Order

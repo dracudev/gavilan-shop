@@ -12,7 +12,7 @@ interface OrderState {
   setShipmentInfo: (info: ShipmentInfo) => void;
   setItems: (items: CartItem[]) => void;
   setTotalAmount: (amount: number) => void;
-  placeOrder: () => Promise<void>;
+  placeOrder: () => Promise<string | null>;
   clearOrder: () => void;
   setOrderId: (id: string) => void;
 }
@@ -46,7 +46,7 @@ export const useOrderStore = create<OrderState>((set, get) => ({
     } = await supabase.auth.getUser();
     if (!user) {
       console.error("User not authenticated");
-      return;
+      return null;
     }
     const userId = user.id;
 
@@ -63,7 +63,7 @@ export const useOrderStore = create<OrderState>((set, get) => ({
 
     if (orderError) {
       console.error("Error placing order:", orderError);
-      return;
+      return null;
     }
 
     const orderId = orderData.order_id;
@@ -71,6 +71,8 @@ export const useOrderStore = create<OrderState>((set, get) => ({
 
     const orderItems = state.items.map((item) => ({
       order_id: orderId,
+      title: item.title,
+      image: item.image,
       product_id: item.id,
       quantity: item.quantity,
       size: item.size,
@@ -83,7 +85,7 @@ export const useOrderStore = create<OrderState>((set, get) => ({
 
     if (orderItemsError) {
       console.error("Error inserting order items:", orderItemsError);
-      return;
+      return null;
     }
 
     const { error: shipmentError } = await supabase
@@ -105,11 +107,11 @@ export const useOrderStore = create<OrderState>((set, get) => ({
 
     if (shipmentError) {
       console.error("Error inserting shipment info:", shipmentError);
-      return;
+      return null;
     }
 
     console.log("Order placed successfully");
-    set({ shipmentInfo: {} as ShipmentInfo, items: [], totalAmount: 0 });
+    return orderId;
   },
 
   clearOrder: () =>

@@ -7,7 +7,7 @@ import {
   SizeSelector,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import useFetchProduct from "@/hooks/use-fetch-product";
+import useFetchProduct from "@/hooks/product/use-fetch-product";
 import { Size } from "@/interfaces";
 import { useCartStore } from "@/store/cart/cart-store";
 import { notFound, useParams } from "next/navigation";

@@ -1,17 +1,23 @@
 "use client";
 
 import { Title } from "@/components";
-import { useCartStore } from "@/store";
+import { useFetchOrder } from "@/hooks/order/use-fetch-order";
 import clsx from "clsx";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
 export default function OrderPage() {
-  const { id } = useParams();
-  const { items, totalAmount } = useCartStore();
+  const { id } = useParams<{ id: string }>();
+  const { order, loading } = useFetchOrder(id);
 
-  // TODO: Validate id and fetch order data from DB
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!order) {
+    return notFound();
+  }
 
   return (
     <div className="flex justify-center items-center mb-72 px-5 sm:px-0">
@@ -25,23 +31,23 @@ export default function OrderPage() {
               className={clsx(
                 "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
                 {
-                  "bg-red-500": false,
-                  "bg-green-700": true,
+                  "bg-red-500": !order.paid,
+                  "bg-green-700": order.paid,
                 }
               )}
             >
               <IoCardOutline size={30} />
-              <span className="mx-2">Paid</span>
+              <span className="mx-2">{order.paid ? "Paid" : "Pending"}</span>
             </div>
 
-            {items.map((product) => (
+            {order.order_items.map((product) => (
               <div
-                key={`${product.id}-${product.size}`}
+                key={`${product.product_id}-${product.size}`}
                 className="flex mb-5 truncate"
               >
                 <Image
                   src={`/products/${product.image}`}
-                  alt={product.title}
+                  alt={product.product_id}
                   style={{ width: "100px", height: "100px" }}
                   width={100}
                   height={100}
@@ -54,7 +60,7 @@ export default function OrderPage() {
                     {product.price}€ x {product.quantity}
                   </p>
                   <p className="font-bold">
-                    Subtotal: ${product.price * product.quantity}
+                    Subtotal: {product.price * product.quantity}€
                   </p>
                 </div>
               </div>
@@ -62,18 +68,23 @@ export default function OrderPage() {
           </div>
 
           {/* Checkout */}
-          <div className="bg-white dark:bg-zinc-800  shadow-xl p-7 rounded h-fit">
-            <h2 className="text-2xl mb-2">Address</h2>
+          <div className="bg-white dark:bg-zinc-800 shadow-xl p-7 rounded h-fit">
+            <h2 className="text-2xl mb-2">Shipment</h2>
             <div className="mb-10">
-              <p>Javier Andreu</p>
-              <p>Carrer Aurora</p>
-              <p>Barcelona, 08001</p>
-              <p>637358834</p>
+              <p>
+                {order.order_shipment[0].name} {order.order_shipment[0].surname}
+              </p>
+              <p>{order.order_shipment[0].address}</p>
+              <p>
+                {order.order_shipment[0].city},{" "}
+                {order.order_shipment[0].postal_code}
+              </p>
+              <p>{order.order_shipment[0].telephone}</p>
             </div>
 
             <div className="w-full h-0.5 rounded bg-gray-200 mb-10" />
 
-            <h2 className="text-2xl mb-2 ">Order Summary</h2>
+            <h2 className="text-2xl mb-2">Order Summary</h2>
 
             <div className="grid grid-cols-2">
               <span>Shipment</span>
@@ -84,24 +95,20 @@ export default function OrderPage() {
 
               <span className="mt-5 font-bold text-2xl">Total:</span>
               <span className="text-right mt-5 font-bold text-2xl">
-                {totalAmount}€
+                {order.total_amount}€
               </span>
             </div>
-
-            <div className="mt-5 mb-2 w-full">
-              {" "}
-              <div
-                className={clsx(
-                  "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                  {
-                    "bg-red-500": false,
-                    "bg-green-700": true,
-                  }
-                )}
-              >
-                <IoCardOutline size={30} />
-                <span className="mx-2">Paid</span>
-              </div>
+            <div
+              className={clsx(
+                "flex items-center rounded-lg py-1 mt-5 px-3.5 text-xs font-bold text-white mb-5",
+                {
+                  "bg-red-500": !order.paid,
+                  "bg-green-700": order.paid,
+                }
+              )}
+            >
+              <IoCardOutline size={30} />
+              <span className="mx-2">{order.paid ? "Paid" : "Pending"}</span>
             </div>
           </div>
         </div>

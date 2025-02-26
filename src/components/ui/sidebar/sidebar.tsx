@@ -71,7 +71,7 @@ export function Sidebar() {
 
         {/* Menu */}
         <Link
-          href="/"
+          href="/account"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
         >
           <IoPersonOutline size={30} />
@@ -79,7 +79,7 @@ export function Sidebar() {
         </Link>
 
         <Link
-          href="/"
+          href="/orders"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
         >
           <IoTicketOutline size={30} />
