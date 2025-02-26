@@ -1,5 +1,5 @@
 import { Product } from "@/interfaces";
-import { createClient } from "./supabase/client";
+import { createClient } from "@/services/supabase/client";
 
 const getProducts = async (): Promise<Product[]> => {
   try {

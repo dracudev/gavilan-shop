@@ -1,6 +1,6 @@
 import { Product } from "@/interfaces";
 import { useState, useEffect } from "react";
-import { getProducts } from "../utils/get-products";
+import { getProducts } from "@/services/product-service";
 
 function useFetchProduct(slug: string | undefined) {
   const [product, setProduct] = useState<Product | null>(null);

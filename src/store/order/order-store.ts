@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { CartItem } from "@/interfaces";
 import { ShipmentInfo } from "@/interfaces";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/services/supabase/client";
 
 interface OrderState {
   userId: string;

@@ -1,6 +1,6 @@
 import { ProductGrid, Title } from "@/components";
 import { Product } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
+import { getProducts } from "@/services/product-service";
 
 export default async function Shop() {
   const data: Product[] = await getProducts();

@@ -1,7 +1,7 @@
 import { JwtPayload } from "jwt-decode";
 import { jwtDecode } from "jwt-decode";
 import { redirect } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/services/supabase/server";
 
 interface CustomJwtPayload extends JwtPayload {
   user_role: string;

@@ -2,7 +2,7 @@
 import { ProductGrid, Title } from "@/components";
 import { notFound } from "next/navigation";
 import { Category } from "@/interfaces";
-import { getProducts } from "@/utils/get-products";
+import { getProducts } from "@/services/product-service";
 
 interface Props {
   params: Promise<{
