@@ -1,8 +1,7 @@
-// src/app/(shop)/category/[id]/page.tsx
 import { ProductGrid, Title } from "@/components";
 import { notFound } from "next/navigation";
 import { Category } from "@/interfaces";
-import { getProducts } from "@/services/product-service";
+import { getProductsByGender } from "@/services/product-service";
 
 interface Props {
   params: Promise<{
@@ -21,8 +20,7 @@ export default async function CategoryPage({ params }: Props) {
     return notFound();
   }
 
-  const data = await getProducts();
-  const categoryProducts = data.filter((product) => product.gender === id);
+  const categoryProducts = await getProductsByGender(id);
 
   const labels: Record<Category, string> = {
     men: "Men",
