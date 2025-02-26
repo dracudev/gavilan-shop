@@ -14,7 +14,7 @@ import {
   IoSearchOutline,
   IoTicketOutline,
 } from "react-icons/io5";
-import { logout } from "@/app/(shop)/auth/actions";
+import { logout } from "@/services/supabase/actions";
 
 export function Sidebar() {
   const isSideBarOpen = useUIStore((state) => state.isSideBarOpen);
@@ -87,7 +87,7 @@ export function Sidebar() {
         </Link>
 
         <Link
-          href="/auth/login"
+          href="/login"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
         >
           <IoLogInOutline size={30} />

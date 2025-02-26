@@ -12,7 +12,7 @@ export default function CartPage() {
 
   useEffect(() => {
     if (items.length === 0) {
-      redirect("/empty");
+      redirect("/cart/empty");
     }
   }, [items]);
 

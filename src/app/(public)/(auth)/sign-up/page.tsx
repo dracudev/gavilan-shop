@@ -1,14 +1,22 @@
 import { titleFont } from "@/config/fonts";
 import Link from "next/link";
-import { login } from "../actions";
+import { signup } from "../../../../services/supabase/actions";
 
 export default function Login() {
   return (
     <form>
       <div className="flex flex-col min-h-screen items-center justify-center">
-        <h1 className={`${titleFont.className} text-4xl mb-5`}>Login</h1>
-
+        <h1 className={`${titleFont.className} text-4xl mb-5`}>Sign Up</h1>
         <div className="flex flex-col">
+          <label htmlFor="text">Username</label>
+          <input
+            className="px-5 py-2 border bg-gray-200 dark:text-black rounded mb-5"
+            id="username"
+            name="username"
+            type="username"
+            required
+          />
+
           <label htmlFor="email">Email</label>
           <input
             className="px-5 py-2 border bg-gray-200 dark:text-black rounded mb-5"
@@ -18,7 +26,7 @@ export default function Login() {
             required
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="text">Password</label>
           <input
             className="px-5 py-2 border bg-gray-200 dark:text-black rounded mb-5"
             id="password"
@@ -27,8 +35,8 @@ export default function Login() {
             required
           />
 
-          <button className="btn-primary" formAction={login}>
-            Login
+          <button className="btn-primary" formAction={signup}>
+            Sign Up
           </button>
 
           <div className="flex items-center my-5">
@@ -37,8 +45,8 @@ export default function Login() {
             <div className="flex-1 border-t border-gray-500"></div>
           </div>
 
-          <Link href="/auth/sign-up" className="btn-secondary text-center">
-            Create new account
+          <Link href="/login" className="btn-secondary text-center">
+            Login
           </Link>
         </div>
       </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <div className="flex w-full justify-center text-xs mb-10">
+    <footer className="flex w-full justify-center text-xs mb-10">
       <Link
         href="/"
         className="hover:underline hover:text-[var(--primary-color)] decoration-[var(--primary-color)]"
@@ -27,6 +27,6 @@ export function Footer() {
       >
         Locations
       </Link>
-    </div>
+    </footer>
   );
 }
