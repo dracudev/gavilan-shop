@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider>
-        <body className="light">{children}</body>
+        <body>{children}</body>
       </ThemeProvider>
     </html>
   );
