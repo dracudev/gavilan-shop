@@ -5,17 +5,20 @@ import { useCartStore } from "@/store";
 import { useOrderStore } from "@/store/order/order-store";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { handleCheckout } from "@/services/stripe/checkout";
 
 export default function CheckoutPage() {
-  const { items, totalAmount, clearItems } = useCartStore();
-  const { shipmentInfo, setItems, setTotalAmount, placeOrder, clearOrder } =
-    useOrderStore();
-  const router = useRouter();
+  const { items, totalAmount } = useCartStore();
+  const { shipmentInfo, setItems, setTotalAmount } = useOrderStore();
+  // const router = useRouter();
 
+  // TODO: On success payment, add order to DB
   const handlePlaceOrder = async () => {
     setItems(items);
     setTotalAmount(totalAmount);
+    await handleCheckout(items);
+    /*
     const orderId = await placeOrder();
     if (!orderId) return;
     router.push(`/orders/${orderId}`);
@@ -23,6 +26,7 @@ export default function CheckoutPage() {
       clearItems();
       clearOrder();
     }, 3000);
+    */
   };
 
   return (
