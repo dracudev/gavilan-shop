@@ -10,17 +10,19 @@ import { handleCheckout } from "@/services/stripe/checkout";
 
 export default function CheckoutPage() {
   const { items, totalAmount } = useCartStore();
-  const { shipmentInfo, setItems, setTotalAmount } = useOrderStore();
+  const { shipmentInfo, setItems, setTotalAmount, placeOrder } =
+    useOrderStore();
   // const router = useRouter();
 
   // TODO: On success payment, add order to DB
   const handlePlaceOrder = async () => {
     setItems(items);
     setTotalAmount(totalAmount);
-    await handleCheckout(items);
-    /*
     const orderId = await placeOrder();
     if (!orderId) return;
+    await handleCheckout(items, orderId);
+    /*
+    
     router.push(`/orders/${orderId}`);
     setTimeout(() => {
       clearItems();

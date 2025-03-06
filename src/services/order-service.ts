@@ -91,6 +91,7 @@ export async function insertOrder(
       {
         user_id: userId,
         total_amount: totalAmount,
+        paid: false,
       },
     ])
     .select("order_id")
@@ -147,3 +148,16 @@ export async function insertOrder(
   console.log("Order placed successfully");
   return orderId;
 }
+
+export const updateOrderStatus = async (orderId: string, paid: boolean) => {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("orders")
+    .update({ paid })
+    .eq("order_id", orderId);
+
+  if (error) {
+    console.error("Error updating order status:", error);
+    throw new Error("Failed to update order status");
+  }
+};

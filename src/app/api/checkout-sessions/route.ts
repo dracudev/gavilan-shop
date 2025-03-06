@@ -16,7 +16,7 @@ const stripe = new Stripe(stripeSecretKey, {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { cartItems, returnUrl } = body;
+    const { cartItems, orderId } = body;
 
     // Map cart items to the Stripe line_items format
     const line_items = await Promise.all(
@@ -39,16 +39,12 @@ export async function POST(request: Request) {
       })
     );
 
-    console.log("line_items:", line_items);
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `${request.headers.get(
-        "origin"
-      )}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${returnUrl}`,
+      success_url: `${request.headers.get("origin")}/orders/${orderId}`,
+      cancel_url: `${request.headers.get("origin")}/orders/${orderId}`,
     });
 
     return NextResponse.json({ sessionId: session.id });

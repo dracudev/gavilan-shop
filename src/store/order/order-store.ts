@@ -10,6 +10,7 @@ interface OrderState {
   shipmentInfo: ShipmentInfo;
   items: CartItem[];
   totalAmount: number;
+  paid: boolean;
   setShipmentInfo: (info: ShipmentInfo) => void;
   setItems: (items: CartItem[]) => void;
   setTotalAmount: (amount: number) => void;
@@ -32,6 +33,7 @@ export const useOrderStore = create<OrderState>((set, get) => ({
   },
   items: [],
   totalAmount: 0,
+  paid: false,
 
   setShipmentInfo: (info: ShipmentInfo) => set({ shipmentInfo: info }),
   setItems: (items: CartItem[]) => set({ items }),

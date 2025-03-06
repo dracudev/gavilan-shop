@@ -11,7 +11,7 @@ if (!stripePublishableKey) {
 
 const stripePromise = loadStripe(stripePublishableKey);
 
-export const handleCheckout = async (products: CartItem[]) => {
+export const handleCheckout = async (products: CartItem[], orderId: string) => {
   const stripe = await stripePromise;
   if (!stripe) {
     throw new Error("Failed to load Stripe");
@@ -24,7 +24,7 @@ export const handleCheckout = async (products: CartItem[]) => {
     },
     body: JSON.stringify({
       cartItems: products,
-      returnUrl: window.location.origin,
+      orderId: orderId,
     }),
   });
 
@@ -33,10 +33,12 @@ export const handleCheckout = async (products: CartItem[]) => {
   }
 
   const session = await response.json();
-  console.log("Checkout session response:", session); // Log the session response
 
   if (!session.sessionId) {
     throw new Error("Session ID is missing in the response");
   }
-  await stripe.redirectToCheckout({ sessionId: session.sessionId });
+
+  await stripe.redirectToCheckout({
+    sessionId: session.sessionId,
+  });
 };
