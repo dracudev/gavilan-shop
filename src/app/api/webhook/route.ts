@@ -1,57 +1,51 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
+import { NextResponse } from "next/server";
 import { updateOrderStatus } from "@/services/order-service";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+if (!stripeSecretKey) {
+  throw new Error("Stripe secret key is not defined in environment variables");
+}
+
+const stripe = new Stripe(stripeSecretKey, {
   apiVersion: "2025-02-24.acacia",
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export async function POST(request: Request) {
+  try {
+    const rawBody = await request.text();
+    const signature = request.headers.get("stripe-signature")!;
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === "POST") {
     let event;
-
     try {
-      const rawBody = await new Promise<Buffer>((resolve, reject) => {
-        const chunks: Buffer[] = [];
-        req.on("data", (chunk) => chunks.push(chunk));
-        req.on("end", () => resolve(Buffer.concat(chunks)));
-        req.on("error", reject);
-      });
-
-      const signature = req.headers["stripe-signature"]!;
-      event = stripe.webhooks.constructEvent(
-        rawBody,
-        signature,
-        webhookSecret!
-      );
-    } catch (err) {
-      if (err instanceof Error) {
-        console.error("Error verifying webhook signature:", err);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-      } else {
-        console.error("Unknown error:", err);
-        return res.status(400).send("Webhook Error: Unknown error occurred");
+      if (!webhookSecret) {
+        throw new Error(
+          "Stripe webhook secret is not defined in environment variables"
+        );
       }
+      event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
+    } catch (err) {
+      console.error("Error verifying webhook signature:", err);
+      return NextResponse.json(
+        {
+          error: `Webhook Error: ${
+            err instanceof Error ? err.message : "Unknown error occurred"
+          }`,
+        },
+        { status: 400 }
+      );
     }
 
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
       if (!session.metadata || !session.metadata.orderId) {
         console.error("Missing orderId in session metadata");
-        return res
-          .status(400)
-          .send("Webhook Error: Missing orderId in session metadata");
+        return NextResponse.json(
+          { error: "Webhook Error: Missing orderId in session metadata" },
+          { status: 400 }
+        );
       }
       const orderId = session.metadata.orderId;
 
@@ -60,13 +54,19 @@ export default async function handler(
         console.log(`Order ${orderId} marked as paid`);
       } catch (error) {
         console.error("Error updating order status:", error);
-        return res.status(500).send("Internal Server Error");
+        return NextResponse.json(
+          { error: "Internal Server Error" },
+          { status: 500 }
+        );
       }
     }
 
-    res.status(200).json({ received: true });
-  } else {
-    res.setHeader("Allow", "POST");
-    res.status(405).end("Method Not Allowed");
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    console.error("Error handling webhook request:", error);
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 }
+    );
   }
 }
