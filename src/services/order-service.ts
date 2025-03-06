@@ -29,7 +29,7 @@ export async function getOrders() {
     `);
 
   if (error) {
-    // console.error("Error fetching orders:", error);
+    console.error("Error fetching orders:", error);
     return [];
   }
 
@@ -145,19 +145,28 @@ export async function insertOrder(
     return null;
   }
 
-  console.log("Order placed successfully");
+  // console.log("Order placed successfully");
   return orderId;
 }
 
-export const updateOrderStatus = async (orderId: string, paid: boolean) => {
+export const updateOrderStatus = async (orderId: number, isPaid: boolean) => {
   const supabase = createClient();
+
+  console.log(
+    `Updating order status in database for orderId: ${orderId} to paid: ${isPaid}`
+  );
+
   const { error } = await supabase
     .from("orders")
-    .update({ paid })
+    .update({ paid: isPaid })
     .eq("order_id", orderId);
 
   if (error) {
-    console.error("Error updating order status:", error);
-    throw new Error("Failed to update order status");
+    console.error("Error updating order status in database:", error);
+    throw new Error("Failed to update order status in database");
   }
+
+  console.log(
+    `Order status in database updated successfully for orderId: ${orderId}`
+  );
 };

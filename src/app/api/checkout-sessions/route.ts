@@ -4,9 +4,14 @@ import { CartItem } from "@/interfaces";
 import { getProduct } from "@/services/product-service";
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 if (!stripeSecretKey) {
   throw new Error("Stripe secret key is not defined in environment variables");
+}
+
+if (!baseUrl) {
+  throw new Error("Base URL is not defined in environment variables");
 }
 
 const stripe = new Stripe(stripeSecretKey, {
@@ -39,12 +44,17 @@ export async function POST(request: Request) {
       })
     );
 
+    const origin = request.headers.get("origin") || baseUrl;
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `${request.headers.get("origin")}/orders/${orderId}`,
-      cancel_url: `${request.headers.get("origin")}/orders/${orderId}`,
+      success_url: `${origin}/api/update-order-status?orderId=${orderId}&paid=true`,
+      cancel_url: `${origin}/api/update-order-status?orderId=${orderId}&paid=false`,
+      metadata: {
+        orderId,
+      },
     });
 
     return NextResponse.json({ sessionId: session.id });
