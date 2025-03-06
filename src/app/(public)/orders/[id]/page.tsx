@@ -72,15 +72,22 @@ export default function OrderPage() {
           <div className="bg-white dark:bg-zinc-800 shadow-xl p-7 rounded h-fit">
             <h2 className="text-2xl mb-2">Shipment</h2>
             <div className="mb-10">
-              <p>
-                {order.order_shipment[0].name} {order.order_shipment[0].surname}
-              </p>
-              <p>{order.order_shipment[0].address}</p>
-              <p>
-                {order.order_shipment[0].city},{" "}
-                {order.order_shipment[0].postal_code}
-              </p>
-              <p>{order.order_shipment[0].telephone}</p>
+              {order.order_shipment[0] ? (
+                <>
+                  <p>
+                    {order.order_shipment[0].name}{" "}
+                    {order.order_shipment[0].surname}
+                  </p>
+                  <p>{order.order_shipment[0].address}</p>
+                  <p>
+                    {order.order_shipment[0].city},{" "}
+                    {order.order_shipment[0].postal_code}
+                  </p>
+                  <p>{order.order_shipment[0].telephone}</p>
+                </>
+              ) : (
+                <p>No shipment info</p>
+              )}
             </div>
 
             <div className="w-full h-0.5 rounded bg-gray-200 mb-10" />

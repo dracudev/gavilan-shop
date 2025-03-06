@@ -56,8 +56,14 @@ export default function OrdersPage() {
                   {order.order_id}
                 </td>
                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  {order.order_shipment[0].name}{" "}
-                  {order.order_shipment[0].surname}
+                  {order.order_shipment[0] ? (
+                    <>
+                      {order.order_shipment[0].name}{" "}
+                      {order.order_shipment[0].surname}
+                    </>
+                  ) : (
+                    "No shipment info"
+                  )}
                 </td>
                 <td className="flex items-center text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <IoCardOutline
