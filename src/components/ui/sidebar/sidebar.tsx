@@ -73,6 +73,7 @@ export function Sidebar() {
         <Link
           href="/account"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          onClick={toggleSideBar} // Add this line
         >
           <IoPersonOutline size={30} />
           <span className="ml-3 text-xl">Account</span>
@@ -81,6 +82,7 @@ export function Sidebar() {
         <Link
           href="/orders"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          onClick={toggleSideBar} // Add this line
         >
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Orders</span>
@@ -89,13 +91,17 @@ export function Sidebar() {
         <Link
           href="/login"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          onClick={toggleSideBar} // Add this line
         >
           <IoLogInOutline size={30} />
           <span className="ml-3 text-xl">Login</span>
         </Link>
 
         <div
-          onClick={logout}
+          onClick={() => {
+            logout();
+            toggleSideBar(); // Add this line
+          }}
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black cursor-pointer  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
         >
           <IoLogOutOutline size={30} />
@@ -108,6 +114,7 @@ export function Sidebar() {
         <Link
           href="/"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          onClick={toggleSideBar} // Add this line
         >
           <FaRedhat size={30} />
           <span className="ml-3 text-xl">Products</span>
@@ -116,6 +123,7 @@ export function Sidebar() {
         <Link
           href="/"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          onClick={toggleSideBar} // Add this line
         >
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Orders</span>
@@ -124,6 +132,7 @@ export function Sidebar() {
         <Link
           href="/"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          onClick={toggleSideBar} // Add this line
         >
           <IoPeopleOutline size={30} />
           <span className="ml-3 text-xl">Users</span>
