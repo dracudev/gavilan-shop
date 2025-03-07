@@ -5,6 +5,7 @@ import { getProduct } from "@/services/product-service";
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const apiKey = process.env.ORDER_STATUS_API_KEY;
 
 if (!stripeSecretKey) {
   throw new Error("Stripe secret key is not defined in environment variables");
@@ -12,6 +13,10 @@ if (!stripeSecretKey) {
 
 if (!baseUrl) {
   throw new Error("Base URL is not defined in environment variables");
+}
+
+if (!apiKey) {
+  throw new Error("API key is not defined in environment variables");
 }
 
 const stripe = new Stripe(stripeSecretKey, {
@@ -50,10 +55,11 @@ export async function POST(request: Request) {
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `${origin}/api/update-order-status?orderId=${orderId}&paid=true`,
-      cancel_url: `${origin}/api/update-order-status?orderId=${orderId}&paid=false`,
+      success_url: `${origin}/api/update-order-status?orderId=${orderId}&paid=true&apiKey=${apiKey}`,
+      cancel_url: `${origin}/api/update-order-status?orderId=${orderId}&paid=false&apiKey=${apiKey}`,
       metadata: {
         orderId,
+        apiKey: String(apiKey),
       },
     });
 

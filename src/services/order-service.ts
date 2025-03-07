@@ -1,4 +1,5 @@
 import { createClient } from "@/services/supabase/client";
+import { createAdminClient } from "./supabase/admin-server";
 import { CartItem, ShipmentInfo } from "@/interfaces";
 
 export async function getOrders() {
@@ -149,12 +150,9 @@ export async function insertOrder(
   return orderId;
 }
 
+// Service role permission for updating order status (paid)
 export const updateOrderStatus = async (orderId: number, isPaid: boolean) => {
-  const supabase = createClient();
-
-  console.log(
-    `Updating order status in database for orderId: ${orderId} to paid: ${isPaid}`
-  );
+  const supabase = createAdminClient();
 
   const { error } = await supabase
     .from("orders")
@@ -165,8 +163,4 @@ export const updateOrderStatus = async (orderId: number, isPaid: boolean) => {
     console.error("Error updating order status in database:", error);
     throw new Error("Failed to update order status in database");
   }
-
-  console.log(
-    `Order status in database updated successfully for orderId: ${orderId}`
-  );
 };
