@@ -5,6 +5,7 @@ import Loading from "@/components/ui/loading/loading";
 import { useFetchOrders } from "@/hooks/order/use-fetch-orders";
 import Link from "next/link";
 import { IoCardOutline } from "react-icons/io5";
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
 export default function OrdersPage() {
   const { orders, loading } = useFetchOrders();
@@ -81,13 +82,14 @@ export default function OrdersPage() {
                     {order.paid === true ? "Paid" : "Pending"}
                   </span>
                 </td>
-                <td className="text-sm text-gray-900 font-light px-6">
-                  <Link
-                    href={`/orders/${order.order_id}`}
-                    className="hover:underline hover:text-[var(--primary-color)] decoration-[var(--primary-color)]"
-                  >
-                    View order
-                  </Link>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  <div className="flex space-x-2">
+                    <Link href={`/orders/${order.order_id}`}>
+                      <FaEye className="cursor-pointer text-blue-500" />
+                    </Link>
+                    <FaEdit className="cursor-pointer text-yellow-500" />
+                    <FaTrash className="cursor-pointer text-red-500" />
+                  </div>
                 </td>
               </tr>
             ))}

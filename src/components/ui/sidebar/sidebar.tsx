@@ -112,7 +112,7 @@ export function Sidebar() {
         <div className="w-full h-px bg-gray-300 my-5"></div>
 
         <Link
-          href="/"
+          href="/products"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
           onClick={toggleSideBar} // Add this line
         >
