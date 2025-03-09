@@ -1,9 +1,15 @@
-import { useSearchParams } from "next/navigation";
-import SignupForm from "@/components/ui/forms/signup-from";
+import SignupForm from "@/components/ui/forms/signup-form";
 
-export default function SignupPage() {
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || undefined;
+type Props = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default async function SignupPage({ searchParams }: Props) {
+  const currSearchParams = await searchParams;
+
+  const redirect = Array.isArray(currSearchParams.redirect)
+    ? currSearchParams.redirect[0]
+    : currSearchParams.redirect;
 
   return <SignupForm redirect={redirect} />;
 }
