@@ -39,6 +39,24 @@ export default function ProductModal({
     }
   }, [product]);
 
+  // Reset form when modal is opened for creating a new product
+  useEffect(() => {
+    if (isOpen && !product) {
+      setProductData({
+        description: "",
+        images: [],
+        inStock: 0,
+        price: 0,
+        sizes: [],
+        slug: "",
+        tags: [],
+        title: "",
+        type: "shirts",
+        gender: "unisex",
+      });
+    }
+  }, [isOpen, product]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {

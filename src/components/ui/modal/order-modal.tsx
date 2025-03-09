@@ -88,6 +88,35 @@ export default function OrderModal({
     }
   }, [order]);
 
+  // Reset form when modal is opened for creating a new order
+  useEffect(() => {
+    if (isOpen && !order) {
+      setUserId("");
+      setTotalAmount(0);
+      setPaid(false);
+      setItems([]);
+      setShipmentInfo({
+        name: "",
+        surname: "",
+        address: "",
+        address2: "",
+        city: "",
+        postalCode: "",
+        country: "",
+        telephone: "",
+      });
+      setNewItem({
+        id: "",
+        title: "",
+        price: 0,
+        quantity: 1,
+        size: "M",
+        slug: "",
+        image: "",
+      });
+    }
+  }, [isOpen, order]);
+
   // Calculate total amount whenever items change
   useEffect(() => {
     const newTotal = items.reduce(
