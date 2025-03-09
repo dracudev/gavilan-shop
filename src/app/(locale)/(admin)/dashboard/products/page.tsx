@@ -2,24 +2,62 @@
 
 import { Title } from "@/components";
 import Loading from "@/components/ui/loading/loading";
-import { useFetchProducts } from "@/hooks/product/use-fetch-products";
-import Image from "next/image";
 import Link from "next/link";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import useProduct from "@/hooks/use-product";
+import { useState } from "react";
+import Image from "next/image";
 
 export default function ProductsPage() {
-  const { products, loading } = useFetchProducts();
+  const {
+    products,
+    loading,
+    createNewProduct,
+    updateExistingProduct,
+    deleteExistingProduct,
+  } = useProduct();
+  const [newProduct, setNewProduct] = useState({
+    id: "",
+    description: "",
+    images: [],
+    inStock: 0,
+    price: 0,
+    sizes: [],
+    slug: "",
+    tags: [],
+    title: "",
+    type: "shirts",
+    gender: "unisex",
+  });
 
   if (loading) {
     return <Loading />;
   }
+
+  const handleCreateProduct = async () => {
+    await createNewProduct(newProduct);
+  };
+
+  const handleDeleteProduct = async (productId: string) => {
+    await deleteExistingProduct(productId);
+  };
+
+  const handleUpdateProduct = async (productId: string, updatedData) => {
+    await updateExistingProduct(productId, updatedData);
+  };
+
   return (
     <>
       <Title title="Products" />
-
       <div className="mb-10">
+        <button
+          onClick={handleCreateProduct}
+          className="mb-4 px-4 py-2 btn-primary"
+        >
+          <strong className="me-2">+</strong> New Product
+        </button>
         <table className="min-w-full rounded-lg overflow-hidden">
-          <thead className="bg-gray-300 dark:bg-zinc-700  border-b">
+          <thead className="bg-gray-300 dark:bg-zinc-700 border-b">
             <tr>
               <th
                 scope="col"
@@ -29,7 +67,7 @@ export default function ProductsPage() {
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium  px-6 py-4 text-left"
+                className="text-sm font-medium px-6 py-4 text-left"
               >
                 Title
               </th>
@@ -41,19 +79,19 @@ export default function ProductsPage() {
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium  px-6 py-4 text-left"
+                className="text-sm font-medium px-6 py-4 text-left"
               >
                 Price
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium  px-6 py-4 text-left"
+                className="text-sm font-medium px-6 py-4 text-left"
               >
                 Gender
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium  px-6 py-4 text-left"
+                className="text-sm font-medium px-6 py-4 text-left"
               >
                 Options
               </th>
@@ -91,8 +129,18 @@ export default function ProductsPage() {
                     <Link href={`/product/${product.slug}`}>
                       <FaEye className="cursor-pointer text-blue-500" />
                     </Link>
-                    <FaEdit className="cursor-pointer text-yellow-500" />
-                    <FaTrash className="cursor-pointer text-red-500" />
+                    <FaEdit
+                      className="cursor-pointer text-yellow-500"
+                      onClick={() =>
+                        handleUpdateProduct(product.id, {
+                          /* updatedData */
+                        })
+                      }
+                    />
+                    <FaTrash
+                      className="cursor-pointer text-red-500"
+                      onClick={() => handleDeleteProduct(product.id)}
+                    />
                   </div>
                 </td>
               </tr>

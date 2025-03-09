@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { CartItem } from "@/interfaces";
 import { ShipmentInfo } from "@/interfaces";
 import { createClient } from "@/services/supabase/client";
-import { insertOrder } from "@/services/order-service";
+import { createOrder } from "@/services/order-service";
 
 interface OrderState {
   userId: string;
@@ -53,7 +53,7 @@ export const useOrderStore = create<OrderState>((set, get) => ({
     }
     const userId = user.id;
 
-    const orderId = await insertOrder(
+    const orderId = await createOrder(
       userId,
       state.totalAmount,
       state.items,

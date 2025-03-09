@@ -1,8 +1,8 @@
 import { createClient } from "@/services/supabase/client";
 import { createAdminClient } from "./supabase/admin-server";
-import { CartItem, ShipmentInfo } from "@/interfaces";
+import { CartItem, Order, ShipmentInfo } from "@/interfaces";
 
-export async function getOrders() {
+async function getOrders() {
   const supabase = createClient();
   const { data, error } = await supabase.from("orders").select(`
       order_id,
@@ -37,7 +37,7 @@ export async function getOrders() {
   return data;
 }
 
-export async function getOrder(orderId: string) {
+async function getOrder(orderId: string) {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("orders")
@@ -78,7 +78,7 @@ export async function getOrder(orderId: string) {
   return data;
 }
 
-export async function insertOrder(
+async function createOrder(
   userId: string,
   totalAmount: number,
   items: CartItem[],
@@ -151,7 +151,7 @@ export async function insertOrder(
 }
 
 // Service role permission for updating order status (paid)
-export const updateOrderStatus = async (orderId: number, isPaid: boolean) => {
+const updateOrderStatus = async (orderId: number, isPaid: boolean) => {
   const supabase = createAdminClient();
 
   const { error } = await supabase
@@ -163,4 +163,98 @@ export const updateOrderStatus = async (orderId: number, isPaid: boolean) => {
     console.error("Error updating order status in database:", error);
     throw new Error("Failed to update order status in database");
   }
+};
+
+async function updateOrder(orderId: string, data: Order) {
+  const supabase = createClient();
+
+  const { error: orderError } = await supabase
+    .from("orders")
+    .update({
+      user_id: data.user_id,
+      total_amount: data.total_amount,
+      paid: data.paid,
+    })
+    .eq("order_id", orderId);
+
+  if (orderError) {
+    console.error("Error updating order:", orderError);
+    throw new Error("Failed to update order");
+  }
+
+  if (data.order_items) {
+    const { error: deleteItemsError } = await supabase
+      .from("order_items")
+      .delete()
+      .eq("order_id", orderId);
+
+    if (deleteItemsError) {
+      console.error("Error deleting existing order items:", deleteItemsError);
+      throw new Error("Failed to delete existing order items");
+    }
+
+    const orderItems = data.order_items.map((item) => ({
+      order_id: orderId,
+      product_id: item.product_id,
+      title: item.title,
+      image: item.image,
+      quantity: item.quantity,
+      size: item.size,
+      price: item.price,
+    }));
+
+    const { error: insertItemsError } = await supabase
+      .from("order_items")
+      .insert(orderItems);
+
+    if (insertItemsError) {
+      console.error("Error inserting order items:", insertItemsError);
+      throw new Error("Failed to insert order items");
+    }
+  }
+
+  if (data.order_shipment) {
+    const shipmentInfo = data.order_shipment[0];
+    const { error: shipmentError } = await supabase
+      .from("order_shipment")
+      .update({
+        name: shipmentInfo.name,
+        surname: shipmentInfo.surname,
+        address: shipmentInfo.address,
+        address_2: shipmentInfo.address_2,
+        postal_code: shipmentInfo.postal_code,
+        city: shipmentInfo.city,
+        country: shipmentInfo.country,
+        telephone: shipmentInfo.telephone,
+      })
+      .eq("order_id", orderId);
+
+    if (shipmentError) {
+      console.error("Error updating shipment info:", shipmentError);
+      throw new Error("Failed to update shipment info");
+    }
+  }
+}
+
+async function deleteOrder(orderId: string) {
+  const supabase = createClient();
+
+  const { error } = await supabase
+    .from("orders")
+    .delete()
+    .eq("order_id", orderId);
+
+  if (error) {
+    console.error("Error deleting order:", error);
+    throw new Error("Failed to delete order");
+  }
+}
+
+export {
+  getOrders,
+  getOrder,
+  createOrder,
+  updateOrderStatus,
+  updateOrder,
+  deleteOrder,
 };
