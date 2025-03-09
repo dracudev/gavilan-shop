@@ -5,7 +5,7 @@ import Loading from "@/components/ui/loading/loading";
 import { useFetchOrders } from "@/hooks/order/use-fetch-orders";
 import Link from "next/link";
 import { IoCardOutline } from "react-icons/io5";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 export default function OrdersPage() {
   const { orders, loading } = useFetchOrders();
@@ -87,8 +87,6 @@ export default function OrdersPage() {
                     <Link href={`/orders/${order.order_id}`}>
                       <FaEye className="cursor-pointer text-blue-500" />
                     </Link>
-                    <FaEdit className="cursor-pointer text-yellow-500" />
-                    <FaTrash className="cursor-pointer text-red-500" />
                   </div>
                 </td>
               </tr>
