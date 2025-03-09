@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/services/supabase/middleware";
 import { checkUserRole } from "@/utils/auth";
-import { LOGIN, ROOT, ADMIN_ROUTES, USER_ROUTES } from "@/lib/routes";
+import { LOGIN, SIGNUP, ROOT, ADMIN_ROUTES, USER_ROUTES } from "@/lib/routes";
 
 export async function middleware(request: NextRequest) {
   // Update the session using Supabase middleware
@@ -18,8 +18,17 @@ export async function middleware(request: NextRequest) {
 
   const isProtectedRoute = isAdminRoute || isUserRoute;
 
+  if (
+    isAuthenticated &&
+    (pathname.startsWith(LOGIN) || pathname.startsWith(SIGNUP))
+  ) {
+    return NextResponse.redirect(new URL(ROOT, request.url));
+  }
+
   if (!isAuthenticated && isProtectedRoute) {
-    return NextResponse.redirect(new URL(LOGIN, request.url));
+    const redirectUrl = new URL(LOGIN, request.url);
+    redirectUrl.searchParams.set("redirect", request.url);
+    return NextResponse.redirect(redirectUrl);
   }
 
   if (isAuthenticated && isAdminRoute && role !== "admin") {
@@ -39,5 +48,7 @@ export const config = {
     "/account/:path*",
     "/orders/:path*",
     "/checkout/:path*",
+    "/login",
+    "/sign-up",
   ],
 };

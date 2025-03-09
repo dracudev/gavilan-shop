@@ -22,8 +22,8 @@ export async function login(formData: FormData) {
     redirect("/error");
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  const redirectUrl = (formData.get("redirect") as string) || "/";
+  redirect(redirectUrl);
 }
 
 export async function signup(formData: FormData) {
@@ -43,8 +43,8 @@ export async function signup(formData: FormData) {
     redirect("/error");
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  const redirectUrl = (formData.get("redirect") as string) || "/";
+  redirect(redirectUrl);
 }
 
 export async function logout() {
