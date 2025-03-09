@@ -1,4 +1,4 @@
-import LoginForm from "@/components/ui/forms/login-form";
+import LoginForm from "@/components/ui/form/login-form";
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

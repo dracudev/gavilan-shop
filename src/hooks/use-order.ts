@@ -1,44 +1,34 @@
-import { useState, useEffect } from "react";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { CartItem, Order, ShipmentInfo } from "@/interfaces";
 import {
   getOrders,
-  getOrder,
   createOrder,
+  updateOrderStatus,
   updateOrder,
   deleteOrder,
 } from "@/services/order-service";
-import { Order, CartItem, ShipmentInfo } from "@/interfaces";
 
-const useOrder = () => {
+export default function useOrder() {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [order, setOrder] = useState<Order | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     setLoading(true);
-    setError(null);
     try {
-      const data = await getOrders();
-      setOrders(data);
-    } catch {
-      setError("Error fetching orders");
+      const ordersData = await getOrders();
+      setOrders(ordersData);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchOrder = async (orderId: string) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await getOrder(orderId);
-      setOrder(data);
-    } catch {
-      setError("Error fetching order");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   const createNewOrder = async (
     userId: string,
@@ -46,8 +36,6 @@ const useOrder = () => {
     items: CartItem[],
     shipmentInfo: ShipmentInfo
   ) => {
-    setLoading(true);
-    setError(null);
     try {
       const orderId = await createOrder(
         userId,
@@ -55,57 +43,69 @@ const useOrder = () => {
         items,
         shipmentInfo
       );
+
       if (orderId) {
-        await fetchOrders();
+        // Refetch orders to update the list
+        fetchOrders();
+        return orderId;
       }
-    } catch {
-      setError("Error creating order");
-    } finally {
-      setLoading(false);
+
+      return null;
+    } catch (error) {
+      console.error("Error creating order:", error);
+      return null;
+    }
+  };
+
+  const updateOrderPaymentStatus = async (orderId: string, isPaid: boolean) => {
+    try {
+      await updateOrderStatus(Number(orderId), isPaid);
+      // Update the orders state to reflect the change
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.order_id === orderId ? { ...order, paid: isPaid } : order
+        )
+      );
+      return true;
+    } catch (error) {
+      console.error("Error updating order payment status:", error);
+      return false;
     }
   };
 
   const updateExistingOrder = async (orderId: string, data: Order) => {
-    setLoading(true);
-    setError(null);
     try {
       await updateOrder(orderId, data);
-      await fetchOrders();
-    } catch {
-      setError("Error updating order");
-    } finally {
-      setLoading(false);
+      // Refetch orders to get the updated data
+      fetchOrders();
+      return true;
+    } catch (error) {
+      console.error("Error updating order:", error);
+      return false;
     }
   };
 
   const deleteExistingOrder = async (orderId: string) => {
-    setLoading(true);
-    setError(null);
     try {
       await deleteOrder(orderId);
-      await fetchOrders();
-    } catch {
-      setError("Error deleting order");
-    } finally {
-      setLoading(false);
+      // Update the orders state to remove the deleted order
+      setOrders((prevOrders) =>
+        prevOrders.filter((order) => order.order_id !== orderId)
+      );
+      return true;
+    } catch (error) {
+      console.error("Error deleting order:", error);
+      return false;
     }
   };
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
   return {
     orders,
-    order,
     loading,
-    error,
-    fetchOrders,
-    fetchOrder,
     createNewOrder,
+    updateOrderPaymentStatus,
     updateExistingOrder,
     deleteExistingOrder,
+    refreshOrders: fetchOrders,
   };
-};
-
-export default useOrder;
+}
