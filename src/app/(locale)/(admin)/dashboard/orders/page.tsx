@@ -5,7 +5,7 @@ import Loading from "@/components/ui/loading/loading";
 import Link from "next/link";
 import { IoCardOutline } from "react-icons/io5";
 import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
-import useOrder from "@/hooks/use-order";
+import useOrder from "@/hooks/order/use-order";
 import { useState } from "react";
 import OrderModal from "@/components/ui/modal/order-modal";
 import { CartItem, Order, ShipmentInfo } from "@/interfaces";

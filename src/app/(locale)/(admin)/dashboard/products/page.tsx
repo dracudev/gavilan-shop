@@ -4,7 +4,7 @@ import { Title } from "@/components";
 import Loading from "@/components/ui/loading/loading";
 import Link from "next/link";
 import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
-import useProduct from "@/hooks/use-product";
+import useProduct from "@/hooks/product/use-product";
 import { useState } from "react";
 import Image from "next/image";
 import ProductModal from "@/components/ui/modal/product-modal";

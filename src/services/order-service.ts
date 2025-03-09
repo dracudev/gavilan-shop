@@ -146,7 +146,6 @@ async function createOrder(
     return null;
   }
 
-  // console.log("Order placed successfully");
   return orderId;
 }
 

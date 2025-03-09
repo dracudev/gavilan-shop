@@ -28,7 +28,7 @@ const useProduct = () => {
     }
   };
 
-  const fetchProduct = async (productId: string) => {
+  const fetchProductById = async (productId: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -108,7 +108,7 @@ const useProduct = () => {
     loading,
     error,
     fetchProducts,
-    fetchProduct,
+    fetchProduct: fetchProductById,
     fetchProductsByGender,
     createNewProduct,
     updateExistingProduct,

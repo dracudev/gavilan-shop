@@ -45,7 +45,6 @@ export default function useOrder() {
       );
 
       if (orderId) {
-        // Refetch orders to update the list
         fetchOrders();
         return orderId;
       }
@@ -60,7 +59,6 @@ export default function useOrder() {
   const updateOrderPaymentStatus = async (orderId: string, isPaid: boolean) => {
     try {
       await updateOrderStatus(Number(orderId), isPaid);
-      // Update the orders state to reflect the change
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order.order_id === orderId ? { ...order, paid: isPaid } : order
@@ -76,7 +74,6 @@ export default function useOrder() {
   const updateExistingOrder = async (orderId: string, data: Order) => {
     try {
       await updateOrder(orderId, data);
-      // Refetch orders to get the updated data
       fetchOrders();
       return true;
     } catch (error) {
@@ -88,7 +85,6 @@ export default function useOrder() {
   const deleteExistingOrder = async (orderId: string) => {
     try {
       await deleteOrder(orderId);
-      // Update the orders state to remove the deleted order
       setOrders((prevOrders) =>
         prevOrders.filter((order) => order.order_id !== orderId)
       );

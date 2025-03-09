@@ -2,13 +2,13 @@
 
 import { Title } from "@/components";
 import Loading from "@/components/ui/loading/loading";
-import { useFetchOrders } from "@/hooks/order/use-fetch-orders";
 import Link from "next/link";
 import { IoCardOutline } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
+import useOrder from "@/hooks/order/use-order";
 
 export default function OrdersPage() {
-  const { orders, loading } = useFetchOrders();
+  const { orders, loading } = useOrder();
 
   if (loading) {
     return <Loading />;
