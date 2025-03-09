@@ -16,7 +16,17 @@ import {
 } from "react-icons/io5";
 import { logout } from "@/services/supabase/actions";
 
-export function Sidebar() {
+interface User {
+  id: string;
+  email: string;
+}
+
+interface SidebarProps {
+  userRole: string | null;
+  userData: User | null;
+}
+
+export function Sidebar({ userRole, userData }: SidebarProps) {
   const isSideBarOpen = useUIStore((state) => state.isSideBarOpen);
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
 
@@ -69,74 +79,91 @@ export function Sidebar() {
           />
         </div>
 
-        {/* Menu */}
-        <Link
-          href="/account"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar}
-        >
-          <IoPersonOutline size={30} />
-          <span className="ml-3 text-xl">Account</span>
-        </Link>
+        {/* User Menu */}
+        {userRole === "user" && (
+          <>
+            <Link
+              href="/account"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <IoPersonOutline size={30} />
+              <span className="ml-3 text-xl">
+                {userData?.email || "Account"}
+              </span>
+            </Link>
 
-        <Link
-          href="/orders"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar}
-        >
-          <IoTicketOutline size={30} />
-          <span className="ml-3 text-xl">Orders</span>
-        </Link>
+            <Link
+              href="/orders"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <IoTicketOutline size={30} />
+              <span className="ml-3 text-xl">Orders</span>
+            </Link>
+          </>
+        )}
 
-        <Link
-          href="/login"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar}
-        >
-          <IoLogInOutline size={30} />
-          <span className="ml-3 text-xl">Login</span>
-        </Link>
+        {/* Admin Menu */}
+        {userRole === "admin" && (
+          <>
+            <Link
+              href="/dashboard/products"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <FaRedhat size={30} />
+              <span className="ml-3 text-xl">Products</span>
+            </Link>
 
-        <div
-          onClick={() => {
-            logout();
-            toggleSideBar();
-          }}
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black cursor-pointer  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-        >
-          <IoLogOutOutline size={30} />
-          <span className="ml-3 text-xl">Logout</span>
-        </div>
+            <Link
+              href="/dashboard/orders"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <IoTicketOutline size={30} />
+              <span className="ml-3 text-xl">Orders</span>
+            </Link>
+
+            <Link
+              href="/dashboard/users"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <IoPeopleOutline size={30} />
+              <span className="ml-3 text-xl">Users</span>
+            </Link>
+          </>
+        )}
 
         {/* Separator */}
         <div className="w-full h-px bg-gray-300 my-5"></div>
 
-        <Link
-          href="/dashboard/products"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar}
-        >
-          <FaRedhat size={30} />
-          <span className="ml-3 text-xl">Products</span>
-        </Link>
+        {/* Login Button */}
+        {!userRole && (
+          <Link
+            href="/login"
+            className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+            onClick={toggleSideBar}
+          >
+            <IoLogInOutline size={30} />
+            <span className="ml-3 text-xl">Login</span>
+          </Link>
+        )}
 
-        <Link
-          href="/dashboard/orders"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar}
-        >
-          <IoTicketOutline size={30} />
-          <span className="ml-3 text-xl">Orders</span>
-        </Link>
-
-        <Link
-          href="/dashboard/users"
-          className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar}
-        >
-          <IoPeopleOutline size={30} />
-          <span className="ml-3 text-xl">Users</span>
-        </Link>
+        {/* Logout Button */}
+        {userRole && (
+          <div
+            onClick={() => {
+              logout();
+              toggleSideBar();
+            }}
+            className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black cursor-pointer  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+          >
+            <IoLogOutOutline size={30} />
+            <span className="ml-3 text-xl">Logout</span>
+          </div>
+        )}
       </nav>
     </div>
   );
