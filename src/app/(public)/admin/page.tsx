@@ -10,23 +10,22 @@ interface CustomJwtPayload extends JwtPayload {
 export default async function PrivatePage() {
   const supabase = await createClient();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data: authListener } = supabase.auth.onAuthStateChange(
-    async (event, session) => {
-      if (session) {
-        const jwt = jwtDecode<CustomJwtPayload>(session.access_token);
-        const userRole = jwt.user_role;
-        if (userRole !== "admin") {
-          redirect("/");
-        }
-      }
-    }
-  );
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError || !userData?.user) {
     redirect("/login");
   }
 
-  return <p>Hello {data.user.email}</p>;
+  const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
+  if (sessionError || !sessionData?.session) {
+    redirect("/login");
+  }
+
+  const jwt = jwtDecode<CustomJwtPayload>(sessionData.session.access_token);
+  const userRole = jwt.user_role;
+  if (userRole !== "admin") {
+    redirect("/");
+  }
+
+  return <p>Hello {userData.user.email}</p>;
 }

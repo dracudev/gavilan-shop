@@ -12,7 +12,7 @@ if (!apiKey) {
   throw new Error("API key is not defined in environment variables");
 }
 
-// Handle GET request for updating order status via URL redirection
+// Handle GET request for updating order status via URL redirection from Stripe gateway
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

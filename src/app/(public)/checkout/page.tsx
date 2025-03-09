@@ -14,7 +14,6 @@ export default function CheckoutPage() {
     useOrderStore();
   // const router = useRouter();
 
-  // TODO: On success payment, add order to DB
   const handlePlaceOrder = async () => {
     setItems(items);
     setTotalAmount(totalAmount);
