@@ -1,4 +1,4 @@
-import { Product } from "@/interfaces";
+import { Product, ProductWithoutId } from "@/interfaces";
 import { createClient } from "@/services/supabase/client";
 
 const getProducts = async (): Promise<Product[]> => {
@@ -55,7 +55,9 @@ const getProductsByGender = async (gender: string): Promise<Product[]> => {
   }
 };
 
-const createProduct = async (product: Product): Promise<string | null> => {
+const createProduct = async (
+  product: ProductWithoutId
+): Promise<string | null> => {
   try {
     const supabase = createClient();
 

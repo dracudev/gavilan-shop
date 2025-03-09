@@ -12,6 +12,19 @@ export interface Product {
   gender: Category;
 }
 
+export interface ProductWithoutId {
+  description: string;
+  images: string[];
+  inStock: number;
+  price: number;
+  sizes: Size[];
+  slug: string;
+  tags: string[];
+  title: string;
+  type: Type;
+  gender: Category;
+}
+
 export interface CartItem {
   id: string;
   title: string;

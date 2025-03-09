@@ -7,7 +7,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "@/services/product-service";
-import { Product } from "@/interfaces";
+import { Product, ProductWithoutId } from "@/interfaces";
 
 const useProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -54,7 +54,7 @@ const useProduct = () => {
     }
   };
 
-  const createNewProduct = async (product: Product) => {
+  const createNewProduct = async (product: ProductWithoutId) => {
     setLoading(true);
     setError(null);
     try {

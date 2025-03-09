@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { CartItem, Order, ShipmentInfo, Size } from "@/interfaces";
 import { FaTimes } from "react-icons/fa";
+import { getProduct } from "@/services/product-service";
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -65,7 +66,7 @@ export default function OrderModal({
         price: item.price,
         quantity: item.quantity,
         size: item.size as Size,
-        slug: "", // You might want to fetch this from your product database
+        slug: "", // TODO: Get slug from product service
         image: item.image,
       }));
       setItems(cartItems);
@@ -96,19 +97,31 @@ export default function OrderModal({
     setTotalAmount(newTotal);
   }, [items]);
 
-  const handleAddItem = () => {
-    if (newItem.id && newItem.title && newItem.price > 0) {
-      setItems([...items, { ...newItem }]);
-      // Reset new item form
-      setNewItem({
-        id: "",
-        title: "",
-        price: 0,
-        quantity: 1,
-        size: "M",
-        slug: "",
-        image: "",
-      });
+  const handleAddItem = async () => {
+    if (newItem.id && newItem.quantity > 0) {
+      const productDetails = await getProduct(newItem.id);
+      if (productDetails) {
+        const itemToAdd = {
+          ...newItem,
+          title: productDetails.title,
+          price: productDetails.price,
+          image: productDetails.images[0],
+          slug: productDetails.slug,
+        };
+        setItems([...items, itemToAdd]);
+        // Reset new item form
+        setNewItem({
+          id: "",
+          title: "",
+          price: 0,
+          quantity: 1,
+          size: "M",
+          slug: "",
+          image: "",
+        });
+      } else {
+        console.error("Product details not found for ID:", newItem.id);
+      }
     }
   };
 
@@ -411,74 +424,20 @@ export default function OrderModal({
                     onChange={(e) =>
                       setNewItem({ ...newItem, id: e.target.value })
                     }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
+                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-black"
                   />
                 </div>
 
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium mb-1">
-                    Title
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-black">
+                    Size
                   </label>
-                  <input
-                    type="text"
-                    value={newItem.title}
-                    onChange={(e) =>
-                      setNewItem({ ...newItem, title: e.target.value })
-                    }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Image URL
-                  </label>
-                  <input
-                    type="text"
-                    value={newItem.image}
-                    onChange={(e) =>
-                      setNewItem({ ...newItem, image: e.target.value })
-                    }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">Slug</label>
-                  <input
-                    type="text"
-                    value={newItem.slug}
-                    onChange={(e) =>
-                      setNewItem({ ...newItem, slug: e.target.value })
-                    }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Price
-                  </label>
-                  <input
-                    type="number"
-                    value={newItem.price}
-                    onChange={(e) =>
-                      setNewItem({ ...newItem, price: Number(e.target.value) })
-                    }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
-                    min="0"
-                    step="0.01"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">Size</label>
                   <select
                     value={newItem.size}
                     onChange={(e) =>
                       setNewItem({ ...newItem, size: e.target.value as Size })
                     }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
+                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-black"
                   >
                     <option value="XS">XS</option>
                     <option value="S">S</option>
@@ -491,7 +450,7 @@ export default function OrderModal({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">
+                  <label className="block text-sm font-medium mb-1 text-black">
                     Quantity
                   </label>
                   <input
@@ -503,7 +462,7 @@ export default function OrderModal({
                         quantity: Number(e.target.value),
                       })
                     }
-                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm"
+                    className="w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-black"
                     min="1"
                   />
                 </div>

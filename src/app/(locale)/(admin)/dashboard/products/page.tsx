@@ -8,7 +8,7 @@ import useProduct from "@/hooks/use-product";
 import { useState } from "react";
 import Image from "next/image";
 import ProductModal from "@/components/ui/modal/product-modal";
-import { Product } from "@/interfaces";
+import { Product, ProductWithoutId } from "@/interfaces";
 
 export default function ProductsPage() {
   const {
@@ -39,7 +39,7 @@ export default function ProductsPage() {
     setIsModalOpen(true);
   };
 
-  const handleModalSubmit = async (productData: Product) => {
+  const handleModalSubmit = async (productData: ProductWithoutId) => {
     if (currentProduct) {
       // Update existing product
       await updateExistingProduct(currentProduct.id, productData);

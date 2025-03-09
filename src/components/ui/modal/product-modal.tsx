@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Product, Size } from "@/interfaces";
+import { Product, ProductWithoutId, Size } from "@/interfaces";
 import { FaTimes } from "react-icons/fa";
 
 interface ProductModalProps {
   isOpen: boolean;
   onClose: () => void;
   product?: Product | null;
-  onSubmit: (productData: Product) => Promise<void>;
+  onSubmit: (productData: ProductWithoutId) => Promise<void>;
   title?: string;
 }
 
@@ -19,8 +19,7 @@ export default function ProductModal({
   onSubmit,
   title = "Create New Product",
 }: ProductModalProps) {
-  const [productData, setProductData] = useState<Product>({
-    id: "",
+  const [productData, setProductData] = useState<ProductWithoutId>({
     description: "",
     images: [],
     inStock: 0,
@@ -35,7 +34,8 @@ export default function ProductModal({
 
   useEffect(() => {
     if (product) {
-      setProductData(product);
+      const { ...rest } = product;
+      setProductData(rest);
     }
   }, [product]);
 
@@ -68,12 +68,8 @@ export default function ProductModal({
         </div>
 
         <form onSubmit={handleSubmit} className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="gap-6 mx-auto max-w-lg">
             <div className="space-y-4">
-              <h3 className="text-lg font-medium border-b pb-2">
-                Product Details
-              </h3>
-
               <div>
                 <label className="block text-sm font-medium mb-1">Title</label>
                 <input
