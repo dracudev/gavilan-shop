@@ -1,31 +1,40 @@
 import { JwtPayload } from "jwt-decode";
 import { jwtDecode } from "jwt-decode";
-import { redirect } from "next/navigation";
 import { createClient } from "@/services/supabase/server";
 
 interface CustomJwtPayload extends JwtPayload {
   user_role: string;
 }
 
-export default async function PrivatePage() {
+interface User {
+  id: string;
+  email: string;
+}
+
+interface UserRoleResult {
+  role: string;
+  userData?: User;
+}
+
+export async function checkUserRole(): Promise<UserRoleResult> {
   const supabase = await createClient();
 
   const { data: userData, error: userError } = await supabase.auth.getUser();
   if (userError || !userData?.user) {
-    redirect("/login");
+    return { role: "unidentified" };
   }
 
   const { data: sessionData, error: sessionError } =
     await supabase.auth.getSession();
   if (sessionError || !sessionData?.session) {
-    redirect("/login");
+    return { role: "unidentified" };
   }
 
   const jwt = jwtDecode<CustomJwtPayload>(sessionData.session.access_token);
   const userRole = jwt.user_role;
-  if (userRole !== "admin") {
-    redirect("/");
+  if (userRole === "admin") {
+    return { role: "admin", userData: userData.user as User };
   }
 
-  return <p>Hello {userData.user.email}</p>;
+  return { role: "user", userData: userData.user as User };
 }

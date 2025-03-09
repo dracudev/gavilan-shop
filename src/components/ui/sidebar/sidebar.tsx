@@ -73,7 +73,7 @@ export function Sidebar() {
         <Link
           href="/account"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar} // Add this line
+          onClick={toggleSideBar}
         >
           <IoPersonOutline size={30} />
           <span className="ml-3 text-xl">Account</span>
@@ -82,7 +82,7 @@ export function Sidebar() {
         <Link
           href="/orders"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar} // Add this line
+          onClick={toggleSideBar}
         >
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Orders</span>
@@ -91,7 +91,7 @@ export function Sidebar() {
         <Link
           href="/login"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar} // Add this line
+          onClick={toggleSideBar}
         >
           <IoLogInOutline size={30} />
           <span className="ml-3 text-xl">Login</span>
@@ -100,7 +100,7 @@ export function Sidebar() {
         <div
           onClick={() => {
             logout();
-            toggleSideBar(); // Add this line
+            toggleSideBar();
           }}
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black cursor-pointer  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
         >
@@ -112,27 +112,27 @@ export function Sidebar() {
         <div className="w-full h-px bg-gray-300 my-5"></div>
 
         <Link
-          href="/products"
+          href="/dashboard/products"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar} // Add this line
+          onClick={toggleSideBar}
         >
           <FaRedhat size={30} />
           <span className="ml-3 text-xl">Products</span>
         </Link>
 
         <Link
-          href="/"
+          href="/dashboard/orders"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar} // Add this line
+          onClick={toggleSideBar}
         >
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Orders</span>
         </Link>
 
         <Link
-          href="/"
+          href="/dashboard/users"
           className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-          onClick={toggleSideBar} // Add this line
+          onClick={toggleSideBar}
         >
           <IoPeopleOutline size={30} />
           <span className="ml-3 text-xl">Users</span>

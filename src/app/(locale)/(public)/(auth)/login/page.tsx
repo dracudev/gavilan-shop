@@ -1,6 +1,6 @@
 import { titleFont } from "@/config/fonts";
 import Link from "next/link";
-import { login } from "../../../../services/supabase/actions";
+import { login } from "@/services/supabase/actions";
 
 export default function Login() {
   return (
