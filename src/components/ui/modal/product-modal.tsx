@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Product, ProductWithoutId, Size } from "@/interfaces";
+import { useProductForm } from "@/hooks/product/use-product-form";
 import { FaTimes } from "react-icons/fa";
+import { Product, ProductWithoutId, Size } from "@/interfaces";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -19,50 +19,10 @@ export default function ProductModal({
   onSubmit,
   title = "Create New Product",
 }: ProductModalProps) {
-  const [productData, setProductData] = useState<ProductWithoutId>({
-    description: "",
-    images: [],
-    inStock: 0,
-    price: 0,
-    sizes: [],
-    slug: "",
-    tags: [],
-    title: "",
-    type: "shirts",
-    gender: "unisex",
+  const { productData, setProductData, handleChange } = useProductForm({
+    product,
+    isOpen,
   });
-
-  useEffect(() => {
-    if (product) {
-      const { ...rest } = product;
-      setProductData(rest);
-    }
-  }, [product]);
-
-  // Reset form when modal is opened for creating a new product
-  useEffect(() => {
-    if (isOpen && !product) {
-      setProductData({
-        description: "",
-        images: [],
-        inStock: 0,
-        price: 0,
-        sizes: [],
-        slug: "",
-        tags: [],
-        title: "",
-        type: "shirts",
-        gender: "unisex",
-      });
-    }
-  }, [isOpen, product]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setProductData({ ...productData, [name]: value });
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

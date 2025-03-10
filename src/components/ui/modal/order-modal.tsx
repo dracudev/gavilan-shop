@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { CartItem, Order, ShipmentInfo, Size } from "@/interfaces";
 import { FaTimes } from "react-icons/fa";
-import { getProduct } from "@/services/product-service";
+import { useOrderForm } from "@/hooks/order/use-order-form";
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -26,146 +25,21 @@ export default function OrderModal({
   onSubmit,
   title = "Create New Order",
 }: OrderModalProps) {
-  const [userId, setUserId] = useState("");
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [paid, setPaid] = useState(false);
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [shipmentInfo, setShipmentInfo] = useState<ShipmentInfo>({
-    name: "",
-    surname: "",
-    address: "",
-    address2: "",
-    city: "",
-    postalCode: "",
-    country: "",
-    telephone: "",
-  });
-
-  // Add a new item to the order
-  const [newItem, setNewItem] = useState<CartItem>({
-    id: "",
-    title: "",
-    price: 0,
-    quantity: 1,
-    size: "M",
-    slug: "",
-    image: "",
-  });
-
-  // Populate form when editing an existing order
-  useEffect(() => {
-    if (order) {
-      setUserId(order.user_id);
-      setTotalAmount(order.total_amount);
-      setPaid(order.paid);
-
-      // Transform order_items to CartItem format
-      const cartItems: CartItem[] = order.order_items.map((item) => ({
-        id: item.product_id,
-        title: item.title,
-        price: item.price,
-        quantity: item.quantity,
-        size: item.size as Size,
-        slug: "", // TODO: Get slug from product service
-        image: item.image,
-      }));
-      setItems(cartItems);
-
-      // Set shipment info if available
-      if (order.order_shipment && order.order_shipment.length > 0) {
-        const shipment = order.order_shipment[0];
-        setShipmentInfo({
-          name: shipment.name,
-          surname: shipment.surname,
-          address: shipment.address,
-          address2: shipment.address_2 || "",
-          city: shipment.city,
-          postalCode: shipment.postal_code,
-          country: shipment.country,
-          telephone: shipment.telephone,
-        });
-      }
-    }
-  }, [order]);
-
-  // Reset form when modal is opened for creating a new order
-  useEffect(() => {
-    if (isOpen && !order) {
-      setUserId("");
-      setTotalAmount(0);
-      setPaid(false);
-      setItems([]);
-      setShipmentInfo({
-        name: "",
-        surname: "",
-        address: "",
-        address2: "",
-        city: "",
-        postalCode: "",
-        country: "",
-        telephone: "",
-      });
-      setNewItem({
-        id: "",
-        title: "",
-        price: 0,
-        quantity: 1,
-        size: "M",
-        slug: "",
-        image: "",
-      });
-    }
-  }, [isOpen, order]);
-
-  // Calculate total amount whenever items change
-  useEffect(() => {
-    const newTotal = items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    setTotalAmount(newTotal);
-  }, [items]);
-
-  const handleAddItem = async () => {
-    if (newItem.id && newItem.quantity > 0) {
-      const productDetails = await getProduct(newItem.id);
-      if (productDetails) {
-        const itemToAdd = {
-          ...newItem,
-          title: productDetails.title,
-          price: productDetails.price,
-          image: productDetails.images[0],
-          slug: productDetails.slug,
-        };
-        setItems([...items, itemToAdd]);
-        // Reset new item form
-        setNewItem({
-          id: "",
-          title: "",
-          price: 0,
-          quantity: 1,
-          size: "M",
-          slug: "",
-          image: "",
-        });
-      } else {
-        console.error("Product details not found for ID:", newItem.id);
-      }
-    }
-  };
-
-  const handleRemoveItem = (index: number) => {
-    const updatedItems = [...items];
-    updatedItems.splice(index, 1);
-    setItems(updatedItems);
-  };
-
-  const handleShipmentInfoChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setShipmentInfo({ ...shipmentInfo, [name]: value });
-  };
+  const {
+    userId,
+    setUserId,
+    totalAmount,
+    setTotalAmount,
+    paid,
+    setPaid,
+    items,
+    newItem,
+    setNewItem,
+    shipmentInfo,
+    handleAddItem,
+    handleRemoveItem,
+    handleShipmentInfoChange,
+  } = useOrderForm({ order, isOpen });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
