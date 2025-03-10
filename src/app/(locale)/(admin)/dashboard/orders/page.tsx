@@ -107,7 +107,7 @@ export default function OrdersPage() {
 
         <div className="overflow-x-auto">
           <table className="min-w-full rounded-lg overflow-hidden">
-            <thead className="bg-gray-300 dark:bg-zinc-700 border-b">
+            <thead className="bg-gray-300 dark:bg-zinc-800 border-b">
               <tr>
                 <th
                   scope="col"

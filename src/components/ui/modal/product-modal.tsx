@@ -74,7 +74,7 @@ export default function ProductModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-auto">
+      <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-auto">
         <div className="flex justify-between items-center border-b p-4">
           <h2 className="text-xl font-semibold">{title}</h2>
           <button
@@ -86,7 +86,7 @@ export default function ProductModal({
         </div>
 
         <form onSubmit={handleSubmit} className="p-6">
-          <div className="gap-6 mx-auto max-w-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">Title</label>
@@ -151,7 +151,9 @@ export default function ProductModal({
                   required
                 />
               </div>
+            </div>
 
+            <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">Type</label>
                 <select
