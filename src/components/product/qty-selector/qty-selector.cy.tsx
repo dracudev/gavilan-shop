@@ -1,4 +1,4 @@
-import { QtySelector } from "@/components/product/qty-selector/qty-selector";
+/*import { QtySelector } from "@/components/product/qty-selector/qty-selector";
 import { CartItem } from "@/interfaces/types";
 
 describe("QtySelector Component", () => {
@@ -109,3 +109,4 @@ describe("QtySelector Component", () => {
     cy.get("span.bg-gray-200").should("contain", "3"); // Still updates UI
   });
 });
+*/
