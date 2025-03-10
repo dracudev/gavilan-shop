@@ -1,24 +1,37 @@
-# 🎩 El Gavilán - eCommerce
+# El Gavilán | Ecommerce
+![El Gavilán](public/imgs/mockup.png)
+## Table of contents
+- [Description](#description)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Future Improvements](#future-improvements)
+- [Deployment](#deployment)
 
-![El Gavilán](public/imgs/logo.png)
+## Description
+**El Gavilán** is a traditional hat shop based in Alicante, established in 1970. This digital platform aims to enhance the shop's online presence and sales by offering a seamless shopping experience. Built with **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**, it ensures a modern and efficient interface for customers to browse, filter, and purchase products.
 
-## Overview
-**El Gavilán** is a local traditional hat shop from Alicante, serving customers since 1970. This project aims to digitalize the shop, improving its digital presence and increasing its benefits by providing an online platform for customers to browse and purchase products seamlessly. Built with **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**, this project ensures a modern and efficient shopping experience.
 ## Features
-- 🛍️ **Product Listings** - Browse a variety of hats for men, women, and children.
-- 🔎 **Search & Filtering** - Easily find the perfect hat.
-- 🛒 **Shopping Cart & Checkout** - Secure and smooth checkout process.
-- 👤 **User Authentication** - Login & signup system.
-- 🎨 **Dark Mode** - Toggle between light and dark themes.
-- 🛠 **Admin Dashboard** - Manage products and orders.
+- 🍭 **Product Listings**: Browse a variety of hats for men, women, and children.
+- 🔍 **Search & Filtering**: Easily find the perfect hat.
+- 🛒 **Shopping Cart & Checkout**: Secure and smooth checkout process with Stripe integration.
+- 👤 **User Authentication**: Secure login & signup system with Supabase.
+- 🎨 **Dark Mode**: Toggle between light and dark themes.
+- 🛠 **Admin Dashboard**: Manage products, orders, and users.
+- 💡 **Localization**: Multi-language support for broader accessibility.
+- 🍿 **Product Carousels**: Enhanced product visuals using Swiper.
 
 ## Tech Stack
 - **Framework**: Next.js (15.1.7)
 - **UI Library**: React (19.0.0)
 - **Styling**: Tailwind CSS
 - **State Management**: Zustand
+- **Authentication**: Supabase
+- **Payment Processing**: Stripe
 - **Icons**: React Icons
-- **Swiper**: For product image carousels
+- **Image Carousels**: Swiper
 
 ## Installation
 ### Prerequisites
@@ -27,55 +40,49 @@
 
 ### Steps
 1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/gavilan-shop.git
+   ```bash
+   git clone https://github.com/dracudev/gavilan-shop.git
    cd gavilan-shop
    ```
 2. Install dependencies:
-   ```sh
+   ```bash
    npm install
    # or
    yarn install
    ```
-3. Start the development server:
-   ```sh
+3. Set up environment variables. Create a `.env.local` file and add the necessary variables for Supabase and Stripe.
+4. Start the development server:
+   ```bash
    npm run dev
    # or
    yarn dev
    ```
-4. Open `http://localhost:3000` in your browser.
+5. Open `http://localhost:3000` in your browser.
 
-## Project Structure
-```
-├── public/
-│   ├── imgs/
-│   ├── products/
-├── src/
-│   ├── app/
-│   ├── components/
-│   ├── hooks/
-│   ├── interfaces/
-│   ├── store/
-│   ├── utils/
-│   ├── config/
-├── package.json
-├── tailwind.config.ts
-├── tsconfig.json
-└── next.config.ts
-```
+## Usage
+- Browse products and use filters to find items.
+- Add products to the cart and proceed to checkout.
+- Manage user accounts and orders.
+- Admins can add, update, or remove products through the dashboard.
 
-## Scripts
-- `npm run dev` - Start the development server
-- `npm run build` - Build the production version
-- `npm run start` - Start the production server
-- `npm run lint` - Run ESLint
+## Testing
+Currently, manual testing is in place. Future improvements will include automated tests with Cypress.
 
-## Contributing
-We welcome contributions! Feel free to open issues or submit pull requests.
+## Future Improvements
+- Implement automated testing with Cypress.
+- Enhance accessibility features.
+- Introduce AI-powered product suggestions.
+- Enable user reviews and ratings.
+- Expand product categories and filtering options.
+- Add more advanced analytics for admin insights.
+- Optimize performance for better mobile experiences.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+## Deployment
+The project is ready for deployment and accesible on **[Live Demo](https://gavilan-shop.vercel.app)**
 
-## Contact
+---
+
 For any inquiries, reach out at **contact@gavilanshop.com**.
+
+This project is licensed under the [MIT License](LICENSE).
 
