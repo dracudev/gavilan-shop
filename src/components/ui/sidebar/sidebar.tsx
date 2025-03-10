@@ -89,7 +89,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
             >
               <IoPersonOutline size={30} />
               <span className="ml-3 text-xl">
-                {userData?.email || "Account"}
+                {userData?.email ?? "Account"}
               </span>
             </Link>
 

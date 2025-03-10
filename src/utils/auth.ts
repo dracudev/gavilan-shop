@@ -1,5 +1,4 @@
-import { JwtPayload } from "jwt-decode";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { createClient } from "@/services/supabase/server";
 
 interface CustomJwtPayload extends JwtPayload {
