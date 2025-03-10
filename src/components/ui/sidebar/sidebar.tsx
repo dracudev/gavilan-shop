@@ -80,7 +80,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
         </div>
 
         {/* User Menu */}
-        {userRole === "user" && (
+        {(userRole === "user" || userRole === "unidentified") && (
           <>
             <Link
               href="/account"
@@ -140,7 +140,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
         <div className="w-full h-px bg-gray-300 my-5"></div>
 
         {/* Login Button */}
-        {!userRole && (
+        {userRole === "unidentified" && (
           <Link
             href="/login"
             className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
@@ -152,7 +152,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
         )}
 
         {/* Logout Button */}
-        {userRole && (
+        {userRole && userRole !== "unidentified" && (
           <div
             onClick={() => {
               logout();
