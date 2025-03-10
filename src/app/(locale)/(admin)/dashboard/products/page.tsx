@@ -4,56 +4,27 @@ import { Title } from "@/components";
 import Loading from "@/components/ui/loading/loading";
 import Link from "next/link";
 import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
-import useProduct from "@/hooks/product/use-product";
-import { useState } from "react";
 import Image from "next/image";
 import ProductModal from "@/components/ui/modal/product-modal";
-import { Product, ProductWithoutId } from "@/interfaces";
+import { useProductsPage } from "@/hooks/product/use-products-page";
 
 export default function ProductsPage() {
   const {
     products,
     loading,
-    createNewProduct,
-    updateExistingProduct,
-    deleteExistingProduct,
-  } = useProduct();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
-  const [modalTitle, setModalTitle] = useState("Create New Product");
+    isModalOpen,
+    setIsModalOpen,
+    currentProduct,
+    modalTitle,
+    handleCreateProductClick,
+    handleEditProductClick,
+    handleModalSubmit,
+    handleDeleteProduct,
+  } = useProductsPage();
 
   if (loading) {
     return <Loading />;
   }
-
-  const handleCreateProductClick = () => {
-    setCurrentProduct(null);
-    setModalTitle("Create New Product");
-    setIsModalOpen(true);
-  };
-
-  const handleEditProductClick = (product: Product) => {
-    setCurrentProduct(product);
-    setModalTitle(`Edit Product: ${product.title}`);
-    setIsModalOpen(true);
-  };
-
-  const handleModalSubmit = async (productData: ProductWithoutId) => {
-    if (currentProduct) {
-      // Update existing product
-      await updateExistingProduct(currentProduct.id, productData);
-    } else {
-      // Create new product
-      await createNewProduct(productData);
-    }
-  };
-
-  const handleDeleteProduct = async (productId: string) => {
-    if (confirm("Are you sure you want to delete this product?")) {
-      await deleteExistingProduct(productId);
-    }
-  };
 
   return (
     <>
