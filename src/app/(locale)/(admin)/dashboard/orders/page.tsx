@@ -82,7 +82,8 @@ export default function OrdersPage() {
         orderData.userId,
         orderData.totalAmount,
         orderData.items,
-        orderData.shipmentInfo
+        orderData.shipmentInfo,
+        orderData.paid
       );
     }
   };

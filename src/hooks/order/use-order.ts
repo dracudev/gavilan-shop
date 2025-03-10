@@ -34,14 +34,16 @@ export default function useOrder() {
     userId: string,
     totalAmount: number,
     items: CartItem[],
-    shipmentInfo: ShipmentInfo
+    shipmentInfo: ShipmentInfo,
+    paid: boolean = false
   ) => {
     try {
       const orderId = await createOrder(
         userId,
         totalAmount,
         items,
-        shipmentInfo
+        shipmentInfo,
+        paid
       );
 
       if (orderId) {

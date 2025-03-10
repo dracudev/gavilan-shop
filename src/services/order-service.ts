@@ -82,7 +82,8 @@ async function createOrder(
   userId: string,
   totalAmount: number,
   items: CartItem[],
-  shipmentInfo: ShipmentInfo
+  shipmentInfo: ShipmentInfo,
+  paid: boolean = false
 ): Promise<string | null> {
   const supabase = createClient();
 
@@ -92,7 +93,7 @@ async function createOrder(
       {
         user_id: userId,
         total_amount: totalAmount,
-        paid: false,
+        paid: paid,
       },
     ])
     .select("order_id")
