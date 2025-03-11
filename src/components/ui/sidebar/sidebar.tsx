@@ -9,6 +9,7 @@ import {
   IoCloseOutline,
   IoLogInOutline,
   IoLogOutOutline,
+  IoCreateOutline,
   IoPeopleOutline,
   IoPersonOutline,
   IoSearchOutline,
@@ -141,14 +142,25 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
         {/* Login Button */}
         {userRole === "unidentified" && (
-          <Link
-            href="/login"
-            className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
-            onClick={toggleSideBar}
-          >
-            <IoLogInOutline size={30} />
-            <span className="ml-3 text-xl">Login</span>
-          </Link>
+          <>
+            <Link
+              href="/login"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <IoLogInOutline size={30} />
+              <span className="ml-3 text-xl">Login</span>
+            </Link>
+
+            <Link
+              href="/sign-up"
+              className="flex items-center mt-5 p-2 hover:bg-zinc-300  dark:hover:text-black  rounded transition-all  hover:text-[var(--primary-color)] transform duration-500"
+              onClick={toggleSideBar}
+            >
+              <IoCreateOutline size={30} />
+              <span className="ml-3 text-xl">Sign Up</span>
+            </Link>
+          </>
         )}
 
         {/* Logout Button */}
