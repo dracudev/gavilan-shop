@@ -1,5 +1,5 @@
 # El Gavilán | Ecommerce
-![El Gavilán](public/imgs/mockup.png)
+![El Gavilán](public/img/mockup-red.png)
 ## Table of contents
 - [Description](#description)
 - [Features](#features)
