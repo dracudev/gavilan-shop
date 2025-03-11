@@ -31,7 +31,7 @@ export function ProductSlideshowMobile({ images, title, className }: Props) {
         {images.map((image) => (
           <SwiperSlide key={image}>
             <Image
-              src={`/products/${image}`}
+              src={image}
               alt={title}
               width={600}
               height={500}

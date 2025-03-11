@@ -17,9 +17,7 @@ export function ProductItem({ product }: ProductItemProps) {
     <div className="md:rounded-md overflow-hidden fade-in">
       <Link href={`/product/${product.slug}`} prefetch={false}>
         <Image
-          src={
-            imageError ? "/imgs/fallback-image.webp" : `/products/${isHovered}`
-          }
+          src={imageError ? "/imgs/fallback-image.webp" : `${isHovered}`}
           alt={product.title}
           className="w-full object-cover sm:rounded"
           width={500}

@@ -40,7 +40,7 @@ export function ProductSlideshow({ images, title, className }: Props) {
         {images.map((image) => (
           <SwiperSlide key={image}>
             <Image
-              src={`/products/${image}`}
+              src={image}
               alt={title}
               width={1024}
               height={800}
@@ -62,7 +62,7 @@ export function ProductSlideshow({ images, title, className }: Props) {
         {images.map((image) => (
           <SwiperSlide key={image}>
             <Image
-              src={`/products/${image}`}
+              src={image}
               alt={title}
               width={200}
               height={200}

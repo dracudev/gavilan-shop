@@ -47,7 +47,7 @@ export default function OrderPage() {
                 className="flex mb-5 truncate"
               >
                 <Image
-                  src={`/products/${product.image}`}
+                  src={product.image}
                   alt={product.product_id}
                   style={{ width: "100px", height: "100px" }}
                   width={100}
@@ -58,7 +58,7 @@ export default function OrderPage() {
                 <div>
                   <p>{product.title}</p>
                   <p>
-                    {product.price}€ x {product.quantity}
+                    {product.price}€ x {product.quantity} ({product.size})
                   </p>
                   <p className="font-bold">
                     Subtotal: {product.price * product.quantity}€

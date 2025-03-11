@@ -63,3 +63,21 @@
 .swiper-pagination-bullet-active {
   background: var(--primary-color) !important;
 }
+
+.custom-slideshow .mySwiper2 {
+  height: 620px;
+  width: auto;
+  border-radius: 10px;
+}
+
+.custom-slideshow .mySwiper2 .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-slideshow .mySwiper2 .swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

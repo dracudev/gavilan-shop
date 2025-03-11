@@ -41,7 +41,7 @@ export default function CartPage() {
                 className="flex mb-5 truncate"
               >
                 <Image
-                  src={`/products/${item.image}`}
+                  src={item.image}
                   alt={item.title}
                   style={{ width: "100px", height: "100px" }}
                   width={100}

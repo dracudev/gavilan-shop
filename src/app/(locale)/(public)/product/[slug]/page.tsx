@@ -65,7 +65,7 @@ export default function ProductPage() {
         <ProductSlideshow
           title={product.title}
           images={product.images}
-          className="hidden md:block"
+          className="hidden md:block custom-slideshow"
         />
       </div>
 

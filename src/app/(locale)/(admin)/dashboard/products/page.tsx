@@ -87,7 +87,7 @@ export default function ProductsPage() {
                 >
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     <Image
-                      src={`/products/${product.images[0]}`}
+                      src={product.images[0]}
                       alt={product.title}
                       className="w-16 h-16 object-cover"
                       width={500}

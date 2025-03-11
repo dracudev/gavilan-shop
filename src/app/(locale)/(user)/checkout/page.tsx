@@ -51,7 +51,7 @@ export default function CheckoutPage() {
                 className="flex mb-5 truncate"
               >
                 <Image
-                  src={`/products/${product.image}`}
+                  src={product.image}
                   alt={product.title}
                   style={{ width: "100px", height: "100px" }}
                   width={100}
