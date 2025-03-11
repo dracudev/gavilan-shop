@@ -14,6 +14,9 @@ import {
   IoPersonOutline,
   IoSearchOutline,
   IoTicketOutline,
+  IoWomanOutline,
+  IoManOutline,
+  IoAccessibilityOutline,
 } from "react-icons/io5";
 import { logout } from "@/services/supabase/actions";
 
@@ -78,6 +81,39 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
             placeholder="Search..."
             className="w-full bg-gray-100 rounded pl-10 py-1 pr-10 border-b-2 dark:text-black text-xl border-gray-200 focus:outline-none focus:border-[var(--primary-color)] "
           />
+        </div>
+
+        {/* Category Links (Mobile Only) */}
+        <div className="block sm:hidden">
+          <Link
+            href="/category/men"
+            className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:hover:text-black rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            onClick={toggleSideBar}
+          >
+            <IoManOutline size={30} />
+            <span className="ml-3 text-xl">Men</span>
+          </Link>
+
+          <Link
+            href="/category/women"
+            className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:hover:text-black rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            onClick={toggleSideBar}
+          >
+            <IoWomanOutline size={30} />
+            <span className="ml-3 text-xl">Women</span>
+          </Link>
+
+          <Link
+            href="/category/kid"
+            className="flex items-center mt-5 p-2 hover:bg-zinc-300 dark:hover:text-black rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            onClick={toggleSideBar}
+          >
+            <IoAccessibilityOutline size={30} />
+            <span className="ml-3 text-xl">Kids</span>
+          </Link>
+
+          {/* Separator */}
+          <div className="w-full h-px bg-gray-300 my-5"></div>
         </div>
 
         {/* User Menu */}
