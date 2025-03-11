@@ -36,7 +36,7 @@ export function QtySelector({
 
   return (
     <div className="flex">
-      <button onClick={() => onQtyChange(-1)}>
+      <button onClick={() => onQtyChange(-1)} role="remove-qty">
         <IoRemoveCircleOutline />
       </button>
 
@@ -44,7 +44,7 @@ export function QtySelector({
         {quantity}
       </span>
 
-      <button onClick={() => onQtyChange(+1)}>
+      <button onClick={() => onQtyChange(+1)} role="add-qty">
         <IoAddCircleOutline />
       </button>
     </div>
