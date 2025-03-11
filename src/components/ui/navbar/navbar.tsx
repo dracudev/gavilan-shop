@@ -6,17 +6,28 @@ import { useCartStore, useUIStore } from "@/store";
 import Link from "next/link";
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 import { ToggleButton } from "../toggle-button/toggle-button";
+import Image from "next/image";
+import { useLogo } from "@/hooks/ui/use-logo";
 
 export const Navbar = () => {
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
   const { theme, toggleTheme } = useTheme();
   const totalItems = useCartStore((state) => state.totalItems);
 
+  const logoSrc = useLogo();
+
   return (
     <nav className="fixed top-0 left-0 right-0 flex px-5 justify-between items-center w-full bg-[var(--background)] shadow-md z-50">
       {/* Logo */}
       <div>
-        <Link href="/">
+        <Link href="/" className="flex items-center">
+          <Image
+            src={logoSrc}
+            alt="logo"
+            className="w-10 h-10 me-2"
+            width={50}
+            height={50}
+          />
           <span
             className={`${titleFont.className} antialiased font-bold text-xl`}
           >
