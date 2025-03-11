@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/context/theme-context";
+import { bodyFont } from "@/config/fonts";
+
 export const metadata: Metadata = {
   title: "El Gavilán",
   description: "Hat shop in Orihuela, Alicante since 1970",
@@ -14,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider>
-        <body>{children}</body>
+        <body className={`${bodyFont.className}`}>{children}</body>
       </ThemeProvider>
     </html>
   );

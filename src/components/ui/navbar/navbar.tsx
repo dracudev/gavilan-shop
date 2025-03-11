@@ -24,12 +24,12 @@ export const Navbar = () => {
           <Image
             src={logoSrc}
             alt="logo"
-            className="w-10 h-10 me-2"
+            className="w-10 h-10 me-2  hidden sm:block "
             width={50}
             height={50}
           />
           <span
-            className={`${titleFont.className} antialiased font-bold text-xl`}
+            className={`${titleFont.className} antialiased text-xl text-nowrap`}
           >
             El Gavilán
           </span>
