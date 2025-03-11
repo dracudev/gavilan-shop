@@ -52,9 +52,9 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="md:mt-10 mb-10 grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div className="md:mt-10 mb-10 grid grid-cols-1 md:grid-cols-2 gap-3">
       {/* Slideshow */}
-      <div className="col-span-1 md:col-span-2">
+      <div className="col-span-1">
         {/* Mobile */}
         <ProductSlideshowMobile
           title={product.title}
@@ -65,7 +65,7 @@ export default function ProductPage() {
         <ProductSlideshow
           title={product.title}
           images={product.images}
-          className="hidden md:block custom-slideshow"
+          className="hidden md:block max-w-3xl mx-auto"
         />
       </div>
 
