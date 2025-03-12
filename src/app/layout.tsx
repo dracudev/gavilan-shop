@@ -5,7 +5,7 @@ import { bodyFont } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: "El Gavilán",
-  description: "Hat shop in Orihuela, Alicante since 1970",
+  description: "Hat shop in Orihuela, Alicante since 1880",
 };
 
 export default function RootLayout({
