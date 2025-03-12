@@ -1,13 +1,13 @@
-import React from "react";
+import { ReactNode, HTMLAttributes } from "react";
 
-export const Swiper = ({ children, ...props }) => (
-  <div data-testid="swiper" {...props}>
-    {children}
-  </div>
-);
+interface SwiperSlideProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+}
 
-export const SwiperSlide = ({ children, ...props }) => (
+const SwiperSlide = ({ children, ...props }: SwiperSlideProps) => (
   <div data-testid="swiper-slide" {...props}>
     {children}
   </div>
 );
+
+export default SwiperSlide;
