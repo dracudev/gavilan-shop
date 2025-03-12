@@ -20,12 +20,10 @@
 ## Features
 
 - 🍭 **Product Listings**: Browse a variety of hats for men, women, and children.
-- 🔍 **Search & Filtering**: Easily find the perfect hat.
 - 🛒 **Shopping Cart & Checkout**: Secure and smooth checkout process with Stripe integration.
 - 👤 **User Authentication**: Secure login & signup system with Supabase.
 - 🎨 **Dark Mode**: Toggle between light and dark themes.
 - 🛠 **Admin Dashboard**: Manage products, orders, and users.
-- 💡 **Localization**: Multi-language support for broader accessibility.
 - 🍿 **Product Carousels**: Enhanced product visuals using Swiper.
 
 ## Tech Stack
