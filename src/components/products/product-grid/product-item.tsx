@@ -3,7 +3,7 @@
 import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ProductItemProps {
   product: Product;
@@ -12,6 +12,22 @@ interface ProductItemProps {
 export function ProductItem({ product }: ProductItemProps) {
   const [isHovered, setIsHovered] = useState(product.images[0]);
   const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    // Preload images
+    const preloadImages = product.images.map((src) => {
+      const img = new window.Image();
+      img.src = src;
+      return img;
+    });
+
+    // Cleanup function to release memory
+    return () => {
+      preloadImages.forEach((img) => {
+        img.src = "";
+      });
+    };
+  }, [product.images]);
 
   return (
     <div className="md:rounded-md overflow-hidden fade-in">
@@ -25,7 +41,6 @@ export function ProductItem({ product }: ProductItemProps) {
           onMouseEnter={() => setIsHovered(product.images[1])}
           onMouseLeave={() => setIsHovered(product.images[0])}
           onError={() => setImageError(true)}
-          unoptimized
         ></Image>
       </Link>
 
