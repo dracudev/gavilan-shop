@@ -89,13 +89,17 @@ yarn test
 
 ## Future Improvements
 
-- Implement end-to-end testing with Cypress.
-- Enhance accessibility features.
-- Introduce AI-powered assistant.
+- Implement end-to-end testing with Cypress and Playwright.
+- Enhance accessibility features (aria-labels).
+- Introduce AI-powered assistant (Chatbot IA).
 - Enable user reviews and ratings.
 - Expand product categories and filtering options.
 - Add more advanced analytics for admin insights.
 - Optimize performance for better mobile experiences.
+- Implement i18n translation with DeepL API.
+- Add OAuth for authentication.
+- Add Zod validations for forms and login.
+- Implement confirmation modals and toast notifications.
 
 ## Deployment
 
