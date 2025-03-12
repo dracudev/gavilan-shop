@@ -31,7 +31,7 @@ export function ProductSlideshow({ images, title, className }: Props) {
           } as React.CSSProperties
         }
         spaceBetween={10}
-        navigation={true}
+        navigation
         autoplay={{ delay: 3500 }}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
@@ -55,13 +55,13 @@ export function ProductSlideshow({ images, title, className }: Props) {
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
         slidesPerView={4}
-        freeMode={true}
-        watchSlidesProgress={true}
+        freeMode
+        watchSlidesProgress
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
         {images.map((image) => (
-          <SwiperSlide key={image}>
+          <SwiperSlide key={image} data-testid="swiper-slide">
             <Image
               src={image}
               alt={title}
