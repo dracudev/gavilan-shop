@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { ProductSlideshowMobile } from "@/components/product/slideshow/product-slideshow-mobile";
@@ -11,6 +11,14 @@ describe("ProductSlideshowMobile", () => {
     "/images/product3.jpg",
   ];
   const title = "Sample Product";
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
 
   it("renders the slideshow with images", () => {
     render(<ProductSlideshowMobile images={images} title={title} />);

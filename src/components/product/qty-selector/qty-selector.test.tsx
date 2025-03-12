@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { QtySelector } from "./qty-selector";
 import { useCartStore } from "@/store/cart/cart-store";
 import "@testing-library/jest-dom";
@@ -14,6 +14,14 @@ describe("QtySelector", () => {
       items: [{ id: "1", quantity: 2 }],
       updateItemQuantity,
     });
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
   });
 
   it("renders with initial quantity", () => {

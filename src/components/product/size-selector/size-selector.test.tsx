@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { SizeSelector } from "./size-selector";
 import "@testing-library/jest-dom";
 import type { Size } from "@/interfaces";
@@ -10,6 +10,14 @@ describe("SizeSelector", () => {
 
   beforeEach(() => {
     mockOnSizeChange.mockClear();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
   });
 
   it("renders with available sizes", () => {
