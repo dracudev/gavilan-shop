@@ -36,6 +36,7 @@ export function ProductSlideshow({ images, title, className }: Props) {
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="mySwiper2"
+        role="swiper1"
       >
         {images.map((image) => (
           <SwiperSlide key={image}>

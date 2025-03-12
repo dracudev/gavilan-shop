@@ -2,13 +2,6 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-// Tell Jest to use the mocks from the __mocks__ folder
-jest.mock("swiper/react");
-jest.mock("swiper/modules");
-jest.mock("swiper/css", () => ({}), { virtual: true });
-jest.mock("swiper/css/free-mode", () => ({}), { virtual: true });
-jest.mock("swiper/css/pagination", () => ({}), { virtual: true });
-
 import { ProductSlideshowMobile } from "@/components/product/slideshow/product-slideshow-mobile";
 
 describe("ProductSlideshowMobile", () => {

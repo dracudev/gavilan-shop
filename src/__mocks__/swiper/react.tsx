@@ -1,4 +1,4 @@
-import React, { ReactNode, HTMLAttributes } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
 interface SwiperProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -19,3 +19,8 @@ export const SwiperSlide = ({ children, ...props }: SwiperSlideProps) => (
     {children}
   </div>
 );
+
+jest.mock("swiper/react", () => ({
+  Swiper: Swiper,
+  SwiperSlide: SwiperSlide,
+}));
