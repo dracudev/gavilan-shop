@@ -26,7 +26,11 @@ export function SizeSelector({
                 underline: size === selectedSize,
               }
             )}
-            onClick={() => onSizeChange(size)}
+            onClick={() => {
+              if (size !== selectedSize) {
+                onSizeChange(size);
+              }
+            }}
           >
             {size}
           </button>
