@@ -5,6 +5,7 @@ module.exports = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "^swiper/react$": "<rootDir>/src/__mocks__/swiper/react.tsx",
     "^swiper/css$": "<rootDir>/src/__mocks__/swiper.js",
     "^swiper/css/(.*)$": "<rootDir>/src/__mocks__/swiper.js",
   },

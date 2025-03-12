@@ -27,6 +27,7 @@ export function ProductSlideshowMobile({ images, title, className }: Props) {
         autoplay={{ delay: 3500 }}
         modules={[FreeMode, Autoplay, Pagination]}
         className="mySwiper2"
+        role="container"
       >
         {images.map((image) => (
           <SwiperSlide key={image}>

@@ -2,18 +2,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-// Mock CSS imports
-jest.mock("./slideshow.css", () => ({}), { virtual: true });
+// Tell Jest to use the mocks from the __mocks__ folder
+jest.mock("swiper/react");
+jest.mock("swiper/modules");
 jest.mock("swiper/css", () => ({}), { virtual: true });
 jest.mock("swiper/css/free-mode", () => ({}), { virtual: true });
 jest.mock("swiper/css/pagination", () => ({}), { virtual: true });
 
-// Mock Swiper components
-jest.mock("swiper/react");
-jest.mock("swiper/modules");
-
-// Now import the component after the mocks are set up
-import { ProductSlideshowMobile } from "./product-slideshow-mobile";
+import { ProductSlideshowMobile } from "@/components/product/slideshow/product-slideshow-mobile";
 
 describe("ProductSlideshowMobile", () => {
   const images = [
@@ -58,7 +54,7 @@ describe("ProductSlideshowMobile", () => {
   it("renders the correct number of slides", () => {
     render(<ProductSlideshowMobile images={images} title={title} />);
 
-    const slides = screen.getAllByTestId("swiper-slide");
+    const slides = screen.getAllByRole("img");
     expect(slides).toHaveLength(images.length);
   });
 });
