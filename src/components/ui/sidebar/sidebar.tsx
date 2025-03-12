@@ -32,15 +32,26 @@ interface SidebarProps {
 
 export function Sidebar({ userRole, userData }: SidebarProps) {
   const isSideBarOpen = useUIStore((state) => state.isSideBarOpen);
+  const isSearchFocused = useUIStore((state) => state.isSearchFocused);
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
+  const setSearchFocus = useUIStore((state) => state.setSearchFocus);
 
   useEffect(() => {
     if (isSideBarOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      setSearchFocus(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSideBarOpen]);
+
+  useEffect(() => {
+    if (isSearchFocused) {
+      const searchInput = document.getElementById("sidebar-search-input");
+      searchInput?.focus();
+    }
+  }, [isSearchFocused]);
 
   return (
     <div>
@@ -77,6 +88,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
             className="absolute top-2 left-2 dark:text-black"
           />
           <input
+            id="sidebar-search-input"
             type="text"
             placeholder="Search..."
             className="w-full bg-gray-100 rounded pl-10 py-1 pr-10 border-b-2 dark:text-black text-xl border-gray-200 focus:outline-none focus:border-[var(--primary-color)] "

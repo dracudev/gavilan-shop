@@ -11,10 +11,16 @@ import { useLogo } from "@/hooks/ui/use-logo";
 
 export const Navbar = () => {
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
+  const setSearchFocus = useUIStore((state) => state.setSearchFocus);
   const { theme, toggleTheme } = useTheme();
   const totalItems = useCartStore((state) => state.totalItems);
 
   const logoSrc = useLogo();
+
+  const handleSearchClick = () => {
+    toggleSideBar();
+    setSearchFocus(true);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 flex px-5 justify-between items-center w-full bg-[var(--background)] shadow-md z-50">
@@ -66,9 +72,9 @@ export const Navbar = () => {
           isDark={theme === "dark"}
           onChange={toggleTheme}
         ></ToggleButton>
-        <Link href="#" className="mx-2">
+        <button className="mx-2" onClick={handleSearchClick}>
           <IoSearchOutline className="w-5 h-5 hover:text-[var(--primary-color)] transform duration-500" />
-        </Link>
+        </button>
 
         <Link href="/cart" className="mx-2">
           <div className="relative">
