@@ -7,15 +7,13 @@ import Link from "next/link";
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 import { ToggleButton } from "../toggle-button/toggle-button";
 import Image from "next/image";
-import { useLogo } from "@/hooks/ui/use-logo";
+import logo from "@/assets/head-logo.png";
 
 export const Navbar = () => {
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
   const setSearchFocus = useUIStore((state) => state.setSearchFocus);
   const { theme, toggleTheme } = useTheme();
   const totalItems = useCartStore((state) => state.totalItems);
-
-  const logoSrc = useLogo();
 
   const handleSearchClick = () => {
     toggleSideBar();
@@ -28,11 +26,11 @@ export const Navbar = () => {
       <div>
         <Link href="/" className="flex items-center">
           <Image
-            src={logoSrc}
+            src={logo}
             alt="logo"
-            className="w-10 h-10 me-2  hidden sm:block "
-            width={50}
-            height={50}
+            className="w-auto h-auto me-2  hidden sm:block "
+            width={40}
+            height={40}
           />
           <span
             className={`${titleFont.className} antialiased text-xl text-nowrap`}
