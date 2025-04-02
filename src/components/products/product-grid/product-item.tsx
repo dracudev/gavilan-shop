@@ -1,9 +1,10 @@
 "use client";
 
+import { useImagePreloader } from "@/hooks/ui/useImagePreloader";
 import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface ProductItemProps {
   product: Product;
@@ -13,21 +14,7 @@ export function ProductItem({ product }: ProductItemProps) {
   const [isHovered, setIsHovered] = useState(product.images[0]);
   const [imageError, setImageError] = useState(false);
 
-  useEffect(() => {
-    // Preload images
-    const preloadImages = product.images.map((src) => {
-      const img = new window.Image();
-      img.src = src;
-      return img;
-    });
-
-    // Cleanup function to release memory
-    return () => {
-      preloadImages.forEach((img) => {
-        img.src = "";
-      });
-    };
-  }, [product.images]);
+  useImagePreloader(product.images);
 
   return (
     <div className="md:rounded-md overflow-hidden fade-in">
