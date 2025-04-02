@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
+import { metadata } from "@/config/metadata"; // Import the metadata
 import "./globals.css";
 import { ThemeProvider } from "@/context/theme-context";
 import { bodyFont } from "@/config/fonts";
 
-export const metadata: Metadata = {
-  title: "El Gavilán",
-  description: "Hat shop in Orihuela, Alicante since 1880",
-};
+export { metadata };
 
 export default function RootLayout({
   children,
