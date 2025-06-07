@@ -10,8 +10,8 @@
   --secondary-color: #d4c4a8;
   --dark-secondary-color: #b5a082;
   --shadow-color: rgba(44, 24, 16, 0.12);
-  --sidebar-bg: #ffffff;
-  --sidebar-hover: #e4e4e7;
+  --sidebar-bg: rgba(247, 245, 243, 0.8);
+  --sidebar-hover: rgba(228, 228, 231, 0.8);
   --input-bg: #f4f4f5;
   --separator: #d1d5db;
   --overlay: rgba(0, 0, 0, 0.3);
@@ -27,8 +27,8 @@
   --background: #201b17;
   --foreground: #d6c4ab;
   --shadow-color: rgba(230, 221, 209, 0.05);
-  --sidebar-bg: var(--background);
-  --sidebar-hover: #2d2318;
+  --shadow-color: rgba(230, 221, 209, 0.05);
+  --sidebar-bg: rgba(32, 27, 23, 0.8);
   --input-bg: #f9f7f4;
   --input-text: #2c1810;
   --separator: #3d3025;
