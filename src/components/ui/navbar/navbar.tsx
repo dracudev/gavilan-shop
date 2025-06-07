@@ -62,7 +62,8 @@ export const Navbar = () => {
           <Image
             src={logo}
             alt="logo"
-            className="w-auto h-auto me-2  hidden sm:block "
+            className="w-auto h-auto me-2  hidden sm:block -mt-1"
+            style={{ width: "42px", height: "42px" }}
             width={40}
             height={40}
           />
