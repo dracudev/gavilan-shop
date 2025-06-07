@@ -24,8 +24,8 @@
 }
 
 .dark {
-  --background: #1c1510;
-  --foreground: #e6ddd1;
+  --background: #201b17;
+  --foreground: #d6c4ab;
   --shadow-color: rgba(230, 221, 209, 0.06);
   --sidebar-bg: var(--background);
   --sidebar-hover: #2d2318;
