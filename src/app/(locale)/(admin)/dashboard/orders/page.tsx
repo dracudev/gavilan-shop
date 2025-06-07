@@ -28,15 +28,16 @@ export default function OrdersPage() {
 
   return (
     <>
-      <Title title="Orders" />
-      <div className="mb-10">
+      <div className="flex justify-between items-center ">
+        <Title title="Orders" />
         <button
           onClick={handleCreateOrderClick}
           className="mb-4 px-4 py-2 btn-primary flex items-center"
         >
           <FaPlus className="mr-2" /> New Order
         </button>
-
+      </div>
+      <div className="mb-10">
         <div className="overflow-x-auto">
           <table className="min-w-full rounded-lg overflow-hidden">
             <thead className="bg-gray-300 dark:bg-zinc-800 border-b">

@@ -6,7 +6,7 @@
   --background: #f7f5f3;
   --foreground: #2c1810;
   --primary-color: #bb8a64;
-  --secondary-color: #d4c4a8;
+  --secondary-color: #829ab5;
   --shadow-color: rgba(44, 24, 16, 0.12);
   --sidebar-bg: rgba(247, 245, 243, 0.8);
   --sidebar-hover: rgba(145, 139, 134, 0.2);
@@ -25,7 +25,7 @@
   --background: #201b17;
   --foreground: #d6c4ab;
   --primary-color: #bb8a64;
-  --secondary-color: #b5a082;
+  --secondary-color: #829ab5;
   --shadow-color: rgba(230, 221, 209, 0.05);
   --shadow-color: rgba(230, 221, 209, 0.05);
   --sidebar-bg: rgba(32, 27, 23, 0.8);
@@ -76,9 +76,9 @@ body {
 }
 
 .btn-primary {
-  @apply bg-[var(--primary-color)] hover:bg-[var(--dark-primary-color)] text-white py-1 px-4 rounded transition-all duration-300;
+  @apply bg-[var(--foreground)] hover:bg-[var(--secondary-color)] text-white py-1 px-4 rounded transition-all duration-300;
 }
 
 .btn-secondary {
-  @apply bg-[var(--secondary-color)] hover:bg-[var(--dark-secondary-color)] text-black py-2 px-4 rounded transition-all duration-300;
+  @apply bg-[var(--primary-color)] hover:bg-[var(--secondary-color)] text-black py-2 px-4 rounded transition-all duration-300;
 }
