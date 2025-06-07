@@ -4,8 +4,8 @@
   "description": "Tienda de sombreros en Orihuela, Alicante desde 1880. Encuentra sombreros de alta calidad y estilo tradicional.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#f7f5f3",
+  "theme_color": "#744922",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "es-ES",
@@ -22,11 +22,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
-    },
-    {
-      "src": "/favicon.ico",
-      "sizes": "16x16 32x32 48x48",
-      "type": "image/x-icon"
     },
     {
       "src": "/apple-touch-icon.png",
