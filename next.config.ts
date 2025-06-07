@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+// @ts-expect-error Theres no updated types for next-pwa
+import withPWA from "next-pwa";
 
 const nextConfig: NextConfig = {
   images: {
@@ -14,4 +16,9 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+})(nextConfig);
