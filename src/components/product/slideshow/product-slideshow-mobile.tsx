@@ -21,7 +21,7 @@ export function ProductSlideshowMobile({ images, title, className }: Props) {
       <Swiper
         style={{
           width: "100%",
-          height: "500px",
+          height: "400px",
         }}
         pagination={true}
         autoplay={{ delay: 3500 }}
@@ -35,7 +35,7 @@ export function ProductSlideshowMobile({ images, title, className }: Props) {
               src={image}
               alt={title}
               width={600}
-              height={500}
+              height={400}
               className="object-fill"
             />
           </SwiperSlide>

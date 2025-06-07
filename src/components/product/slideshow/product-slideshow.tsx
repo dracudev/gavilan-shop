@@ -43,7 +43,7 @@ export function ProductSlideshow({ images, title, className }: Props) {
             <Image
               src={image}
               alt={title}
-              width={1024}
+              width={800}
               height={800}
               className="rounded-xl object-fill"
             />
@@ -65,8 +65,8 @@ export function ProductSlideshow({ images, title, className }: Props) {
             <Image
               src={image}
               alt={title}
-              width={200}
-              height={200}
+              width={100}
+              height={100}
               className="rounded-xl object-fill"
             />
           </SwiperSlide>
