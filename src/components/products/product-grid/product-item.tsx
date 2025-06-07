@@ -22,7 +22,7 @@ export function ProductItem({ product }: ProductItemProps) {
         <Image
           src={imageError ? "/imgs/fallback-image.webp" : `${isHovered}`}
           alt={product.title}
-          className="w-full max-h-[400px] object-cover sm:rounded"
+          className="w-full h-96 sm:h-[325px] object-cover sm:rounded"
           width={400}
           height={400}
           onMouseEnter={() => setIsHovered(product.images[1])}
