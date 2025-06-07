@@ -1,6 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://gavilan-shop.vercel.app'),
+
   title: "Sombrerería El Gavilán | Orihuela, Alicante",
   description:
     "Sombrerería El Gavilán: Tienda de sombreros en Orihuela, Alicante desde 1880. Encuentra sombreros de alta calidad y estilo tradicional.",
@@ -36,18 +49,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/android-chrome-192x192.png", type: "image/png", sizes: "192x192" },
+      { url: "/android-chrome-512x512.png", type: "image/png", sizes: "512x512" },
     ],
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
   applicationName: "Sombrerería El Gavilán",
   formatDetection: {
     email: false,
@@ -84,36 +94,30 @@ export const metadata: Metadata = {
       },
     ],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   creator: "dracudev",
   publisher: "dracudev",
   alternates: {
-    canonical: "https://gavilan-shop.vercel.app",
+    canonical: process.env.NEXT_PUBLIC_SITE_URL,
     languages: {
-      "es-ES": "https://gavilan-shop.vercel.app/es",
-      "en-US": "https://gavilan-shop.vercel.app",
+      "es-ES": `${process.env.NEXT_PUBLIC_BASE_URL}/es`,
+      "en-US": `${process.env.NEXT_PUBLIC_BASE_URL}`, // TODO: Make spanish the default language
     },
   },
   openGraph: {
     title: "Sombrerería El Gavilán - Orihuela, Alicante",
     description:
       "Sombrerería El Gavilán: Tienda de sombreros en Orihuela, Alicante desde 1880. Encuentra sombreros de alta calidad y estilo tradicional.",
-    url: "https://gavilan-shop.vercel.app/",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
     siteName: "Sombrerería El Gavilán",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.png", // TODO: Replace with actual OG image URL
         width: 1200,
         height: 630,
         alt: "Sombrerería El Gavilán - Orihuela, Alicante",
       },
     ],
-    locale: "es-ES",
+    locale: "en-US", 
     type: "website",
   },
   twitter: {
@@ -121,7 +125,7 @@ export const metadata: Metadata = {
     title: "Sombrerería El Gavilán - Orihuela, Alicante",
     description: "Tienda de sombreros en Orihuela, Alicante desde 1880",
     creator: "@dracudev",
-    images: ["/twitter-image.jpg"],
+    images: [], // TODO: Add Twitter card image
   },
   category: "Shopping",
 };
