@@ -2,23 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+:root {
+  --background: #f7f5f3;
+  --foreground: #2c1810;
+  --primary-color: #744922;
+  --dark-primary-color: #744922;
+  --secondary-color: #d4c4a8;
+  --dark-secondary-color: #b5a082;
+  --shadow-color: rgba(44, 24, 16, 0.12);
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #e4e4e7;
+  --input-bg: #f4f4f5;
+  --separator: #d1d5db;
+  --overlay: rgba(0, 0, 0, 0.3);
+  --background-texture: radial-gradient(
+    circle at 1px 1px,
+    rgba(44, 24, 16, 0.15) 1px,
+    transparent 0
+  );
+  --background-size: 20px 20px;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary-color: #ea5a0c; /*#ea5a0c*/
-  --dark-primary-color: #c65732; /*#c65732*/
-  --secondary-color: #f6f5f6;
-  --dark-secondary-color: #a2a6ad;
+.dark {
+  --background: #1c1510;
+  --foreground: #e6ddd1;
+  --shadow-color: rgba(230, 221, 209, 0.06);
+  --sidebar-bg: var(--background);
+  --sidebar-hover: #2d2318;
+  --input-bg: #f9f7f4;
+  --input-text: #2c1810;
+  --separator: #3d3025;
+  --background-texture: linear-gradient(
+      45deg,
+      transparent 40%,
+      rgba(230, 221, 209, 0.06) 50%,
+      transparent 60%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 40%,
+      rgba(230, 221, 209, 0.06) 50%,
+      transparent 60%
+    );
+  --background-size: 6px 6px;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  background-image: var(--background-texture);
+  background-size: var(--background-size);
 }
 
 @keyframes fadeIn {
@@ -44,7 +77,6 @@ body {
   animation-duration: 0.5s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
 }
