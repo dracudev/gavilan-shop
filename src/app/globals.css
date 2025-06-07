@@ -5,13 +5,13 @@
 :root {
   --background: #f7f5f3;
   --foreground: #2c1810;
-  --primary-color: #744922;
+  --primary-color: #bb8a64;
   --dark-primary-color: #744922;
   --secondary-color: #d4c4a8;
   --dark-secondary-color: #b5a082;
   --shadow-color: rgba(44, 24, 16, 0.12);
   --sidebar-bg: rgba(247, 245, 243, 0.8);
-  --sidebar-hover: rgba(228, 228, 231, 0.8);
+  --sidebar-hover: rgba(145, 139, 134, 0.2);
   --input-bg: #f4f4f5;
   --separator: #d1d5db;
   --overlay: rgba(0, 0, 0, 0.3);
@@ -26,25 +26,21 @@
 .dark {
   --background: #201b17;
   --foreground: #d6c4ab;
+  --primary-color: #bb8a64;
+  --secondary-color: #b5a082;
   --shadow-color: rgba(230, 221, 209, 0.05);
   --shadow-color: rgba(230, 221, 209, 0.05);
   --sidebar-bg: rgba(32, 27, 23, 0.8);
+  --sidebar-hover: rgba(238, 229, 222, 0.2);
   --input-bg: #f9f7f4;
   --input-text: #2c1810;
   --separator: #3d3025;
-  --background-texture: linear-gradient(
-      45deg,
-      transparent 40%,
-      rgba(230, 221, 209, 0.06) 50%,
-      transparent 60%
-    ),
-    linear-gradient(
-      -45deg,
-      transparent 40%,
-      rgba(230, 221, 209, 0.06) 50%,
-      transparent 60%
-    );
-  --background-size: 6px 6px;
+  --background-texture: radial-gradient(
+    circle at 1px 1px,
+    rgba(248, 247, 246, 0.15) 1px,
+    transparent 0
+  );
+  --background-size: 20px 20px;
 }
 
 body {
