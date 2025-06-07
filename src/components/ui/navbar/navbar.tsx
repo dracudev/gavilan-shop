@@ -21,25 +21,13 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 flex px-5 justify-between items-center w-full bg-[var(--background)] shadow-md z-50">
-      {/* Logo */}
-      <div>
-        <Link href="/" className="flex items-center">
-          <Image
-            src={logo}
-            alt="logo"
-            className="w-auto h-auto me-2  hidden sm:block "
-            width={40}
-            height={40}
-          />
-          <span
-            className={`${titleFont.className} antialiased text-xl text-nowrap`}
-          >
-            El Gavilán
-          </span>
-        </Link>
-      </div>
-
+    <nav
+      className="fixed top-0 left-0 right-0 flex px-5 justify-between items-center w-full bg-[var(--background)] z-50"
+      style={{
+        boxShadow:
+          "0 4px 4px -1px var(--shadow-color), 0 2px 2px -1px var(--shadow-color)",
+      }}
+    >
       {/* Categories */}
       <div className="hidden sm:block">
         <Link
@@ -61,6 +49,24 @@ export const Navbar = () => {
           className="m-2 p-2 rounded-md transition-all hover:text-[var(--primary-color)] transform duration-500"
         >
           Kids
+        </Link>
+      </div>
+
+      {/* Logo */}
+      <div>
+        <Link href="/" className="flex items-center">
+          <Image
+            src={logo}
+            alt="logo"
+            className="w-auto h-auto me-2  hidden sm:block "
+            width={40}
+            height={40}
+          />
+          <span
+            className={`${titleFont.className} antialiased text-xl text-nowrap`}
+          >
+            El Gavilán
+          </span>
         </Link>
       </div>
 
