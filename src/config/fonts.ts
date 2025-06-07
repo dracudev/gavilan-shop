@@ -1,13 +1,21 @@
-import { Roboto_Slab, Playfair_Display } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
+import { Lato } from "next/font/google";
 
-export const titleFont = Playfair_Display({
+export const titleFont = localFont({
+  src: "../assets/fonts/glorius-regular.woff2", 
   variable: "--font-title",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-export const bodyFont = Roboto_Slab({
+export const bodyFont = Lato({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "700"],
+});
+
+export const serifFont = Source_Serif_4({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
