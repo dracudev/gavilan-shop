@@ -39,7 +39,7 @@ export function ProductItem({ product }: ProductItemProps) {
         >
           {product.title}
         </Link>
-        <span className="font-bold">{product.price}N/A</span>
+        <span className="font-bold">{product.price}€</span>
       </div>
     </div>
   );

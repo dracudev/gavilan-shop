@@ -22,7 +22,9 @@ export function ProductSlideshow({ images, title, className }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>();
 
   return (
-    <div className={className}>
+    <div
+      className={`max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto ${className}`}
+    >
       <Swiper
         style={
           {
@@ -35,7 +37,7 @@ export function ProductSlideshow({ images, title, className }: Props) {
         autoplay={{ delay: 3500 }}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-        className="mySwiper2"
+        className="mySwiper2 h-80 w-full"
         role="swiper1"
       >
         {images.map((image) => (
@@ -43,9 +45,9 @@ export function ProductSlideshow({ images, title, className }: Props) {
             <Image
               src={image}
               alt={title}
-              width={800}
-              height={800}
-              className="rounded-xl object-fill"
+              width={400}
+              height={400}
+              className="rounded-xl object-cover w-full h-full"
             />
           </SwiperSlide>
         ))}
@@ -58,16 +60,16 @@ export function ProductSlideshow({ images, title, className }: Props) {
         freeMode
         watchSlidesProgress
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
+        className="mySwiper mt-2 h-20"
       >
         {images.map((image) => (
           <SwiperSlide key={image} data-testid="swiper-slide">
             <Image
               src={image}
               alt={title}
-              width={100}
-              height={100}
-              className="rounded-xl object-fill"
+              width={80}
+              height={80}
+              className="rounded-xl object-cover w-full h-full"
             />
           </SwiperSlide>
         ))}
