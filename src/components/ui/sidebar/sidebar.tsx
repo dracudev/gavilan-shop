@@ -77,7 +77,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
       >
         <IoCloseOutline
           size={40}
-          className="absolute top-5 right-5 cursor-pointer hover:text-[var(--primary-color)] transition-colors transform duration-500"
+          className="absolute top-5 right-5 cursor-pointer hover:text-[var(--primary-color)] "
           onClick={toggleSideBar}
         />
 
@@ -99,7 +99,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
         <div className="block sm:hidden">
           <Link
             href="/category/men"
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
             onClick={toggleSideBar}
           >
             <IoManOutline size={30} />
@@ -108,7 +108,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
           <Link
             href="/category/women"
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
             onClick={toggleSideBar}
           >
             <IoWomanOutline size={30} />
@@ -117,7 +117,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
           <Link
             href="/category/kid"
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
             onClick={toggleSideBar}
           >
             <IoAccessibilityOutline size={30} />
@@ -133,7 +133,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
           <>
             <Link
               href="/account"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
               onClick={toggleSideBar}
             >
               <IoPersonOutline size={30} />
@@ -144,7 +144,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
             <Link
               href="/orders"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)]"
               onClick={toggleSideBar}
             >
               <IoTicketOutline size={30} />
@@ -158,7 +158,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
           <>
             <Link
               href="/dashboard/products"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)]"
               onClick={toggleSideBar}
             >
               <FaRedhat size={30} />
@@ -167,7 +167,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
             <Link
               href="/dashboard/orders"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
               onClick={toggleSideBar}
             >
               <IoTicketOutline size={30} />
@@ -176,7 +176,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
             <Link
               href="/dashboard/users"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
               onClick={toggleSideBar}
             >
               <IoPeopleOutline size={30} />
@@ -193,7 +193,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
           <>
             <Link
               href="/login"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
               onClick={toggleSideBar}
             >
               <IoLogInOutline size={30} />
@@ -202,7 +202,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
 
             <Link
               href="/sign-up"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
               onClick={toggleSideBar}
             >
               <IoCreateOutline size={30} />
@@ -218,7 +218,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
               logout();
               toggleSideBar();
             }}
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] cursor-pointer rounded transition-all hover:text-[var(--primary-color)] transform duration-500"
+            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] cursor-pointer rounded hover:text-[var(--primary-color)] "
           >
             <IoLogOutOutline size={30} />
             <span className="ml-3 text-xl">Logout</span>
