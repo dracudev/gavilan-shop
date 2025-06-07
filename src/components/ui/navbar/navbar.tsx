@@ -1,13 +1,13 @@
 "use client";
 
+import logo from "@/assets/head-logo.png";
 import { titleFont } from "@/config/fonts";
 import { useTheme } from "@/context/theme-context";
 import { useCartStore, useUIStore } from "@/store";
-import Link from "next/link";
-import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
-import { ToggleButton } from "../toggle-button/toggle-button";
 import Image from "next/image";
-import logo from "@/assets/head-logo.png";
+import Link from "next/link";
+import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
+import { ToggleButton } from "../toggle-button/toggle-button";
 
 export const Navbar = () => {
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
@@ -26,6 +26,10 @@ export const Navbar = () => {
       style={{
         boxShadow:
           "0 4px 4px -1px var(--shadow-color), 0 2px 2px -1px var(--shadow-color)",
+        backgroundColor:
+          theme === "dark"
+            ? "rgba(32, 27, 23, 0.8)"
+            : "rgba(247, 245, 243, 0.8)",
       }}
     >
       {/* Categories */}
