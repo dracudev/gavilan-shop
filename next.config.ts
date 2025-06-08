@@ -16,10 +16,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPWA({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === "development",
-  buildExcludes: [/app-build-manifest\.json$/],
-})(nextConfig);
+export default process.env.NODE_ENV === "development"
+  ? nextConfig
+  : withPWA({
+      dest: "public",
+      register: true,
+      skipWaiting: true,
+      disable: false,
+      buildExcludes: [/app-build-manifest\.json$/],
+    })(nextConfig);
