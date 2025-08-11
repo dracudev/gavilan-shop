@@ -31,7 +31,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const addToast = useCallback((toast: Omit<Toast, "id">) => {
     const id = Math.random().toString(36).substr(2, 9);
     const newToast = { ...toast, id };
-    setToasts((prev) => [...prev, newToast]);
+    setToasts((prev) => {
+      const updated = [...prev, newToast];
+      // Keep only the last 3 toasts
+      return updated.slice(-3);
+    });
 
     // Auto remove after duration
     const duration = toast.duration || 5000;
@@ -69,7 +73,7 @@ function ToastContainer({ toasts, removeToast }: ToastContainerProps) {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-[60] space-y-2 w-full max-w-sm pointer-events-none">
+    <div className="fixed bottom-4 right-4 z-[60] space-y-2 w-full max-w-sm pointer-events-none">
       {toasts.map((toast) => (
         <ToastItem
           key={toast.id}
