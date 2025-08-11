@@ -1,16 +1,51 @@
 "use client";
 
 import { login } from "@/services/supabase/actions";
+import { useToast } from "@/components/ui/toast/toast-provider";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LoginForm({ redirect }: { redirect?: string }) {
+  const { addToast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(event.target as HTMLFormElement);
     if (redirect) {
       formData.set("redirect", redirect);
     }
-    await login(formData);
+
+    addToast({
+      title: "Signing in...",
+      description: "Please wait while we log you in",
+      type: "info",
+    });
+
+    try {
+      await login(formData);
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "digest" in error &&
+        typeof error.digest === "string" &&
+        error.digest.includes("NEXT_REDIRECT")
+      ) {
+        return;
+      }
+
+      console.error("Login error:", error);
+      addToast({
+        title: "Login failed",
+        description: "Please check your email and password and try again",
+        type: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -37,8 +72,8 @@ export default function LoginForm({ redirect }: { redirect?: string }) {
             required
           />
 
-          <button className="btn-primary" type="submit">
-            Login
+          <button className="btn-primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Signing in..." : "Login"}
           </button>
 
           <div className="flex items-center my-5">

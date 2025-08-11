@@ -9,7 +9,13 @@ import {
 } from "@/services/product-service";
 import { Product, ProductWithoutId } from "@/interfaces";
 
-const useProduct = () => {
+const useProduct = (
+  addToast?: (toast: {
+    title: string;
+    description?: string;
+    type: "success" | "error" | "warning" | "info";
+  }) => void
+) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -61,9 +67,21 @@ const useProduct = () => {
       const productId = await createProduct(product);
       if (productId) {
         await fetchProducts();
+        addToast?.({
+          title: "Product created",
+          description: `${product.title} has been added to the inventory`,
+          type: "success",
+        });
       }
     } catch {
-      setError("Error creating product");
+      const errorMsg = "Error creating product";
+      setError(errorMsg);
+      addToast?.({
+        title: "Creation failed",
+        description:
+          "There was an error creating the product. Please try again.",
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -78,8 +96,20 @@ const useProduct = () => {
     try {
       await updateProduct(productId, product);
       await fetchProducts();
+      addToast?.({
+        title: "Product updated",
+        description: "The product has been successfully updated",
+        type: "success",
+      });
     } catch {
-      setError("Error updating product");
+      const errorMsg = "Error updating product";
+      setError(errorMsg);
+      addToast?.({
+        title: "Update failed",
+        description:
+          "There was an error updating the product. Please try again.",
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -91,8 +121,20 @@ const useProduct = () => {
     try {
       await deleteProduct(productId);
       await fetchProducts();
+      addToast?.({
+        title: "Product deleted",
+        description: "The product has been successfully removed",
+        type: "success",
+      });
     } catch {
-      setError("Error deleting product");
+      const errorMsg = "Error deleting product";
+      setError(errorMsg);
+      addToast?.({
+        title: "Deletion failed",
+        description:
+          "There was an error deleting the product. Please try again.",
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }

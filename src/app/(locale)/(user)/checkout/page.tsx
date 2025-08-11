@@ -1,10 +1,12 @@
 "use client";
 
 import { Title } from "@/components";
+import { useToast } from "@/components/ui/toast/toast-provider";
 import { useCartStore } from "@/store";
 import { useOrderStore } from "@/store/order/order-store";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 // import { useRouter } from "next/navigation";
 import { handleCheckout } from "@/services/stripe/checkout";
 
@@ -12,22 +14,61 @@ export default function CheckoutPage() {
   const { items, totalAmount } = useCartStore();
   const { shipmentInfo, setItems, setTotalAmount, placeOrder } =
     useOrderStore();
+  const { addToast } = useToast();
+  const [isProcessing, setIsProcessing] = useState(false);
   // const router = useRouter();
 
   const handlePlaceOrder = async () => {
-    setItems(items);
-    setTotalAmount(totalAmount);
-    const orderId = await placeOrder();
-    if (!orderId) return;
-    await handleCheckout(items, orderId);
-    /*
-    
-    router.push(`/orders/${orderId}`);
-    setTimeout(() => {
-      clearItems();
-      clearOrder();
-    }, 3000);
-    */
+    if (isProcessing) return;
+
+    setIsProcessing(true);
+
+    try {
+      addToast({
+        title: "Processing order...",
+        description: "Please wait while we process your order",
+        type: "info",
+      });
+
+      setItems(items);
+      setTotalAmount(totalAmount);
+      const orderId = await placeOrder();
+
+      if (!orderId) {
+        addToast({
+          title: "Order failed",
+          description:
+            "There was an error processing your order. Please try again.",
+          type: "error",
+        });
+        return;
+      }
+
+      addToast({
+        title: "Order placed!",
+        description: "Redirecting to payment...",
+        type: "success",
+      });
+
+      await handleCheckout(items, orderId);
+
+      /*
+      router.push(`/orders/${orderId}`);
+      setTimeout(() => {
+        clearItems();
+        clearOrder();
+      }, 3000);
+      */
+    } catch (error) {
+      console.error("Checkout error:", error);
+      addToast({
+        title: "Checkout failed",
+        description: "There was an error during checkout. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -116,10 +157,12 @@ export default function CheckoutPage() {
                 .
               </p>
               <div
-                className="flex btn-primary justify-center cursor-pointer"
+                className={`flex btn-primary justify-center cursor-pointer ${
+                  isProcessing ? "opacity-50 cursor-not-allowed" : ""
+                }`}
                 onClick={handlePlaceOrder}
               >
-                Place Order
+                {isProcessing ? "Processing..." : "Place Order"}
               </div>
             </div>
           </div>

@@ -1,16 +1,52 @@
 "use client";
 
 import { signup } from "@/services/supabase/actions";
+import { useToast } from "@/components/ui/toast/toast-provider";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function SignupForm({ redirect }: { redirect?: string }) {
+  const { addToast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSignup = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(event.target as HTMLFormElement);
     if (redirect) {
       formData.set("redirect", redirect);
     }
-    await signup(formData);
+
+    addToast({
+      title: "Creating account...",
+      description: "Please wait while we create your account",
+      type: "info",
+    });
+
+    try {
+      await signup(formData);
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "digest" in error &&
+        typeof error.digest === "string" &&
+        error.digest.includes("NEXT_REDIRECT")
+      ) {
+        return;
+      }
+
+      console.error("Signup error:", error);
+      addToast({
+        title: "Signup failed",
+        description:
+          "There was an error creating your account. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -45,8 +81,8 @@ export default function SignupForm({ redirect }: { redirect?: string }) {
             required
           />
 
-          <button className="btn-primary" type="submit">
-            Sign Up
+          <button className="btn-primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Creating Account..." : "Sign Up"}
           </button>
 
           <div className="flex items-center my-5">

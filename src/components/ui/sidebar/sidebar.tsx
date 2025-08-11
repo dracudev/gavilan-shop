@@ -1,6 +1,7 @@
 "use client";
 
 import { logout } from "@/services/supabase/actions";
+import { useToast } from "@/components/ui/toast/toast-provider";
 import { useUIStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
@@ -35,6 +36,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
   const isSearchFocused = useUIStore((state) => state.isSearchFocused);
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
   const setSearchFocus = useUIStore((state) => state.setSearchFocus);
+  const { addToast } = useToast();
 
   useEffect(() => {
     if (isSideBarOpen) {
@@ -224,9 +226,30 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
               userRole !== "unidentified" && (
                 <div>
                   <button
-                    onClick={() => {
-                      logout();
-                      toggleSideBar();
+                    onClick={async () => {
+                      try {
+                        toggleSideBar();
+                        await logout();
+                        // If we reach here, something went wrong (logout should redirect)
+                      } catch (error) {
+                        // Check if it's a redirect error (successful logout) or actual error
+                        if (
+                          error &&
+                          typeof error === "object" &&
+                          "digest" in error &&
+                          typeof error.digest === "string" &&
+                          error.digest.includes("NEXT_REDIRECT")
+                        ) {
+                          // This is a successful redirect, don't show error toast
+                          return;
+                        }
+
+                        addToast({
+                          title: "Error",
+                          description: "Failed to sign out. Please try again.",
+                          type: "error",
+                        });
+                      }
                     }}
                     className="btn-ghost w-full justify-start text-error hover:bg-error/5"
                   >

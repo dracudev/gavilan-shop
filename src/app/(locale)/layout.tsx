@@ -1,5 +1,6 @@
 import { Footer, Navbar, Sidebar, ToastProvider } from "@/components";
 import { checkUserRole } from "@/utils/auth";
+import CartToastInitializer from "./cart-toast-initializer";
 
 export default async function ShopLayout({
   children,
@@ -8,6 +9,7 @@ export default async function ShopLayout({
 
   return (
     <ToastProvider>
+      <CartToastInitializer />
       <main className="min-h-screen bg-background">
         <Navbar />
         <Sidebar userRole={role} userData={userData ?? null} />
