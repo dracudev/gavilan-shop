@@ -1,6 +1,24 @@
 import { create } from "zustand";
 import { CartItem } from "@/interfaces";
 
+let toastInstance:
+  | ((toast: {
+      title: string;
+      description?: string;
+      type: "success" | "error" | "warning" | "info";
+    }) => void)
+  | null = null;
+
+export const setCartToastInstance = (
+  instance: (toast: {
+    title: string;
+    description?: string;
+    type: "success" | "error" | "warning" | "info";
+  }) => void
+) => {
+  toastInstance = instance;
+};
+
 interface State {
   items: CartItem[];
   totalItems: number;
@@ -22,7 +40,25 @@ export const useCartStore = create<State>()((set) => ({
       );
       if (existingItem) {
         const newQuantity = existingItem.quantity + item.quantity;
-        if (newQuantity > 10) return state;
+        if (newQuantity > 10) {
+          if (toastInstance) {
+            toastInstance({
+              title: "Maximum quantity reached",
+              description:
+                "You can't add more than 10 items of the same product",
+              type: "warning",
+            });
+          }
+          return state;
+        }
+
+        if (toastInstance) {
+          toastInstance({
+            title: "Cart updated",
+            description: `Updated ${item.title} quantity to ${newQuantity}`,
+            type: "success",
+          });
+        }
 
         return {
           items: state.items.map((i) =>
@@ -34,6 +70,14 @@ export const useCartStore = create<State>()((set) => ({
           totalAmount: state.totalAmount + item.price * item.quantity,
         };
       } else {
+        if (toastInstance) {
+          toastInstance({
+            title: "Added to cart",
+            description: `${item.title} has been added to your cart`,
+            type: "success",
+          });
+        }
+
         return {
           items: [...state.items, item],
           totalItems: state.totalItems + item.quantity,
@@ -47,6 +91,15 @@ export const useCartStore = create<State>()((set) => ({
         (i) => i.id === id && i.size === size
       );
       if (!itemToRemove) return state;
+
+      if (toastInstance) {
+        toastInstance({
+          title: "Item removed",
+          description: `${itemToRemove.title} has been removed from your cart`,
+          type: "info",
+        });
+      }
+
       return {
         items: state.items.filter((i) => !(i.id === id && i.size === size)),
         totalItems: state.totalItems - itemToRemove.quantity,
@@ -68,5 +121,14 @@ export const useCartStore = create<State>()((set) => ({
           itemToUpdate.price * quantity,
       };
     }),
-  clearItems: () => set({ items: [], totalItems: 0, totalAmount: 0 }),
+  clearItems: () => {
+    if (toastInstance) {
+      toastInstance({
+        title: "Cart cleared",
+        description: "All items have been removed from your cart",
+        type: "info",
+      });
+    }
+    return set({ items: [], totalItems: 0, totalAmount: 0 });
+  },
 }));

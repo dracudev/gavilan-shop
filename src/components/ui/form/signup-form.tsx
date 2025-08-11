@@ -2,15 +2,27 @@
 
 import { signup } from "@/services/supabase/actions";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function SignupForm({ redirect }: { redirect?: string }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSignup = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(event.target as HTMLFormElement);
     if (redirect) {
       formData.set("redirect", redirect);
     }
-    await signup(formData);
+
+    try {
+      await signup(formData);
+    } catch (error) {
+      console.error("Signup error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -45,8 +57,8 @@ export default function SignupForm({ redirect }: { redirect?: string }) {
             required
           />
 
-          <button className="btn-primary" type="submit">
-            Sign Up
+          <button className="btn-primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Creating Account..." : "Sign Up"}
           </button>
 
           <div className="flex items-center my-5">

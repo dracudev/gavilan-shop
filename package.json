@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:webpack": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "clean": "npx rimraf .next node_modules/.cache",
+    "reset": "npm run clean && npm install"
   },
   "dependencies": {
     "@stripe/stripe-js": "5.8.0",

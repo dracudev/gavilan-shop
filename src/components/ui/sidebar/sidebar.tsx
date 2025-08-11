@@ -1,7 +1,7 @@
 "use client";
 
 import { logout } from "@/services/supabase/actions";
-import { useUIStore } from "@/store";
+import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -54,177 +54,232 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
   }, [isSearchFocused]);
 
   return (
-    <div>
-      {isSideBarOpen && (
-        <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-[var(--overlay)]"></div>
-      )}
-
+    <>
+      {/* Backdrop */}
       {isSideBarOpen && (
         <div
+          className="fixed inset-0 z-40 bg-overlay backdrop-blur-sm fade-in"
           onClick={toggleSideBar}
-          className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
-        ></div>
+        />
       )}
 
       {/* Sidebar */}
       <nav
         className={clsx(
-          "fixed overflow-y-auto p-5 mt-14 right-0 top-0 w-screen sm:w-[500px] h-screen bg-[var(--sidebar-bg)] z-20 shadow-2xl transform transition-all duration-300",
+          "fixed top-0 right-0 z-50 h-full w-full sm:w-96 bg-surface-glass backdrop-blur-xl border-l border-border-primary shadow-strong transform transition-all duration-300 ease-out",
+          "flex flex-col",
           {
             "translate-x-full": !isSideBarOpen,
           }
         )}
       >
-        <IoCloseOutline
-          size={40}
-          className="absolute top-5 right-5 cursor-pointer hover:text-[var(--primary-color)] "
-          onClick={toggleSideBar}
-        />
-
-        {/* Input */}
-        <div className="relative mt-14">
-          <IoSearchOutline
-            size={20}
-            className="absolute top-2 left-2 text-[var(--input-text)]"
-          />
-          <input
-            id="sidebar-search-input"
-            type="text"
-            placeholder="Search..."
-            className="w-full bg-[var(--input-bg)] rounded pl-10 py-1 pr-10 border-b-2 text-[var(--input-text,var(--foreground))] text-xl border-[var(--separator)] focus:outline-none focus:border-[var(--primary-color)] placeholder:text-gray-500"
-          />
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-border-primary">
+          <h2 className="text-lg font-semibold text-text-primary">Menu</h2>
+          <button
+            onClick={toggleSideBar}
+            className="p-2 -mr-2 text-text-secondary hover:text-text-primary hover:bg-surface-secondary rounded-md transition-all duration-200"
+            aria-label="Close menu"
+          >
+            <IoCloseOutline size={24} />
+          </button>
         </div>
 
-        {/* Category Links (Mobile Only) */}
-        <div className="block sm:hidden">
-          <Link
-            href="/category/men"
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
-            onClick={toggleSideBar}
-          >
-            <IoManOutline size={30} />
-            <span className="ml-3 text-xl">Men</span>
-          </Link>
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto scrollbar-thin">
+          <div className="p-6 space-y-6">
+            {/* Search */}
+            <div className="relative">
+              <IoSearchOutline
+                size={20}
+                className="absolute top-3 left-3 text-text-muted pointer-events-none z-10"
+              />
+              <input
+                id="sidebar-search-input"
+                type="text"
+                placeholder="Search products..."
+                className="w-full pl-11 pr-3 py-3 h-12 text-base bg-surface-primary border border-border-primary rounded-md text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                autoComplete="off"
+              />
+            </div>
 
-          <Link
-            href="/category/women"
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
-            onClick={toggleSideBar}
-          >
-            <IoWomanOutline size={30} />
-            <span className="ml-3 text-xl">Women</span>
-          </Link>
+            {/* Category Links - Mobile Only */}
+            <div className="block lg:hidden">
+              <h3 className="text-sm font-medium text-text-secondary uppercase tracking-wider mb-3">
+                Categories
+              </h3>
+              <div className="space-y-1">
+                <SidebarLink
+                  href="/category/men"
+                  icon={<IoManOutline size={20} />}
+                  label="Men"
+                  onClick={toggleSideBar}
+                />
+                <SidebarLink
+                  href="/category/women"
+                  icon={<IoWomanOutline size={20} />}
+                  label="Women"
+                  onClick={toggleSideBar}
+                />
+                <SidebarLink
+                  href="/category/kid"
+                  icon={<IoAccessibilityOutline size={20} />}
+                  label="Kids"
+                  onClick={toggleSideBar}
+                />
+              </div>
+              <div className="border-t border-border-primary mt-6 pt-6" />
+            </div>
 
-          <Link
-            href="/category/kid"
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
-            onClick={toggleSideBar}
-          >
-            <IoAccessibilityOutline size={30} />
-            <span className="ml-3 text-xl">Kids</span>
-          </Link>
+            {/* User Menu */}
+            {(userRole === "user" || userRole === "unidentified") && (
+              <>
+                <div>
+                  <h3 className="text-sm font-medium text-text-secondary uppercase tracking-wider mb-3">
+                    Account
+                  </h3>
+                  <div className="space-y-1">
+                    <SidebarLink
+                      href="/account"
+                      icon={<IoPersonOutline size={20} />}
+                      label={
+                        userData?.email
+                          ? `Hi, ${userData.email.split("@")[0]}`
+                          : "My Account"
+                      }
+                      description="Manage your profile"
+                      onClick={toggleSideBar}
+                    />
+                    <SidebarLink
+                      href="/orders"
+                      icon={<IoTicketOutline size={20} />}
+                      label="My Orders"
+                      description="Track your purchases"
+                      onClick={toggleSideBar}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
 
-          {/* Separator */}
-          <div className="w-full h-px bg-[var(--separator)] my-5"></div>
+            {/* Admin Menu */}
+            {userRole === "admin" && (
+              <div>
+                <h3 className="text-sm font-medium text-text-secondary uppercase tracking-wider mb-3">
+                  Dashboard
+                </h3>
+                <div className="space-y-1">
+                  <SidebarLink
+                    href="/dashboard/products"
+                    icon={<FaRedhat size={20} />}
+                    label="Products"
+                    description="Manage inventory"
+                    onClick={toggleSideBar}
+                  />
+                  <SidebarLink
+                    href="/dashboard/orders"
+                    icon={<IoTicketOutline size={20} />}
+                    label="Orders"
+                    description="Process orders"
+                    onClick={toggleSideBar}
+                  />
+                  <SidebarLink
+                    href="/dashboard/users"
+                    icon={<IoPeopleOutline size={20} />}
+                    label="Users"
+                    description="User management"
+                    onClick={toggleSideBar}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Authentication */}
+            {userRole === "unidentified" ? (
+              <div>
+                <h3 className="text-sm font-medium text-text-secondary uppercase tracking-wider mb-3">
+                  Get Started
+                </h3>
+                <div className="space-y-2">
+                  <Link
+                    href="/login"
+                    onClick={toggleSideBar}
+                    className="btn-primary w-full justify-center"
+                  >
+                    <IoLogInOutline size={20} className="mr-2" />
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    onClick={toggleSideBar}
+                    className="btn-secondary w-full justify-center"
+                  >
+                    <IoCreateOutline size={20} className="mr-2" />
+                    Create Account
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              userRole &&
+              userRole !== "unidentified" && (
+                <div>
+                  <button
+                    onClick={async () => {
+                      try {
+                        toggleSideBar();
+                        await logout();
+                      } catch (error) {
+                        console.error("Error logging out:", error);
+                      }
+                    }}
+                    className="btn-ghost w-full justify-start text-error hover:bg-error/5"
+                  >
+                    <IoLogOutOutline size={20} className="mr-3" />
+                    Sign Out
+                  </button>
+                </div>
+              )
+            )}
+          </div>
         </div>
+      </nav>
+    </>
+  );
+}
 
-        {/* User Menu */}
-        {(userRole === "user" || userRole === "unidentified") && (
-          <>
-            <Link
-              href="/account"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
-              onClick={toggleSideBar}
-            >
-              <IoPersonOutline size={30} />
-              <span className="ml-3 text-xl">
-                {userData?.email ?? "Account"}
-              </span>
-            </Link>
+// Reusable Sidebar Link Component
+interface SidebarLinkProps {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  description?: string;
+  onClick: () => void;
+}
 
-            <Link
-              href="/orders"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)]"
-              onClick={toggleSideBar}
-            >
-              <IoTicketOutline size={30} />
-              <span className="ml-3 text-xl">Orders</span>
-            </Link>
-          </>
-        )}
-
-        {/* Admin Menu */}
-        {userRole === "admin" && (
-          <>
-            <Link
-              href="/dashboard/products"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)]"
-              onClick={toggleSideBar}
-            >
-              <FaRedhat size={30} />
-              <span className="ml-3 text-xl">Products</span>
-            </Link>
-
-            <Link
-              href="/dashboard/orders"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
-              onClick={toggleSideBar}
-            >
-              <IoTicketOutline size={30} />
-              <span className="ml-3 text-xl">Orders</span>
-            </Link>
-
-            <Link
-              href="/dashboard/users"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
-              onClick={toggleSideBar}
-            >
-              <IoPeopleOutline size={30} />
-              <span className="ml-3 text-xl">Users</span>
-            </Link>
-          </>
-        )}
-
-        {/* Separator */}
-        <div className="w-full h-px bg-[var(--separator)] my-5"></div>
-
-        {/* Login Button */}
-        {userRole === "unidentified" && (
-          <>
-            <Link
-              href="/login"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded hover:text-[var(--primary-color)] "
-              onClick={toggleSideBar}
-            >
-              <IoLogInOutline size={30} />
-              <span className="ml-3 text-xl">Login</span>
-            </Link>
-
-            <Link
-              href="/sign-up"
-              className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] rounded  hover:text-[var(--primary-color)] "
-              onClick={toggleSideBar}
-            >
-              <IoCreateOutline size={30} />
-              <span className="ml-3 text-xl">Sign Up</span>
-            </Link>
-          </>
-        )}
-
-        {/* Logout Button */}
-        {userRole && userRole !== "unidentified" && (
-          <div
-            onClick={() => {
-              logout();
-              toggleSideBar();
-            }}
-            className="flex items-center mt-5 p-2 hover:bg-[var(--sidebar-hover)] cursor-pointer rounded hover:text-[var(--primary-color)] "
-          >
-            <IoLogOutOutline size={30} />
-            <span className="ml-3 text-xl">Logout</span>
+function SidebarLink({
+  href,
+  icon,
+  label,
+  description,
+  onClick,
+}: SidebarLinkProps) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="flex items-center gap-3 p-3 text-text-secondary hover:text-text-primary hover:bg-surface-secondary rounded-md transition-all duration-200 group"
+    >
+      <span className="text-text-muted group-hover:text-primary transition-colors duration-200">
+        {icon}
+      </span>
+      <div className="flex-1 min-w-0">
+        <div className="font-medium text-sm truncate">{label}</div>
+        {description && (
+          <div className="text-xs text-text-muted mt-0.5 truncate">
+            {description}
           </div>
         )}
-      </nav>
-    </div>
+      </div>
+    </Link>
   );
 }

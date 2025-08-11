@@ -1,6 +1,6 @@
 "use client";
 
-import { Title } from "@/components";
+import { Title } from "@/components/ui/title/title";
 import Loading from "@/components/ui/loading/loading";
 import Link from "next/link";
 import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
