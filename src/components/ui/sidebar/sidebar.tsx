@@ -1,7 +1,6 @@
 "use client";
 
 import { logout } from "@/services/supabase/actions";
-import { useToast } from "@/components/ui/toast/toast-provider";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import Link from "next/link";
@@ -36,7 +35,6 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
   const isSearchFocused = useUIStore((state) => state.isSearchFocused);
   const toggleSideBar = useUIStore((state) => state.toggleSideBar);
   const setSearchFocus = useUIStore((state) => state.setSearchFocus);
-  const { addToast } = useToast();
 
   useEffect(() => {
     if (isSideBarOpen) {
@@ -231,21 +229,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
                         toggleSideBar();
                         await logout();
                       } catch (error) {
-                        if (
-                          error &&
-                          typeof error === "object" &&
-                          "digest" in error &&
-                          typeof error.digest === "string" &&
-                          error.digest.includes("NEXT_REDIRECT")
-                        ) {
-                          return;
-                        }
-
-                        addToast({
-                          title: "Error",
-                          description: "Failed to sign out. Please try again.",
-                          type: "error",
-                        });
+                        console.error("Error logging out:", error);
                       }
                     }}
                     className="btn-ghost w-full justify-start text-error hover:bg-error/5"
