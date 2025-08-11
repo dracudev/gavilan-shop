@@ -42,7 +42,12 @@ export function Title({
       </h1>
 
       {subtitle && (
-        <p className="text-lg text-text-secondary font-medium leading-relaxed text-pretty max-w-2xl">
+        <p
+          className={clsx(
+            "text-lg text-text-secondary font-medium leading-relaxed text-pretty",
+            align === "center" ? "max-w-2xl mx-auto" : "max-w-2xl"
+          )}
+        >
           {subtitle}
         </p>
       )}

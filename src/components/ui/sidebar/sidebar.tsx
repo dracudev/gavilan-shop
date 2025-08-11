@@ -230,9 +230,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
                       try {
                         toggleSideBar();
                         await logout();
-                        // If we reach here, something went wrong (logout should redirect)
                       } catch (error) {
-                        // Check if it's a redirect error (successful logout) or actual error
                         if (
                           error &&
                           typeof error === "object" &&
@@ -240,7 +238,6 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
                           typeof error.digest === "string" &&
                           error.digest.includes("NEXT_REDIRECT")
                         ) {
-                          // This is a successful redirect, don't show error toast
                           return;
                         }
 
