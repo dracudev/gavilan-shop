@@ -76,15 +76,10 @@ export const Navbar = () => {
 
           {/* Actions - Right */}
           <div className="flex items-center space-x-2">
-            {/* Theme Toggle */}
-            <div className="hidden sm:block p-2">
-              <ToggleButton isDark={theme === "dark"} onChange={toggleTheme} />
-            </div>
-
             {/* Search Button */}
             <button
               onClick={handleSearchClick}
-              className="p-2 text-text-secondary hover:text-primary hover:bg-primary/5 rounded-md transition-all duration-200 group"
+              className="hidden sm:block p-2 text-text-secondary hover:text-primary hover:bg-primary/5 rounded-md transition-all duration-200 group"
               aria-label="Search products"
             >
               <IoSearchOutline className="w-5 h-5 group-hover:scale-105 transition-transform duration-200" />
@@ -102,6 +97,11 @@ export const Navbar = () => {
               </button>
             </Link>
 
+            {/* Theme Toggle */}
+            <div className="p-2">
+              <ToggleButton isDark={theme === "dark"} onChange={toggleTheme} />
+            </div>
+
             {/* Menu Button */}
             <button
               onClick={toggleSideBar}
@@ -112,11 +112,6 @@ export const Navbar = () => {
                 Menu
               </span>
             </button>
-
-            {/* Mobile Theme Toggle */}
-            <div className="block sm:hidden">
-              <ToggleButton isDark={theme === "dark"} onChange={toggleTheme} />
-            </div>
           </div>
         </div>
       </div>
