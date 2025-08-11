@@ -8,13 +8,10 @@ export default {
   ],
   theme: {
     extend: {
-      // El Gavilán Design System - Color Palette
       colors: {
-        // Base colors using CSS variables for theme switching
         background: "var(--background)",
         foreground: "var(--foreground)",
 
-        // Brand colors
         primary: {
           50: "var(--primary-50)",
           100: "var(--primary-100)",
@@ -55,7 +52,6 @@ export default {
           DEFAULT: "var(--accent-color)",
         },
 
-        // Semantic colors
         surface: {
           primary: "var(--surface-primary)",
           secondary: "var(--surface-secondary)",
@@ -81,11 +77,9 @@ export default {
         error: "var(--error-color)",
         info: "var(--info-color)",
 
-        // Overlay
         overlay: "var(--overlay)",
       },
 
-      // Typography Scale
       fontFamily: {
         title: ["var(--font-title)", "serif"],
         body: ["var(--font-body)", "sans-serif"],
@@ -104,7 +98,6 @@ export default {
         "6xl": ["3.75rem", { lineHeight: "1.1" }],
       },
 
-      // Enhanced Spacing Scale
       spacing: {
         18: "4.5rem",
         22: "5.5rem",
@@ -113,7 +106,6 @@ export default {
         34: "8.5rem",
       },
 
-      // Border Radius Scale
       borderRadius: {
         none: "0",
         sm: "0.25rem",
@@ -126,7 +118,6 @@ export default {
         full: "9999px",
       },
 
-      // Box Shadow Scale
       boxShadow: {
         subtle: "var(--shadow-subtle)",
         soft: "var(--shadow-soft)",
@@ -136,7 +127,6 @@ export default {
         "inner-soft": "var(--shadow-inner-soft)",
       },
 
-      // Animation and Transition
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
         "slide-in": "slideIn 0.3s ease-out",
@@ -146,12 +136,10 @@ export default {
         shimmer: "shimmer 2s linear infinite",
       },
 
-      // Custom backdrop blur
       backdropBlur: {
         xs: "2px",
       },
 
-      // Custom aspect ratios for product images
       aspectRatio: {
         "4/5": "4 / 5",
         "3/4": "3 / 4",
