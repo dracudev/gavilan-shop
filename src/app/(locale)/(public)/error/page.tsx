@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button/button";
 import {
   Card,
@@ -10,23 +9,8 @@ import {
 } from "@/components/ui/card/card";
 import { useRouter } from "next/navigation";
 
-export default function ErrorPage({
-  error,
-  reset,
-}: {
-  error?: Error & { digest?: string };
-  reset?: () => void;
-} = {}) {
+export default function ErrorPage() {
   const router = useRouter();
-
-  useEffect(() => {
-    // Log error to console and potentially to error tracking service
-    if (error) {
-      console.error("Page Error:", error);
-      // TODO: In production, send to error tracking service
-      // trackError(error);
-    }
-  }, [error]);
 
   const handleGoHome = () => {
     router.push("/");
@@ -37,12 +21,7 @@ export default function ErrorPage({
   };
 
   const handleRetry = () => {
-    if (reset) {
-      reset();
-    } else {
-      // If no reset function, just reload the page
-      window.location.reload();
-    }
+    window.location.reload();
   };
 
   return (
@@ -77,36 +56,6 @@ export default function ErrorPage({
 
           <CardContent className="pb-8">
             <div className="space-y-6">
-              {/* Error Details */}
-              {error && (
-                <div className="p-4 bg-error/5 border border-error/20 rounded-lg text-left">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <svg
-                      className="w-5 h-5 text-error flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium text-error">
-                      Error Details
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-secondary font-mono break-words">
-                    {error.message || "Unknown error"}
-                  </p>
-                  {error.digest && (
-                    <p className="text-xs text-text-muted mt-2">
-                      Error ID: {error.digest}
-                    </p>
-                  )}
-                </div>
-              )}
-
               {/* Help Information */}
               <div className="text-center space-y-4">
                 <h3 className="text-lg font-semibold text-text-primary">
@@ -115,9 +64,7 @@ export default function ErrorPage({
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-3 text-center">
                     <div className="space-y-2">
-                      <p className="font-medium text-text-primary">
-                        Try again
-                      </p>
+                      <p className="font-medium text-text-primary">Try again</p>
                       <p className="text-sm text-text-secondary">
                         The issue might be temporary
                       </p>
