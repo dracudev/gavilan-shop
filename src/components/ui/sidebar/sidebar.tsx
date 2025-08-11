@@ -2,7 +2,7 @@
 
 import { logout } from "@/services/supabase/actions";
 import { useToast } from "@/components/ui/toast/toast-provider";
-import { useUIStore } from "@/store";
+import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect } from "react";

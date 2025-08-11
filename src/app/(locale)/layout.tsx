@@ -1,4 +1,7 @@
-import { Footer, Navbar, Sidebar, ToastProvider } from "@/components";
+import { Footer } from "@/components/ui/footer/footer";
+import { Navbar } from "@/components/ui/navbar/navbar";
+import { Sidebar } from "@/components/ui/sidebar/sidebar";
+import { ToastProvider } from "@/components/ui/toast/toast-provider";
 import { checkUserRole } from "@/utils/auth";
 import CartToastInitializer from "./cart-toast-initializer";
 

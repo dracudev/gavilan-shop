@@ -3,7 +3,8 @@
 import logo from "@/assets/head-logo.png";
 import { titleFont } from "@/config/fonts";
 import { useTheme } from "@/context/theme-context";
-import { useCartStore, useUIStore } from "@/store";
+import { useCartStore } from "@/store/cart/cart-store";
+import { useUIStore } from "@/store/ui/ui-store";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
