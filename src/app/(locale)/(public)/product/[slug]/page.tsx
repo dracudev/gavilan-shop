@@ -1,11 +1,9 @@
 "use client";
 
-import {
-  ProductSlideshow,
-  ProductSlideshowMobile,
-  QtySelector,
-  SizeSelector,
-} from "@/components";
+import { ProductSlideshow } from "@/components/product/slideshow/product-slideshow";
+import { ProductSlideshowMobile } from "@/components/product/slideshow/product-slideshow-mobile";
+import { QtySelector } from "@/components/product/qty-selector/qty-selector";
+import { SizeSelector } from "@/components/product/size-selector/size-selector";
 import Loading from "@/components/ui/loading/loading";
 import { titleFont } from "@/config/fonts";
 import useFetchProduct from "@/hooks/product/use-fetch-product";

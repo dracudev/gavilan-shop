@@ -1,6 +1,6 @@
 "use client";
 
-import { Title } from "@/components";
+import { Title } from "@/components/ui/title/title";
 import Loading from "@/components/ui/loading/loading";
 import { useFetchOrder } from "@/hooks/order/use-fetch-order";
 import clsx from "clsx";

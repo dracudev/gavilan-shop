@@ -1,46 +1,86 @@
 "use client";
 
-import { useImagePreloader } from "@/hooks/ui/useImagePreloader";
 import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, memo } from "react";
+import { Badge } from "@/components/ui/badge/badge";
 
 interface ProductItemProps {
   product: Product;
 }
 
-export function ProductItem({ product }: ProductItemProps) {
-  const [isHovered, setIsHovered] = useState(product.images[0]);
+export const ProductItem = memo(function ProductItem({
+  product,
+}: ProductItemProps) {
+  const [displayImage, setDisplayImage] = useState(product.images[0]);
   const [imageError, setImageError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useImagePreloader(product.images);
+  const handleMouseEnter = () => {
+    if (product.images[1]) {
+      setDisplayImage(product.images[1]);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setDisplayImage(product.images[0]);
+  };
 
   return (
-    <div className="md:rounded-md overflow-hidden fade-in">
-      <Link href={`/product/${product.slug}`} prefetch={false}>
-        <Image
-          src={imageError ? "/imgs/fallback-image.webp" : `${isHovered}`}
-          alt={product.title}
-          className="w-full h-96 sm:h-[325px] object-cover sm:rounded"
-          width={400}
-          height={400}
-          onMouseEnter={() => setIsHovered(product.images[1])}
-          onMouseLeave={() => setIsHovered(product.images[0])}
-          onError={() => setImageError(true)}
-        ></Image>
-      </Link>
+    <article className="group fade-in">
+      <Link
+        href={`/product/${product.slug}`}
+        prefetch={false}
+        className="block"
+      >
+        {/* Image Container */}
+        <div className="relative overflow-hidden rounded-lg bg-surface-secondary aspect-[4/5] mb-4">
+          {/* Loading Placeholder */}
+          {isLoading && (
+            <div className="absolute inset-0 bg-surface-secondary loading-shimmer rounded-lg" />
+          )}
 
-      <div className="p-4 flex flex-col">
-        <Link
-          className=" hover:text-[var(--primary-color)] dark:hover:text-[var(--primary-color)] transition-all duration-300"
-          href={`/products/${product.slug}`}
-          prefetch={false}
-        >
-          {product.title}
-        </Link>
-        <span className="font-bold">{product.price}€</span>
-      </div>
-    </div>
+          <Image
+            src={imageError ? "/img/fallback-image.webp" : displayImage}
+            alt={product.title}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onError={() => setImageError(true)}
+            onLoad={() => setIsLoading(false)}
+            loading="lazy"
+            quality={75}
+          />
+
+          <div className="absolute inset-0 bg-text-primary/0 group-hover:bg-text-primary/5 transition-colors duration-200" />
+        </div>
+
+        {/* Product Info */}
+        <div className="space-y-2">
+          <h3 className="font-medium text-text-primary group-hover:text-primary transition-colors duration-200 leading-tight line-clamp-2">
+            {product.title}
+          </h3>
+
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-semibold text-primary">
+              {product.price}€
+            </span>
+
+            {product.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 max-w-[50%]">
+                {product.tags.slice(0, 3).map((tag, index) => (
+                  <Badge key={index} variant="default" size="sm">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </Link>
+    </article>
   );
-}
+});

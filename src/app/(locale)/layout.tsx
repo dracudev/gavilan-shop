@@ -1,5 +1,9 @@
-import { Footer, Navbar, Sidebar } from "@/components";
+import { Footer } from "@/components/ui/footer/footer";
+import { Navbar } from "@/components/ui/navbar/navbar";
+import { Sidebar } from "@/components/ui/sidebar/sidebar";
+import { ToastProvider } from "@/components/ui/toast/toast-provider";
 import { checkUserRole } from "@/utils/auth";
+import CartToastInitializer from "./cart-toast-initializer";
 
 export default async function ShopLayout({
   children,
@@ -7,13 +11,20 @@ export default async function ShopLayout({
   const { role, userData } = await checkUserRole();
 
   return (
-    <main className="min-h-screen pt-16">
-      <Navbar />
-      <Sidebar userRole={role} userData={userData ?? null} />
+    <ToastProvider>
+      <CartToastInitializer />
+      <main className="min-h-screen bg-background">
+        <Navbar />
+        <Sidebar userRole={role} userData={userData ?? null} />
 
-      <div className="px-0 sm:px-5">{children}</div>
+        <div className="pt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {children}
+          </div>
+        </div>
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </ToastProvider>
   );
 }

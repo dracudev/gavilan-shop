@@ -2,15 +2,27 @@
 
 import { login } from "@/services/supabase/actions";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LoginForm({ redirect }: { redirect?: string }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(event.target as HTMLFormElement);
     if (redirect) {
       formData.set("redirect", redirect);
     }
-    await login(formData);
+
+    try {
+      await login(formData);
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -37,8 +49,8 @@ export default function LoginForm({ redirect }: { redirect?: string }) {
             required
           />
 
-          <button className="btn-primary" type="submit">
-            Login
+          <button className="btn-primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Signing in..." : "Login"}
           </button>
 
           <div className="flex items-center my-5">

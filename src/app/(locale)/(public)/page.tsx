@@ -1,4 +1,5 @@
-import { ProductGrid, Title } from "@/components";
+import { ProductGrid } from "@/components/products/product-grid/product-grid";
+import { Title } from "@/components/ui/title/title";
 import { Product } from "@/interfaces";
 import { getProducts } from "@/services/product-service";
 

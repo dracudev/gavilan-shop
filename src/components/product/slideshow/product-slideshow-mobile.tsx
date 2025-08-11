@@ -17,7 +17,7 @@ interface Props {
 
 export function ProductSlideshowMobile({ images, title, className }: Props) {
   return (
-    <div className={className}>
+    <div className={`overflow-hidden rounded-lg ${className || ""}`}>
       <Swiper
         style={{
           width: "100%",
@@ -26,7 +26,7 @@ export function ProductSlideshowMobile({ images, title, className }: Props) {
         pagination={true}
         autoplay={{ delay: 3500 }}
         modules={[FreeMode, Autoplay, Pagination]}
-        className="mySwiper2"
+        className="mySwiper2 rounded-lg overflow-hidden"
         role="container"
       >
         {images.map((image) => (
@@ -36,7 +36,7 @@ export function ProductSlideshowMobile({ images, title, className }: Props) {
               alt={title}
               width={600}
               height={400}
-              className="object-fill"
+              className="object-fill rounded-lg"
             />
           </SwiperSlide>
         ))}
