@@ -10,21 +10,20 @@ import {
 } from "@/components/ui/card/card";
 import { useRouter } from "next/navigation";
 
-interface ErrorPageProps {
-  error?: Error & { digest?: string };
-  reset?: () => void;
-}
-
-export default function ErrorPage({ error, reset }: ErrorPageProps) {
+export default function ErrorPage({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   const router = useRouter();
 
   useEffect(() => {
     // Log error to console and potentially to error tracking service
-    if (error) {
-      console.error("Page Error:", error);
-      // TODO: In production, send to error tracking service
-      // trackError(error);
-    }
+    console.error("Page Error:", error);
+    // TODO: In production, send to error tracking service
+    // trackError(error);
   }, [error]);
 
   const handleGoHome = () => {
@@ -36,11 +35,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
   };
 
   const handleRetry = () => {
-    if (reset) {
-      reset();
-    } else {
-      window.location.reload();
-    }
+    reset();
   };
 
   return (
@@ -76,34 +71,32 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
           <CardContent className="pb-8">
             <div className="space-y-6">
               {/* Error Details */}
-              {error && (
-                <div className="p-4 bg-error/5 border border-error/20 rounded-lg text-left">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <svg
-                      className="w-5 h-5 text-error flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium text-error">
-                      Error Details
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-secondary font-mono break-words">
-                    {error.message || "Unknown error"}
-                  </p>
-                  {error.digest && (
-                    <p className="text-xs text-text-muted mt-2">
-                      Error ID: {error.digest}
-                    </p>
-                  )}
+              <div className="p-4 bg-error/5 border border-error/20 rounded-lg text-left">
+                <div className="flex items-center space-x-2 mb-3">
+                  <svg
+                    className="w-5 h-5 text-error flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="text-sm font-medium text-error">
+                    Error Details
+                  </span>
                 </div>
-              )}
+                <p className="text-sm text-text-secondary font-mono break-words">
+                  {error.message || "Unknown error"}
+                </p>
+                {error.digest && (
+                  <p className="text-xs text-text-muted mt-2">
+                    Error ID: {error.digest}
+                  </p>
+                )}
+              </div>
 
               {/* Help Information */}
               <div className="text-left space-y-4">
