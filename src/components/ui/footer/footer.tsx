@@ -33,7 +33,7 @@ export function Footer() {
                   href="/category/men"
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
-                  Men&apos;s Hats
+                  Men
                 </Link>
               </li>
               <li>
@@ -41,7 +41,7 @@ export function Footer() {
                   href="/category/women"
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
-                  Women&apos;s Hats
+                  Women
                 </Link>
               </li>
               <li>
@@ -49,7 +49,7 @@ export function Footer() {
                   href="/category/kid"
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
-                  Kids&apos; Hats
+                  Kids
                 </Link>
               </li>
             </ul>

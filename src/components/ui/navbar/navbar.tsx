@@ -53,10 +53,10 @@ export const Navbar = () => {
             </Link>
           </div>
 
-          {/* Logo - Center */}
+          {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center group">
-              <div className="relative mr-3 group-hover:scale-105 transition-transform duration-200">
+              <div className="relative mr-3 group-hover:scale-105 transition-transform duration-200 -translate-y-1">
                 <Image
                   src={logo}
                   alt="El Gavilán Logo"
