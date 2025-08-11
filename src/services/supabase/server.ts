@@ -24,6 +24,15 @@ export async function createClient() {
           }
         },
       },
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 0,
+        },
+      },
     }
   );
 }

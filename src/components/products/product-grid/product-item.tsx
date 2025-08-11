@@ -1,21 +1,20 @@
 "use client";
 
-import { useImagePreloader } from "@/hooks/ui/useImagePreloader";
 import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, memo } from "react";
 
 interface ProductItemProps {
   product: Product;
 }
 
-export function ProductItem({ product }: ProductItemProps) {
+export const ProductItem = memo(function ProductItem({
+  product,
+}: ProductItemProps) {
   const [displayImage, setDisplayImage] = useState(product.images[0]);
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  useImagePreloader(product.images);
 
   const handleMouseEnter = () => {
     if (product.images[1]) {
@@ -44,37 +43,19 @@ export function ProductItem({ product }: ProductItemProps) {
           <Image
             src={imageError ? "/img/fallback-image.webp" : displayImage}
             alt={product.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onError={() => setImageError(true)}
             onLoad={() => setIsLoading(false)}
-            priority={false}
+            loading="lazy"
+            quality={75}
           />
 
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-text-primary/0 group-hover:bg-text-primary/5 transition-colors duration-300" />
-
-          {/* Quick Actions */}
-          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="bg-surface-primary/90 backdrop-blur-sm rounded-full p-2 shadow-soft">
-              <svg
-                className="w-4 h-4 text-text-secondary"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </div>
-          </div>
+          {/* Simplified Hover Overlay */}
+          <div className="absolute inset-0 bg-text-primary/0 group-hover:bg-text-primary/5 transition-colors duration-200" />
         </div>
 
         {/* Product Info */}
@@ -94,15 +75,8 @@ export function ProductItem({ product }: ProductItemProps) {
               </span>
             )}
           </div>
-
-          {/* Product Details */}
-          {product.description && (
-            <p className="text-sm text-text-secondary line-clamp-2 group-hover:text-text-primary transition-colors duration-200">
-              {product.description}
-            </p>
-          )}
         </div>
       </Link>
     </article>
   );
-}
+});
