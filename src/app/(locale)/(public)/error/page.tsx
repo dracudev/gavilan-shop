@@ -14,16 +14,18 @@ export default function ErrorPage({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+  error?: Error & { digest?: string };
+  reset?: () => void;
+} = {}) {
   const router = useRouter();
 
   useEffect(() => {
     // Log error to console and potentially to error tracking service
-    console.error("Page Error:", error);
-    // TODO: In production, send to error tracking service
-    // trackError(error);
+    if (error) {
+      console.error("Page Error:", error);
+      // TODO: In production, send to error tracking service
+      // trackError(error);
+    }
   }, [error]);
 
   const handleGoHome = () => {
@@ -35,7 +37,12 @@ export default function ErrorPage({
   };
 
   const handleRetry = () => {
-    reset();
+    if (reset) {
+      reset();
+    } else {
+      // If no reset function, just reload the page
+      window.location.reload();
+    }
   };
 
   return (
@@ -43,7 +50,7 @@ export default function ErrorPage({
       <div className="max-w-2xl w-full">
         {/* Main Error Card */}
         <Card variant="elevated" className="text-center">
-          <CardHeader className="pb-8">
+          <CardHeader className="pb-8 flex-col items-center justify-center text-center">
             {/* Error Icon */}
             <div className="w-20 h-20 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
@@ -53,7 +60,7 @@ export default function ErrorPage({
               >
                 <path
                   fillRule="evenodd"
-                  d="M2.25 12c0-5.385 4.365-9.75 9.75 4.365 9.75 9.75s-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
                   clipRule="evenodd"
                 />
               </svg>
@@ -71,83 +78,73 @@ export default function ErrorPage({
           <CardContent className="pb-8">
             <div className="space-y-6">
               {/* Error Details */}
-              <div className="p-4 bg-error/5 border border-error/20 rounded-lg text-left">
-                <div className="flex items-center space-x-2 mb-3">
-                  <svg
-                    className="w-5 h-5 text-error flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="text-sm font-medium text-error">
-                    Error Details
-                  </span>
-                </div>
-                <p className="text-sm text-text-secondary font-mono break-words">
-                  {error.message || "Unknown error"}
-                </p>
-                {error.digest && (
-                  <p className="text-xs text-text-muted mt-2">
-                    Error ID: {error.digest}
+              {error && (
+                <div className="p-4 bg-error/5 border border-error/20 rounded-lg text-left">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg
+                      className="w-5 h-5 text-error flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="text-sm font-medium text-error">
+                      Error Details
+                    </span>
+                  </div>
+                  <p className="text-sm text-text-secondary font-mono break-words">
+                    {error.message || "Unknown error"}
                   </p>
-                )}
-              </div>
+                  {error.digest && (
+                    <p className="text-xs text-text-muted mt-2">
+                      Error ID: {error.digest}
+                    </p>
+                  )}
+                </div>
+              )}
 
               {/* Help Information */}
-              <div className="text-left space-y-4">
+              <div className="text-center space-y-4">
                 <h3 className="text-lg font-semibold text-text-primary">
                   What can you do?
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <p className="font-medium text-text-primary">
-                          Try again
-                        </p>
-                        <p className="text-sm text-text-secondary">
-                          The issue might be temporary
-                        </p>
-                      </div>
+                  <div className="space-y-3 text-center">
+                    <div className="space-y-2">
+                      <p className="font-medium text-text-primary">
+                        Try again
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        The issue might be temporary
+                      </p>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <p className="font-medium text-text-primary">
-                          Go to homepage
-                        </p>
-                        <p className="text-sm text-text-secondary">
-                          Return to the main page
-                        </p>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="font-medium text-text-primary">
+                        Go to homepage
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        Return to the main page
+                      </p>
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <p className="font-medium text-text-primary">
-                          Contact support
-                        </p>
-                        <p className="text-sm text-text-secondary">
-                          If the problem persists
-                        </p>
-                      </div>
+                  <div className="space-y-3 text-center">
+                    <div className="space-y-2">
+                      <p className="font-medium text-text-primary">
+                        Contact support
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        If the problem persists
+                      </p>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <p className="font-medium text-text-primary">Go back</p>
-                        <p className="text-sm text-text-secondary">
-                          Return to the previous page
-                        </p>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="font-medium text-text-primary">Go back</p>
+                      <p className="text-sm text-text-secondary">
+                        Return to the previous page
+                      </p>
                     </div>
                   </div>
                 </div>
