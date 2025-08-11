@@ -112,19 +112,19 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
                 <SidebarLink
                   href="/category/men"
                   icon={<IoManOutline size={20} />}
-                  label="Men's Hats"
+                  label="Men"
                   onClick={toggleSideBar}
                 />
                 <SidebarLink
                   href="/category/women"
                   icon={<IoWomanOutline size={20} />}
-                  label="Women's Hats"
+                  label="Women"
                   onClick={toggleSideBar}
                 />
                 <SidebarLink
                   href="/category/kid"
                   icon={<IoAccessibilityOutline size={20} />}
-                  label="Kids' Hats"
+                  label="Kids"
                   onClick={toggleSideBar}
                 />
               </div>

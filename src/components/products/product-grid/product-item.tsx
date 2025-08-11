@@ -4,6 +4,7 @@ import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, memo } from "react";
+import { Badge } from "@/components/ui/badge/badge";
 
 interface ProductItemProps {
   product: Product;
@@ -54,7 +55,6 @@ export const ProductItem = memo(function ProductItem({
             quality={75}
           />
 
-          {/* Simplified Hover Overlay */}
           <div className="absolute inset-0 bg-text-primary/0 group-hover:bg-text-primary/5 transition-colors duration-200" />
         </div>
 
@@ -69,10 +69,14 @@ export const ProductItem = memo(function ProductItem({
               {product.price}€
             </span>
 
-            {product.gender && (
-              <span className="text-xs font-medium text-text-muted uppercase tracking-wider px-2 py-1 bg-surface-secondary rounded-md">
-                {product.gender}
-              </span>
+            {product.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 max-w-[50%]">
+                {product.tags.slice(0, 3).map((tag, index) => (
+                  <Badge key={index} variant="default" size="sm">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
             )}
           </div>
         </div>
