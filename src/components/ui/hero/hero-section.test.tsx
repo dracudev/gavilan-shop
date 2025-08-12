@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { HeroSection } from "./hero-section";
+import { HERO_VARIANTS } from "./hero-variants";
 import React from "react";
 
 // Types for mocks
@@ -77,15 +78,18 @@ describe("HeroSection", () => {
     expect(screen.getByText("Our Story")).toBeInTheDocument();
   });
 
-  it("renders with custom props", () => {
-    const customProps = {
+  it("renders with custom variant", () => {
+    const customVariant = {
+      id: "test",
+      name: "Test Variant",
       headline: "Custom Headline",
       subheading: "Custom subheading text",
       primaryCtaText: "Shop Now",
       secondaryCtaText: "Learn More",
+      theme: "default" as const,
     };
 
-    render(<HeroSection {...customProps} />);
+    render(<HeroSection variant={customVariant} />);
 
     expect(screen.getByText("Custom Headline")).toBeInTheDocument();
     expect(screen.getByText("Custom subheading text")).toBeInTheDocument();
@@ -102,7 +106,9 @@ describe("HeroSection", () => {
       "El Gavilán Hero Section"
     );
 
-    const primaryCta = screen.getByRole("link", { name: /Explore Collection/ });
+    const primaryCta = screen.getByRole("button", {
+      name: /Explore Collection/,
+    });
     expect(primaryCta).toHaveAttribute("aria-label");
 
     const secondaryCta = screen.getByRole("link", { name: /Our Story/ });
@@ -117,16 +123,40 @@ describe("HeroSection", () => {
     expect(screen.getByText("Traditional Excellence")).toBeInTheDocument();
   });
 
-  it("renders brand badge with establishment year", () => {
+  it("renders +145 years statistics", () => {
     render(<HeroSection />);
 
-    expect(screen.getByText("Est. 1880 • Alicante, Spain")).toBeInTheDocument();
+    expect(screen.getByText("+145")).toBeInTheDocument();
+    expect(screen.getByText("Years of Excellence")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Authentic Spanish craftsmanship from the heart of Alicante"
+      )
+    ).toBeInTheDocument();
   });
 
-  it("renders scroll indicator", () => {
+  it("renders heritage variant by default", () => {
     render(<HeroSection />);
 
-    expect(screen.getByText("Scroll to discover")).toBeInTheDocument();
+    expect(
+      screen.getByText("Crafting Timeless Elegance Since 1880")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Over a century of artisanal hats, bags, and accessories, crafted for those who value quality and style."
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("renders different variants correctly", () => {
+    render(<HeroSection variant={HERO_VARIANTS.elegant} />);
+
+    expect(screen.getByText("Elegance Since 1880")).toBeInTheDocument();
+    expect(
+      screen.getByText(/Discover our collection of premium leather goods/)
+    ).toBeInTheDocument();
+    expect(screen.getByText("Shop Now")).toBeInTheDocument();
+    expect(screen.getByText("Learn More")).toBeInTheDocument();
   });
 
   it("applies custom className", () => {
