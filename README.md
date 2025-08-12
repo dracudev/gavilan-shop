@@ -47,23 +47,29 @@
 ### Steps
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/dracudev/gavilan-shop.git
    cd gavilan-shop
    ```
+
 2. Install dependencies:
+
    ```bash
    npm install
    # or
    yarn install
    ```
+
 3. Set up environment variables. Create a `.env.local` file and add the necessary variables for Supabase and Stripe.
 4. Start the development server:
+
    ```bash
    npm run dev
    # or
    yarn dev
    ```
+
 5. Open `http://localhost:3000` in your browser.
 
 ## Usage
@@ -105,6 +111,6 @@ The project is ready for deployment and accesible on: **[Live Demo](https://gavi
 
 ---
 
-For any inquiries, reach out at **contact@gavilanshop.com**.
+For any inquiries, reach out at **<contact@gavilanshop.com>**.
 
 This project is licensed under the [MIT License](LICENSE).

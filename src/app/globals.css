@@ -63,16 +63,7 @@
   --text-muted: #8a7968;
   --text-inverse: #ffffff;
 
-  /* Legacy Variables */
-  --shadow-color: rgba(44, 24, 16, 0.12);
-  --sidebar-bg: rgba(250, 249, 247, 0.95);
-  --sidebar-hover: rgba(187, 138, 100, 0.1);
-  --input-bg: #f9f8f6;
-  --input-text: #2c1810;
-  --separator: rgba(44, 24, 16, 0.12);
-  --overlay: rgba(44, 24, 16, 0.4);
-
-  /* Enhanced Shadows */
+  /* Shadows */
   --shadow-subtle: 0 1px 2px 0 rgba(44, 24, 16, 0.05);
   --shadow-soft: 0 1px 3px 0 rgba(44, 24, 16, 0.1),
     0 1px 2px 0 rgba(44, 24, 16, 0.06);
@@ -161,15 +152,6 @@
   --text-muted: #a59680;
   --text-inverse: #2c1810;
 
-  /* Legacy Variables - Dark Mode */
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --sidebar-bg: rgba(26, 22, 18, 0.95);
-  --sidebar-hover: rgba(187, 138, 100, 0.15);
-  --input-bg: #2a251b;
-  --input-text: #e8dcc6;
-  --separator: rgba(232, 220, 198, 0.12);
-  --overlay: rgba(0, 0, 0, 0.6);
-
   /* Enhanced Shadows - Dark Mode */
   --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
@@ -195,7 +177,10 @@
   --info-color: #2563eb;
 }
 
-/* Base Body Styling */
+html {
+  overflow-x: hidden;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -205,6 +190,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Custom Animations */
