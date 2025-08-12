@@ -1,116 +1,182 @@
-# El Gavilán | Ecommerce
+# El Gavilán | E-commerce Platform
 
 ![El Gavilán](public/img/mockup-red.png)
 
-## Table of contents
+> A modern e-commerce platform for a traditional hat shop established in 1880, blending heritage with contemporary digital experiences.
 
-- [Description](#description)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-gavilan--shop.vercel.app-blue?style=for-the-badge&logo=vercel)](https://gavilan-shop.vercel.app)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+## Table of Contents
+
+- [About](#about)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Testing](#testing)
-- [Future Improvements](#future-improvements)
-- [Deployment](#deployment)
+- [Architecture](#architecture)
+- [Design System](#design-system)
+- [Progressive Web App](#progressive-web-app)
+- [Roadmap](#roadmap)
 
-## Description
+## About
 
-**El Gavilán** is a traditional hat shop based in Alicante, established in 1970. This digital platform aims to enhance the shop's online presence and sales by offering a seamless shopping experience. Built with **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**, it ensures a modern and efficient interface for customers to browse, filter, and purchase products.
+This project represents the digital transformation of a traditional hat shop from Alicante, Spain, with over 145 years of craftsmanship heritage since 1880. This modern e-commerce platform seamlessly blends traditional elegance with cutting-edge web technologies, providing customers with an intuitive shopping experience while maintaining the shop's authentic brand identity.
 
 ## Features
 
-- 🍭 **Product Listings**: Browse a variety of hats for men, women, and children.
-- 🛒 **Shopping Cart & Checkout**: Secure and smooth checkout process with Stripe integration.
-- 👤 **User Authentication**: Secure login & signup system with Supabase.
-- 🎨 **Dark Mode**: Toggle between light and dark themes.
-- 🛠 **Admin Dashboard**: Manage products, orders, and users.
-- 🍿 **Product Carousels**: Enhanced product visuals using Swiper.
+- **Product Catalog** - Advanced filtering, search, and browsing with image carousels
+- **Shopping Cart & Checkout** - Persistent cart with secure Stripe payment processing
+- **User Authentication** - Supabase Auth with role-based access (customer/admin)
+- **Responsive Design** - Mobile-first with dark/light mode switching
+- **Admin Dashboard** - Complete product, order, and user management
+- **Progressive Web App** - Offline functionality and native app experience
+- **Real-time Updates** - Live cart updates and order tracking
+- **Security** - SSL encryption, GDPR compliance, and data protection
 
 ## Tech Stack
 
-- **Framework**: Next.js (15.1.7)
-- **UI Library**: React (19.0.0)
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand
-- **Authentication**: Supabase
-- **Payment Processing**: Stripe
-- **Icons**: React Icons
-- **Image Carousels**: Swiper
+### **Frontend**
 
-## Installation
+- **[Next.js 15.2.4](https://nextjs.org/)** - Full-stack React framework with App Router
+- **[React 19.0.0](https://react.dev/)** - UI library with latest concurrent features
+- **[TypeScript 5](https://www.typescriptlang.org/)** - Type-safe development
+- **[Tailwind CSS 3.4.1](https://tailwindcss.com/)** - Utility-first CSS framework
 
-### Prerequisites
+### **Backend & Database**
 
-- Node.js (v16+ recommended)
-- npm or yarn
+- **[Supabase](https://supabase.com/)** - PostgreSQL database with real-time subscriptions
+- **[Supabase Auth](https://supabase.com/auth)** - Authentication and authorization
+- **[Stripe](https://stripe.com/)** - Payment processing and webhooks
 
-### Steps
+### **State Management & UI**
 
-1. Clone the repository:
+- **[Zustand 5.0.3](https://github.com/pmndrs/zustand)** - Lightweight state management
+- **[React Icons 5.4.0](https://react-icons.github.io/react-icons/)** - Comprehensive icon library
+- **[Swiper 11.2.3](https://swiperjs.com/)** - Touch-enabled sliders
+- **[Framer Motion 12.23.12](https://www.framer.com/motion/)** - Production-ready animations
+- **[clsx](https://github.com/lukeed/clsx)** - Conditional CSS class composition
 
-   ```bash
-   git clone https://github.com/dracudev/gavilan-shop.git
-   cd gavilan-shop
-   ```
+### **Development & Testing**
 
-2. Install dependencies:
+- **[Jest 29.7.0](https://jestjs.io/)** - JavaScript testing framework
+- **[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)** - Component testing utilities
+- **[ESLint](https://eslint.org/)** - Code linting and quality assurance
+- **[Babel](https://babeljs.io/)** - JavaScript compilation
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+### **Build & Deployment**
 
-3. Set up environment variables. Create a `.env.local` file and add the necessary variables for Supabase and Stripe.
-4. Start the development server:
+- **[Turbopack](https://turbo.build/pack)** - Ultra-fast bundler for development
+- **[Webpack 5](https://webpack.js.org/)** - Production bundling
+- **[PostCSS](https://postcss.org/)** - CSS processing
+- **[next-pwa](https://github.com/shadowwalker/next-pwa)** - Progressive Web App features
+- **[Vercel](https://vercel.com/)** - Deployment platform
 
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+## Architecture
 
-5. Open `http://localhost:3000` in your browser.
+### **Project Structure**
 
-## Usage
-
-- Browse products and use filters to find items.
-- Add products to the cart and proceed to checkout.
-- Manage user accounts and orders.
-- Admins can add, update, or remove products through the dashboard.
-
-## Testing
-
-Automated tests are implemented using Jest and React Testing Library.
-
-To run the tests, use the following command:
-
-```bash
-npm test
-# or
-yarn test
+```tree
+gavilan-shop/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (locale)/          # Localized routes
+│   │   ├── api/               # API routes
+│   │   └── globals.css        # Global styles & CSS variables
+│   ├── components/            # React components
+│   │   ├── product/          # Product-specific components
+│   │   ├── products/         # Product listing components
+│   │   └── ui/               # Reusable UI components
+│   ├── services/             # External service integrations
+│   │   ├── supabase/         # Database & auth services
+│   │   └── stripe/           # Payment processing
+│   ├── store/                # Zustand state management
+│   ├── hooks/                # Custom React hooks
+│   ├── interfaces/           # TypeScript type definitions
+│   ├── utils/                # Utility functions
+│   └── middleware.ts         # Route protection & auth
+├── public/                   # Static assets
+├── docs/                     # Project documentation
+└── coverage/                 # Test coverage reports
 ```
 
-## Future Improvements
+## Design System
 
-- Implement end-to-end testing with Cypress and Playwright.
-- Enhance accessibility features (aria-labels).
-- Introduce AI-powered assistant (Chatbot IA).
-- Enable user reviews and ratings.
-- Expand product categories and filtering options.
-- Add more advanced analytics for admin insights.
-- Optimize performance for better mobile experiences.
-- Implement i18n translation with DeepL API.
-- Add OAuth for authentication.
-- Add Zod validations for forms and login.
-- Implement confirmation modals and toast notifications.
+### **Color**
 
-## Deployment
+- **Primary** (#bb8a64): Warm leather tones for brand actions
+- **Secondary** (#829ab5): Blue-gray for supporting elements  
+- **Accent** (#8b2635): Burgundy for call-to-actions
+- **Extended**: 50 variants per color (50-900) plus semantic states
 
-The project is ready for deployment and accesible on: **[Live Demo](https://gavilan-shop.vercel.app)**
+### **Typography**
 
----
+- **Brand Font** (Glorius): Custom font for titles and brand elements
+- **Serif** (Playfair Display): Elegant headings
+- **Body** (Inter): Clean, readable interface text
+- **Scale**: 12px-48px with responsive sizing
 
-For any inquiries, reach out at **<contact@gavilanshop.com>**.
+### **Components**
 
-This project is licensed under the [MIT License](LICENSE).
+- **Buttons**: 5 variants × 3 sizes with complete state management
+- **Cards**: 3 variants with header/content/footer sub-components
+- **Forms**: Full validation states with ARIA accessibility
+- **Navigation**: Responsive navbar/sidebar with backdrop effects
+
+### **Dark Mode**
+
+- CSS custom properties for seamless theme switching
+- System preference detection with persistent user choice
+- WCAG AA contrast compliance in both themes
+
+### **Responsive & Animation**
+
+- Mobile-first design (1-4 column grids)
+- GPU-accelerated micro-interactions
+
+## Progressive Web App
+
+El Gavilán is built as a Progressive Web App with:
+
+- **Service Worker**: Offline functionality and caching strategies
+- **Web Manifest**: Installation prompts and native app feel
+- **Responsive Design**: Works seamlessly across all devices
+- **Performance Optimizations**: Code splitting and lazy loading
+
+## Roadmap
+
+### **Phase 1: Foundation**
+
+- [x] Core e-commerce functionality
+- [x] User authentication
+- [x] Payment processing
+- [x] Responsive design
+- [x] Basic admin panel
+
+### **Phase 2: Enhancement**
+
+- [x] Dark mode implementation
+- [x] Error handling system
+- [x] Testing framework setup
+- [ ] Performance optimizations
+- [ ] SEO improvements
+
+### **Phase 3: Advanced Features**
+
+- [ ] **Internationalization**: Multi-language support with DeepL API
+- [ ] **AI Integration**: Smart product recommendations and chatbot
+- [ ] **Analytics**: Advanced reporting and insights
+- [ ] **Reviews System**: Customer feedback and ratings
+- [ ] **Wishlist**: Save items for later
+- [ ] **Email Marketing**: Automated campaigns
+
+### **Phase 4: Scale & Optimize**
+
+- [ ] **E2E Testing**: Playwright/Cypress implementation
+- [ ] **Performance**: Core Web Vitals optimization
+- [ ] **Accessibility**: WCAG 2.1 AA compliance
+- [ ] **OAuth**: Social login integration
+- [ ] **Advanced Search**: Elasticsearch integration
+- [ ] **Real-time Features**: Live inventory updates
+
+## License
+
+This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](LICENSE).
