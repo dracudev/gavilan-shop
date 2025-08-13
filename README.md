@@ -1,6 +1,6 @@
 # El Gavilán | E-commerce Platform
 
-![El Gavilán](public/img/mockup-red.png)
+![El Gavilán](public/img/gav-mockup.png)
 
 > A modern e-commerce platform for a traditional hat shop established in 1880, blending heritage with contemporary digital experiences.
 
