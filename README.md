@@ -94,8 +94,6 @@ gavilan-shop/
 │   ├── utils/                # Utility functions
 │   └── middleware.ts         # Route protection & auth
 ├── public/                   # Static assets
-├── docs/                     # Project documentation
-└── coverage/                 # Test coverage reports
 ```
 
 ## Design System
@@ -180,3 +178,4 @@ El Gavilán is built as a Progressive Web App with:
 ## License
 
 This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](LICENSE).
+
