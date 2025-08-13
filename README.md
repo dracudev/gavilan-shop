@@ -19,7 +19,7 @@
 
 ## About
 
-This project represents the digital transformation of a traditional hat shop from Alicante, Spain, with over 145 years of craftsmanship heritage since 1880. This modern e-commerce platform seamlessly blends traditional elegance with cutting-edge web technologies, providing customers with an intuitive shopping experience while maintaining the shop's authentic brand identity.
+This project represents the digital transformation of a traditional hat shop from Alicante, Spain, with over 145 years of craftsmanship heritage. This e-commerce platform seamlessly blends traditional elegance with cutting-edge web technologies, providing customers with an intuitive shopping experience while maintaining the shop's authentic brand identity.
 
 ## Features
 
@@ -178,4 +178,5 @@ El Gavilán is built as a Progressive Web App with:
 ## License
 
 This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](LICENSE).
+
 
