@@ -16,7 +16,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-text-secondary max-w-md mb-4">
-              Traditional hat shop established in 1970, bringing authentic
+              Traditional hat shop established in 1880, bringing authentic
               Spanish craftsmanship to modern fashion in Alicante.
             </p>
             <p className="text-sm text-text-muted">
