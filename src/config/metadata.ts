@@ -12,7 +12,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://gavilan-shop.vercel.app'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://gavilan-shop.vercel.app"
+  ),
 
   title: "Sombrerería El Gavilán | Orihuela, Alicante",
   description:
@@ -51,8 +53,16 @@ export const metadata: Metadata = {
       { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/android-chrome-192x192.png", type: "image/png", sizes: "192x192" },
-      { url: "/android-chrome-512x512.png", type: "image/png", sizes: "512x512" },
+      {
+        url: "/android-chrome-192x192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+      {
+        url: "/android-chrome-512x512.png",
+        type: "image/png",
+        sizes: "512x512",
+      },
     ],
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
@@ -111,13 +121,13 @@ export const metadata: Metadata = {
     siteName: "Sombrerería El Gavilán",
     images: [
       {
-        url: "/og-image.png", // TODO: Replace with actual OG image URL
+        url: "/img/gav-mockup.png",
         width: 1200,
         height: 630,
         alt: "Sombrerería El Gavilán - Orihuela, Alicante",
       },
     ],
-    locale: "en-US", 
+    locale: "en-US",
     type: "website",
   },
   twitter: {
@@ -125,7 +135,7 @@ export const metadata: Metadata = {
     title: "Sombrerería El Gavilán - Orihuela, Alicante",
     description: "Tienda de sombreros en Orihuela, Alicante desde 1880",
     creator: "@dracudev",
-    images: [], // TODO: Add Twitter card image
+    images: ["/img/gav-mockup.png"],
   },
   category: "Shopping",
 };
