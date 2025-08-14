@@ -152,7 +152,7 @@
   --text-muted: #a59680;
   --text-inverse: #2c1810;
 
-  /* Enhanced Shadows - Dark Mode */
+  /* Shadows - Dark Mode */
   --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
