@@ -92,89 +92,90 @@
 
 /* Dark Mode */
 .dark {
-  --background: #1a1612;
-  --foreground: #e8dcc6;
+  --background: #252018;
+  --foreground: #f0e6d2;
 
   /* Primary Colors - Dark Mode */
-  --primary-50: #2d1f15;
-  --primary-100: #3d2a1c;
-  --primary-200: #523624;
-  --primary-300: #6b452c;
-  --primary-400: #855635;
-  --primary-500: #a16940;
-  --primary-600: #bb7d4c;
-  --primary-700: #d49359;
-  --primary-800: #e2a970;
-  --primary-900: #edc08a;
-  --primary-color: #bb8a64;
+  --primary-50: #3a2d20;
+  --primary-100: #4a3827;
+  --primary-200: #5f452f;
+  --primary-300: #785438;
+  --primary-400: #926542;
+  --primary-500: #ae784e;
+  --primary-600: #c98d5a;
+  --primary-700: #dda368;
+  --primary-800: #e8b67e;
+  --primary-900: #f1c896;
+  --primary-color: #c98d5a;
 
   /* Secondary Colors - Dark Mode */
-  --secondary-50: #0f1419;
-  --secondary-100: #1e2832;
-  --secondary-200: #334155;
-  --secondary-300: #475569;
-  --secondary-400: #64748b;
-  --secondary-500: #829ab5;
-  --secondary-600: #94a3b8;
-  --secondary-700: #cbd5e1;
-  --secondary-800: #e2e8f0;
-  --secondary-900: #f1f5f9;
-  --secondary-color: #829ab5;
+  --secondary-50: #1a2025;
+  --secondary-100: #293038;
+  --secondary-200: #3e4c5d;
+  --secondary-300: #546172;
+  --secondary-400: #6d7887;
+  --secondary-500: #8a9aad;
+  --secondary-600: #9cabc0;
+  --secondary-700: #d3dae5;
+  --secondary-800: #e8eef5;
+  --secondary-900: #f6f8fb;
+  --secondary-color: #8a9aad;
 
   /* Accent Colors - Dark Mode */
-  --accent-50: #2d1b1d;
-  --accent-100: #3d2426;
-  --accent-200: #522d31;
-  --accent-300: #6b373d;
-  --accent-400: #85424a;
-  --accent-500: #a14f58;
-  --accent-600: #bb5d66;
-  --accent-700: #d46d76;
-  --accent-800: #e27e87;
-  --accent-900: #ed919a;
-  --accent-color: #b85c6b;
+  --accent-50: #3a252a;
+  --accent-100: #4a3035;
+  --accent-200: #5f3c42;
+  --accent-300: #784951;
+  --accent-400: #925861;
+  --accent-500: #ae6873;
+  --accent-600: #c97a85;
+  --accent-700: #dd8e98;
+  --accent-800: #e8a3ab;
+  --accent-900: #f1b8be;
+  --accent-color: #c97a85;
 
   /* Surface Colors - Dark Mode */
-  --surface-primary: #242016;
-  --surface-secondary: #2a251b;
-  --surface-elevated: #322c20;
-  --surface-glass: rgba(36, 32, 22, 0.85);
-  --surface-glass-tinted: rgba(26, 22, 18, 0.92);
+  --surface-primary: #2d2722;
+  --surface-secondary: #342f28;
+  --surface-elevated: #3c362d;
+  --surface-glass: rgba(45, 39, 34, 0.85);
+  --surface-glass-tinted: rgba(37, 32, 24, 0.92);
 
   /* Border Colors - Dark Mode */
-  --border-primary: rgba(232, 220, 198, 0.12);
-  --border-secondary: rgba(232, 220, 198, 0.08);
+  --border-primary: rgba(240, 230, 210, 0.15);
+  --border-secondary: rgba(240, 230, 210, 0.1);
   --border-accent: var(--primary-color);
 
   /* Text Colors - Dark Mode */
-  --text-primary: #e8dcc6;
-  --text-secondary: #c9b99b;
-  --text-muted: #a59680;
-  --text-inverse: #2c1810;
+  --text-primary: #f0e6d2;
+  --text-secondary: #d4c5a8;
+  --text-muted: #b5a388;
+  --text-inverse: #2d2722;
 
   /* Shadows - Dark Mode */
-  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
-    0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.4),
-    0 4px 6px -2px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 0 1px rgba(187, 138, 100, 0.1),
-    0 1px 2px 0 rgba(187, 138, 100, 0.3);
-  --shadow-inner-soft: inset 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.25),
+    0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.25),
+    0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.35),
+    0 4px 6px -2px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 0 1px rgba(201, 141, 90, 0.12),
+    0 1px 2px 0 rgba(201, 141, 90, 0.25);
+  --shadow-inner-soft: inset 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 
   /* Background Texture - Dark Mode */
   --background-texture: radial-gradient(
     circle at 1px 1px,
-    rgba(232, 220, 198, 0.02) 1px,
+    rgba(240, 230, 210, 0.025) 1px,
     transparent 0
   );
 
   /* Status Colors - Dark Mode */
-  --success-color: #16a34a;
-  --warning-color: #d97706;
-  --error-color: #dc2626;
-  --info-color: #2563eb;
+  --success-color: #22c55e;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --info-color: #3b82f6;
 }
 
 html {
