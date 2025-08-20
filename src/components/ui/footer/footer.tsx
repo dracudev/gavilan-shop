@@ -78,7 +78,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
+                {/*                <Link
                   href="/privacy"
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
@@ -91,7 +91,11 @@ export function Footer() {
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
                   Terms of Service
-                </Link>
+                </Link> */}
+                <span className="text-text-muted 0">Privacy Policy</span>
+              </li>
+              <li>
+                <span className="text-text-muted">Terms of Service</span>
               </li>
             </ul>
           </div>

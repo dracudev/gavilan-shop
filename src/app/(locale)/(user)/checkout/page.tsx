@@ -148,12 +148,15 @@ export default function CheckoutPage() {
               {/* Disclaimer */}
               <p className="text-xs mb-2">
                 By placing your order, you agree to our{" "}
-                <a
+                {/*                 <a
                   href="www.wikipedia.com"
-                  className="text-[var(--primary-color)] hover:underline decoration-[var(--primary-color)]"
+                  className="text-text-muted hover:text-primary hover:underline decoration-[var(--primary-color)]"
                 >
                   Terms of Use and Privacy Policy
-                </a>
+                </a> */}
+                <span className="text-text-muted ">
+                  Terms of Use and Privacy Policy
+                </span>
                 .
               </p>
               <div
