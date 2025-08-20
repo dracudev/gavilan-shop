@@ -5,6 +5,7 @@ import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect } from "react";
+import SocialMediaLinks from "../social-media/social-media";
 import { FaRedhat } from "react-icons/fa";
 import {
   IoAccessibilityOutline,
@@ -241,6 +242,10 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
               )
             )}
           </div>
+        </div>
+        {/* Social Media Links absolutely at the bottom */}
+        <div className="p-6 border-t border-border-primary mt-auto flex items-center justify-center">
+          <SocialMediaLinks className="!gap-3 [&_a]:!w-4 [&_a]:!h-4 [&_svg]:!w-4 [&_svg]:!h-4" />
         </div>
       </nav>
     </>

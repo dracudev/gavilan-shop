@@ -1,5 +1,7 @@
 import { titleFont } from "@/config/fonts";
+
 import Link from "next/link";
+import SocialMediaLinks from "../social-media/social-media";
 
 export function Footer() {
   return (
@@ -96,25 +98,28 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border-primary mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <div className="border-t border-border-primary mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-text-muted text-sm">
             Made with care in Alicante, Spain
           </div>
-          <div className="flex space-x-6 mt-4 sm:mt-0">
-            <Link
-              href="/about"
-              className="text-text-muted hover:text-primary transition-colors duration-200"
-            >
-              About Us
-            </Link>
-            <Link
-              href="https://maps.app.goo.gl/GraYF2QV6rQCVKVV6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-primary transition-colors duration-200"
-            >
-              Location
-            </Link>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <div className="flex space-x-6">
+              <Link
+                href="/about"
+                className="text-text-muted hover:text-primary transition-colors duration-200"
+              >
+                About Us
+              </Link>
+              <Link
+                href="https://maps.app.goo.gl/GraYF2QV6rQCVKVV6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted hover:text-primary transition-colors duration-200"
+              >
+                Location
+              </Link>
+            </div>
+            <SocialMediaLinks className="mt-0 sm:mt-0 items-center !gap-3 [&_a]:!w-4 [&_a]:!h-4 [&_svg]:!w-4 [&_svg]:!h-4" />
           </div>
         </div>
       </div>
