@@ -36,39 +36,38 @@ This project represents the digital transformation of a traditional hat shop fro
 
 ### **Frontend**
 
-- **[Next.js 15.2.4](https://nextjs.org/)** - Full-stack React framework with App Router
-- **[React 19.0.0](https://react.dev/)** - UI library with latest concurrent features
-- **[TypeScript 5](https://www.typescriptlang.org/)** - Type-safe development
-- **[Tailwind CSS 3.4.1](https://tailwindcss.com/)** - Utility-first CSS framework
+- Next.js 15.2.4
+- React 19.0.0
+- TypeScript 5
+- Tailwind CSS 3.4.1
 
 ### **Backend & Database**
 
-- **[Supabase](https://supabase.com/)** - PostgreSQL database with real-time subscriptions
-- **[Supabase Auth](https://supabase.com/auth)** - Authentication and authorization
-- **[Stripe](https://stripe.com/)** - Payment processing and webhooks
+- Supabase
+- Supabase Auth
+- Stripe
 
 ### **State Management & UI**
 
-- **[Zustand 5.0.3](https://github.com/pmndrs/zustand)** - Lightweight state management
-- **[React Icons 5.4.0](https://react-icons.github.io/react-icons/)** - Comprehensive icon library
-- **[Swiper 11.2.3](https://swiperjs.com/)** - Touch-enabled sliders
-- **[Framer Motion 12.23.12](https://www.framer.com/motion/)** - Production-ready animations
-- **[clsx](https://github.com/lukeed/clsx)** - Conditional CSS class composition
+- Zustand 5.0.3
+- React Icons 5.4.0
+- Swiper 11.2.3
+- Framer Motion 12.23.12
+- clsx
 
 ### **Development & Testing**
 
-- **[Jest 29.7.0](https://jestjs.io/)** - JavaScript testing framework
-- **[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)** - Component testing utilities
-- **[ESLint](https://eslint.org/)** - Code linting and quality assurance
-- **[Babel](https://babeljs.io/)** - JavaScript compilation
+- Jest 29.7.0
+- React Testing Library
+- ESLint
 
 ### **Build & Deployment**
 
-- **[Turbopack](https://turbo.build/pack)** - Ultra-fast bundler for development
-- **[Webpack 5](https://webpack.js.org/)** - Production bundling
-- **[PostCSS](https://postcss.org/)** - CSS processing
-- **[next-pwa](https://github.com/shadowwalker/next-pwa)** - Progressive Web App features
-- **[Vercel](https://vercel.com/)** - Deployment platform
+- Turbopack
+- Webpack 5
+- PostCSS
+- next-pwa
+- Vercel
 
 ## Architecture
 
