@@ -19,7 +19,7 @@ export async function login(formData: FormData) {
 
   if (error) {
     console.error(error);
-    redirect("/error");
+    return { error };
   }
 
   const redirectUrl = (formData.get("redirect") as string) || "/";
