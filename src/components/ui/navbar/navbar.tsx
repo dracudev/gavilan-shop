@@ -43,6 +43,7 @@ export const Navbar = () => {
                 Women
               </span>
             </Link>
+            {/*
             <Link
               href="/category/kid"
               className="px-3 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary/5 rounded-md transition-all duration-200 group"
@@ -51,6 +52,13 @@ export const Navbar = () => {
                 Kids
               </span>
             </Link>
+            */}
+            <span
+              className="px-3 py-2 text-sm font-medium text-text-muted rounded-md"
+              aria-disabled="true"
+            >
+              Kids
+            </span>
           </div>
 
           {/* Logo */}

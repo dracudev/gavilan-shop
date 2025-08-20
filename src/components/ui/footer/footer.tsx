@@ -45,12 +45,20 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/category/kid"
-                  className="text-text-secondary hover:text-primary transition-colors duration-200"
+                {/*
+                  <Link
+                    href="/category/kid"
+                    className="text-text-secondary hover:text-primary transition-colors duration-200"
+                  >
+                    Kids
+                  </Link>
+                 */}
+                <span
+                  className="text-text-muted transition-colors duration-200"
+                  aria-disabled="true"
                 >
                   Kids
-                </Link>
+                </span>
               </li>
             </ul>
           </div>
