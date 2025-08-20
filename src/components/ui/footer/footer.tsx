@@ -100,10 +100,12 @@ export function Footer() {
               About Us
             </Link>
             <Link
-              href="/locations"
+              href="https://maps.app.goo.gl/GraYF2QV6rQCVKVV6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-text-muted hover:text-primary transition-colors duration-200"
             >
-              Locations
+              Location
             </Link>
           </div>
         </div>
