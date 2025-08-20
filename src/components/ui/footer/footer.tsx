@@ -61,7 +61,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/contact"
+                  href="mailto:contact@gavilanshop.com"
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
                   Contact Us
@@ -93,12 +93,12 @@ export function Footer() {
             Made with care in Alicante, Spain
           </div>
           <div className="flex space-x-6 mt-4 sm:mt-0">
-            <a
-              href="mailto:contact@gavilanshop.com"
+            <Link
+              href="/about"
               className="text-text-muted hover:text-primary transition-colors duration-200"
             >
-              Contact
-            </a>
+              About Us
+            </Link>
             <Link
               href="/locations"
               className="text-text-muted hover:text-primary transition-colors duration-200"
