@@ -82,7 +82,7 @@ export const HeroSection = ({
       {/* Background Image */}
       <div className="hero-section__background absolute inset-0 z-0">
         <div className="relative h-full w-full">
-          {/* Mobile Banner - Show on small screens */}
+          {/* Mobile Banner */}
           <Image
             src="/img/banner-gav-mobile.jpg"
             alt="El Gavilán traditional storefront in Alicante, showcasing hats, bags, and accessories"
@@ -95,7 +95,7 @@ export const HeroSection = ({
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli/hSBc/wTT9pGPaV8x8BOdO+Y0wovJdSE5gg=="
           />
 
-          {/* Desktop Banner - Show on medium screens and up */}
+          {/* Desktop Banner */}
           <Image
             src="/img/banner-gav.jpg"
             alt="El Gavilán traditional storefront in Alicante, showcasing hats, bags, and accessories"
@@ -146,7 +146,7 @@ export const HeroSection = ({
                 {variant.subheading}
               </motion.p>
 
-              {/* Call-to-Action Buttons */}
+              {/* Call-to-Action */}
               <motion.div
                 className="hero-section__actions flex flex-col sm:flex-row gap-4 pt-4"
                 variants={itemVariants}
