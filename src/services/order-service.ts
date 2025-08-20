@@ -9,6 +9,7 @@ async function getOrders() {
       user_id,
       paid,
       total_amount,
+      created_at,
       order_items (
         title,
         image,
@@ -73,6 +74,48 @@ async function getOrder(orderId: string) {
   if (error) {
     // console.error("Error fetching order:", error);
     return null;
+  }
+
+  return data;
+}
+
+async function getOrdersByUser(userId: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("orders")
+    .select(
+      `
+      order_id,
+      user_id,
+      paid,
+      total_amount,
+      order_items (
+        title,
+        image,
+        product_id,
+        quantity,
+        size,
+        price
+      ),
+      order_shipment (
+        name,
+        surname,
+        address,
+        address_2,
+        postal_code,
+        city,
+        country,
+        telephone
+      ),
+      created_at
+    `
+    )
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching user orders:", error);
+    return [];
   }
 
   return data;
@@ -257,4 +300,5 @@ export {
   updateOrderStatus,
   updateOrder,
   deleteOrder,
+  getOrdersByUser,
 };

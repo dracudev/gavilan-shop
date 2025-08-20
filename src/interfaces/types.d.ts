@@ -51,6 +51,7 @@ export interface Order {
   user_id: string;
   total_amount: number;
   paid: boolean;
+  created_at?: string;
   order_items: {
     product_id: string;
     title: string;
@@ -69,6 +70,14 @@ export interface Order {
     country: string;
     telephone: string;
   }[];
+}
+
+export interface OrderHistoryItem {
+  id: string;
+  status: string;
+  total: string;
+  items: string;
+  date: string;
 }
 
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
