@@ -1,34 +1,76 @@
 "use client";
 
 import { signup } from "@/services/supabase/actions";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
 
-export default function SignupForm({ redirect }: { redirect?: string }) {
-  const [isLoading, setIsLoading] = useState(false);
+import { useActionState } from "react";
 
-  const handleSignup = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsLoading(true);
+type SignupFormState = { error: string | { message?: string } | null };
+function getInitialState(): SignupFormState {
+  return { error: null };
+}
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    if (redirect) {
-      formData.set("redirect", redirect);
-    }
-
+function useSignupAction() {
+  const router = useRouter();
+  return async function signupAction(
+    prevState: SignupFormState,
+    formData: FormData
+  ): Promise<SignupFormState> {
     try {
-      await signup(formData);
+      const result = await signup(formData);
+      if (result?.error) {
+        return { error: result.error.message || "Signup failed" };
+      }
+      if (result?.redirectUrl) {
+        router.push(result.redirectUrl);
+      }
+      return { error: null };
     } catch (error) {
-      console.error("Signup error:", error);
-    } finally {
-      setIsLoading(false);
+      if (typeof error === "object" && error && "message" in error) {
+        return {
+          error: (error as { message?: string }).message || "Signup failed",
+        };
+      }
+      return { error: "Signup failed" };
     }
   };
+}
+
+export default function SignupForm({ redirect }: { redirect?: string }) {
+  const signupAction = useSignupAction();
+  const [state, formAction] = useActionState(signupAction, getInitialState());
 
   return (
-    <form onSubmit={handleSignup}>
+    <form action={formAction}>
       <div className="flex flex-col min-h-screen items-center justify-center">
         <h1 className="text-4xl mb-5">Sign Up</h1>
+
+        {state?.error && (
+          <div className="mb-4 bg-error-color/10 text-error-color border border-error-color rounded-md px-4 py-2 flex items-center gap-2 shadow-soft animate-fadeIn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+              />
+            </svg>
+            <span>
+              {typeof state.error === "string"
+                ? state.error
+                : state.error?.message || "Signup failed"}
+            </span>
+          </div>
+        )}
+
         <div className="flex flex-col">
           <label htmlFor="username">Username</label>
           <input
@@ -57,8 +99,10 @@ export default function SignupForm({ redirect }: { redirect?: string }) {
             required
           />
 
-          <button className="btn-primary" type="submit" disabled={isLoading}>
-            {isLoading ? "Creating Account..." : "Sign Up"}
+          {redirect && <input type="hidden" name="redirect" value={redirect} />}
+
+          <button className="btn-primary" type="submit">
+            Sign Up
           </button>
 
           <div className="flex items-center my-5">

@@ -39,11 +39,11 @@ export async function signup(formData: FormData) {
 
   if (error) {
     console.error(error);
-    redirect("/error");
+    return { error };
   }
 
   const redirectUrl = (formData.get("redirect") as string) || "/";
-  redirect(redirectUrl);
+  return { redirectUrl };
 }
 
 export async function logout() {
@@ -53,7 +53,7 @@ export async function logout() {
 
   if (error) {
     console.error("Error logging out:", error);
-    redirect("/error");
+    return { error };
   }
 
   revalidatePath("/", "layout");
