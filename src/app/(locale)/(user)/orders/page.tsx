@@ -13,10 +13,28 @@ export default function OrdersPage() {
   if (loading) {
     return <Loading />;
   }
+  if (!orders || orders.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-[800px]">
+        <IoCardOutline size={80} className="mx-5" />
+        <div className="flex flex-col items-center">
+          <h1 className="text-5xl font-bold mb-5">You have no orders</h1>
+          <p className="text-lg font-light text-center">
+            You haven&apos;t placed any orders yet.{" "}
+            <Link
+              href="/"
+              className="text-[var(--primary-color)] hover:underline decoration-[var(--primary-color)]"
+            >
+              Start shopping!
+            </Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <Title title="Orders" />
-
       <div className="mb-10">
         <table className="min-w-full rounded-lg overflow-hidden">
           <thead className="bg-gray-300 dark:bg-zinc-700  border-b">
