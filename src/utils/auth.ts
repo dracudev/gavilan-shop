@@ -8,6 +8,9 @@ interface CustomJwtPayload extends JwtPayload {
 interface User {
   id: string;
   email: string;
+  user_metadata?: {
+    display_name?: string;
+  };
 }
 
 interface UserRoleResult {
