@@ -20,6 +20,7 @@ import {
   IoTicketOutline,
   IoWomanOutline,
 } from "react-icons/io5";
+import SidebarLink from "./sidebar-link";
 
 interface User {
   id: string;
@@ -127,6 +128,7 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
                   icon={<IoAccessibilityOutline size={20} />}
                   label="Kids"
                   onClick={toggleSideBar}
+                  disabled={true}
                 />
               </div>
               <div className="border-t border-border-primary mt-6 pt-6" />
@@ -243,48 +245,11 @@ export function Sidebar({ userRole, userData }: SidebarProps) {
             )}
           </div>
         </div>
-        {/* Social Media Links absolutely at the bottom */}
+        {/* Social Media */}
         <div className="p-6 border-t border-border-primary mt-auto flex items-center justify-center">
           <SocialMediaLinks className="!gap-3 [&_a]:!w-4 [&_a]:!h-4 [&_svg]:!w-4 [&_svg]:!h-4" />
         </div>
       </nav>
     </>
-  );
-}
-
-// Reusable Sidebar Link Component
-interface SidebarLinkProps {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-  description?: string;
-  onClick: () => void;
-}
-
-function SidebarLink({
-  href,
-  icon,
-  label,
-  description,
-  onClick,
-}: SidebarLinkProps) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="flex items-center gap-3 p-3 text-text-secondary hover:text-text-primary hover:bg-surface-secondary rounded-md transition-all duration-200 group"
-    >
-      <span className="text-text-muted group-hover:text-primary transition-colors duration-200">
-        {icon}
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="font-medium text-sm truncate">{label}</div>
-        {description && (
-          <div className="text-xs text-text-muted mt-0.5 truncate">
-            {description}
-          </div>
-        )}
-      </div>
-    </Link>
   );
 }
