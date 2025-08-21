@@ -123,7 +123,7 @@ export function ProfilePageUI({
 
         {/* Main Content */}
         <div className="lg:col-span-3">
-          <Card className="p-8 bg-surface-primary border-border-primary">
+          <Card className="p-8 bg-surface-primary border-border-primary w-full max-w-full">
             {activeTab === "personal" && (
               <div>
                 <div className="flex items-center justify-between mb-6">
@@ -310,7 +310,7 @@ export function ProfilePageUI({
             )}
 
             {activeTab === "orders" && (
-              <div>
+              <div className="w-full max-w-full">
                 <h2 className="text-xl font-semibold text-text-primary mb-6">
                   Order History
                 </h2>
@@ -318,7 +318,7 @@ export function ProfilePageUI({
                 {loading ? (
                   <p className="text-text-secondary">Loading orders...</p>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-4 overflow-x-auto w-full max-w-full">
                     {!orders || orders.length === 0 ? (
                       <p className="text-text-secondary">No orders found.</p>
                     ) : (
@@ -326,35 +326,27 @@ export function ProfilePageUI({
                         .slice(-3)
                         .reverse()
                         .map((order: Order) => {
-                          console.log(
-                            "Order created_at:",
-                            order.created_at,
-                            order
-                          );
                           return (
                             <div
                               key={order.order_id}
-                              className="border border-border-secondary rounded-lg p-6 hover:bg-surface-secondary transition-colors"
+                              className="border border-border-secondary rounded-lg p-6 hover:bg-surface-secondary transition-colors min-w-0 w-full max-w-full"
                             >
-                              <div className="flex items-center justify-between mb-3">
-                                <div className="flex items-center space-x-4">
+                              <div className="flex flex-wrap items-center justify-between mb-3 min-w-0 w-full max-w-full">
+                                <div className="flex items-center space-x-4 min-w-0 flex-shrink flex-wrap">
                                   <Link
                                     href={`/orders/${order.order_id}`}
-                                    className="font-mono text-sm text-primary-600 underline hover:text-primary-800 transition-colors"
+                                    className="font-mono text-sm text-primary-600 underline hover:text-primary-800 transition-colors break-words max-w-[120px] truncate overflow-hidden"
                                   >
                                     Order-{order.order_id}
                                   </Link>
                                   <Badge
-                                    className={`px-2 py-1 text-xs rounded-full ${
-                                      order.paid
-                                        ? "bg-green-50 text-green-700 border-green-200"
-                                        : "bg-yellow-50 text-yellow-700 border-yellow-200"
-                                    }`}
+                                    variant={order.paid ? "success" : "warning"}
+                                    size="sm"
                                   >
                                     {order.paid ? "Paid" : "Pending"}
                                   </Badge>
                                 </div>
-                                <span className="font-semibold text-text-primary">
+                                <span className="font-semibold text-text-primary break-words max-w-[80px] truncate overflow-hidden flex-shrink">
                                   ${order.total_amount?.toFixed(2) ?? "0.00"}
                                 </span>
                               </div>
@@ -363,7 +355,12 @@ export function ProfilePageUI({
                                 order.order_items.length > 0 ? (
                                   <ul className="list-disc list-inside">
                                     {order.order_items.map((item, idx) => (
-                                      <li key={idx}>{item.title}</li>
+                                      <li
+                                        key={idx}
+                                        className="break-words max-w-[180px]"
+                                      >
+                                        {item.title}
+                                      </li>
                                     ))}
                                   </ul>
                                 ) : (
