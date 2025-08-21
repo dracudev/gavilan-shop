@@ -87,7 +87,7 @@ export const HeroSection = ({
             src="/img/banner-gav-mobile.jpg"
             alt="El Gavilán traditional storefront in Alicante, showcasing hats, bags, and accessories"
             fill
-            className="object-cover object-center block md:hidden"
+            className="object-cover object-center block sm:hidden"
             priority
             quality={90}
             sizes="100vw"
@@ -100,7 +100,7 @@ export const HeroSection = ({
             src="/img/banner-gav.jpg"
             alt="El Gavilán traditional storefront in Alicante, showcasing hats, bags, and accessories"
             fill
-            className="object-cover object-center hidden md:block"
+            className="object-cover object-center hidden sm:block"
             priority
             quality={90}
             sizes="100vw"
