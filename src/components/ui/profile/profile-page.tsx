@@ -13,10 +13,11 @@ import { Card } from "@/components/ui/card/card";
 import { Title } from "@/components/ui/title/title";
 import { Badge } from "@/components/ui/badge/badge";
 import Link from "next/link";
-import Image from "next/image";
-import headLogo from "@/assets/head-logo.png";
+import { Avatar } from "@/components/ui/avatar/avatar";
 
 // TODO: Define the correct UserData interface for type safety
+// TODO: Implement user UPDATE/DELETE actions
+
 export interface UserData {
   name: string;
   email: string;
@@ -85,13 +86,11 @@ export function ProfilePageUI({
           {/* Profile Summary Card */}
           <Card className="order-1 lg:order-none p-6 bg-surface-primary border-border-primary text-center mb-6 lg:mb-6 w-full">
             <div className="w-20 h-20 bg-primary-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <Image
-                src={headLogo}
+              <Avatar
                 alt="Profile logo"
-                width={64}
-                height={64}
-                className="w-16 h-16 object-contain"
-                priority
+                size="xl"
+                className="mx-auto"
+                name={userData.name}
               />
             </div>
             <h3 className="font-semibold text-text-primary mb-1">
