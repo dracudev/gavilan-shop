@@ -1,7 +1,7 @@
 import { titleFont } from "@/config/fonts";
 
 import Link from "next/link";
-import SocialMediaLinks from "../social-media/social-media";
+import SocialMediaLinks from "../ui/social-media";
 
 export function Footer() {
   return (

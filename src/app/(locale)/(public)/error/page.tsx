@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
   CardContent,
   CardFooter,
-} from "@/components/ui/card/card";
+} from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 
 export default function ErrorPage() {

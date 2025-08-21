@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Card } from "@/components/ui/card/card";
-import { Title } from "@/components/ui/title/title";
+import { Card } from "@/components/ui/card";
+import { Title } from "@/components/ui/title";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
-import { Badge } from "@/components/ui/badge/badge";
+import { Badge } from "@/components/ui/badge";
 import { FaHatCowboy, FaBagShopping, FaStar, FaAward } from "react-icons/fa6";
 import Link from "next/link";
 

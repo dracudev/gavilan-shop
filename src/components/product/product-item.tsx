@@ -4,7 +4,7 @@ import { Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, memo } from "react";
-import { Badge } from "@/components/ui/badge/badge";
+import { Badge } from "@/components/ui/badge";
 
 interface ProductItemProps {
   product: Product;

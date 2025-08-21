@@ -9,11 +9,11 @@ import {
 } from "react-icons/io5";
 import type { Order } from "@/interfaces/types";
 import useOrder from "@/hooks/order/use-order";
-import { Card } from "@/components/ui/card/card";
-import { Title } from "@/components/ui/title/title";
-import { Badge } from "@/components/ui/badge/badge";
+import { Card } from "@/components/ui/card";
+import { Title } from "@/components/ui/title";
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Avatar } from "@/components/ui/avatar/avatar";
+import { Avatar } from "@/components/ui/avatar";
 
 // TODO: Define the correct UserData interface for type safety
 // TODO: Implement user UPDATE/DELETE actions

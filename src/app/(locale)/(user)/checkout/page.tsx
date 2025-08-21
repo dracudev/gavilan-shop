@@ -1,7 +1,7 @@
 "use client";
 
-import { Title } from "@/components/ui/title/title";
-import { useToast } from "@/components/ui/toast/toast-provider";
+import { Title } from "@/components/ui/title";
+import { useToast } from "@/components/providers/toast-provider";
 import { useCartStore } from "@/store/cart/cart-store";
 import { useOrderStore } from "@/store/order/order-store";
 import Image from "next/image";

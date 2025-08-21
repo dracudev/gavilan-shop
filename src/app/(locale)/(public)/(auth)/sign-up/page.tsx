@@ -1,4 +1,4 @@
-import SignupForm from "@/components/ui/form/signup-form";
+import SignupForm from "@/components/forms/signup-form";
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

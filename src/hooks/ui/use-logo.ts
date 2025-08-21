@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/theme-context";
+import { useTheme } from "@/components/providers/theme-provider";
 
 export const useLogo = () => {
   const { theme } = useTheme();

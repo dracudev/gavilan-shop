@@ -1,8 +1,8 @@
-import { Footer } from "@/components/ui/footer/footer";
-import { Navbar } from "@/components/ui/navbar/navbar";
-import { Sidebar } from "@/components/ui/sidebar/sidebar";
-import { ToastProvider } from "@/components/ui/toast/toast-provider";
-import { ConditionalContainer } from "@/components/ui/layout/conditional-container";
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
+import { Sidebar } from "@/components/layout/sidebar/sidebar";
+import { ToastProvider } from "@/components/providers/toast-provider";
+import { ConditionalContainer } from "@/components/layout/conditional-container";
 import { checkUserRole } from "@/utils/auth";
 import CartToastInitializer from "./cart-toast-initializer";
 

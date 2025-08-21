@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button/button";
-import { Input } from "@/components/ui/input/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Card,
   CardHeader,
   CardContent,
   CardFooter,
-} from "@/components/ui/card/card";
-import { Title } from "@/components/ui/title/title";
+} from "@/components/ui/card";
+import { Title } from "@/components/ui/title";
 import { titleFont, serifFont } from "@/config/fonts";
 
 export default function StyleGuidePage() {

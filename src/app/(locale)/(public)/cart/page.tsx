@@ -1,7 +1,7 @@
 "use client";
 
 import { QtySelector } from "@/components/product/qty-selector/qty-selector";
-import { Title } from "@/components/ui/title/title";
+import { Title } from "@/components/ui/title";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";

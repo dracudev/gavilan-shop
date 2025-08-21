@@ -1,43 +1,45 @@
 "use client";
 
-import { login } from "@/services/supabase/actions";
+import { signup } from "@/services/supabase/actions";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Card } from "@/components/ui/card/card";
-import { useFormStatus } from "react-dom";
+import { Card } from "@/components/ui/card";
 import { useActionState } from "react";
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button className="btn-primary w-full" type="submit" disabled={pending}>
-      {pending ? "Signing in..." : "Login"}
-    </button>
-  );
-}
-
-type LoginFormState = { error: string | { message?: string } | null };
-function getInitialState(): LoginFormState {
+type SignupFormState = { error: string | { message?: string } | null };
+function getInitialState(): SignupFormState {
   return { error: null };
 }
 
-// Server action wrapper for useFormState
-async function loginAction(
-  prevState: LoginFormState,
-  formData: FormData
-): Promise<LoginFormState> {
-  const result = await login(formData);
-  if (result && result.error) {
-    return { error: result.error.message || "Invalid credentials" };
-  }
-  return { error: null };
+function useSignupAction() {
+  const router = useRouter();
+  return async function signupAction(
+    prevState: SignupFormState,
+    formData: FormData
+  ): Promise<SignupFormState> {
+    try {
+      const result = await signup(formData);
+      if (result?.error) {
+        return { error: result.error.message || "Signup failed" };
+      }
+      if (result?.redirectUrl) {
+        router.push(result.redirectUrl);
+      }
+      return { error: null };
+    } catch (error) {
+      if (typeof error === "object" && error && "message" in error) {
+        return {
+          error: (error as { message?: string }).message || "Signup failed",
+        };
+      }
+      return { error: "Signup failed" };
+    }
+  };
 }
 
-type LoginFormProps = {
-  redirect?: string;
-};
-
-export default function LoginForm({ redirect }: LoginFormProps) {
-  const [state, formAction] = useActionState(loginAction, getInitialState());
+export default function SignupForm({ redirect }: { redirect?: string }) {
+  const signupAction = useSignupAction();
+  const [state, formAction] = useActionState(signupAction, getInitialState());
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 sm:p-6 lg:p-8">
@@ -47,7 +49,7 @@ export default function LoginForm({ redirect }: LoginFormProps) {
         className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl min-w-0 bg-surface-primary"
       >
         <form action={formAction} className="space-y-4 sm:space-y-6">
-          <h1 className="text-4xl mb-5 text-center">Login</h1>
+          <h1 className="text-4xl mb-5 text-center">Sign Up</h1>
 
           {state?.error && (
             <div className="mb-4 bg-error-color/10 text-error-color border border-error-color rounded-md px-3 sm:px-4 py-2 sm:py-3 flex gap-2 shadow-soft animate-fadeIn justify-center ">
@@ -69,12 +71,29 @@ export default function LoginForm({ redirect }: LoginFormProps) {
               <span className="text-sm sm:text-base leading-tight">
                 {typeof state.error === "string"
                   ? state.error
-                  : state.error?.message || "Invalid credentials"}
+                  : state.error?.message || "Signup failed"}
               </span>
             </div>
           )}
 
           <div className="space-y-4 sm:space-y-5">
+            <div className="space-y-1 sm:space-y-2">
+              <label
+                htmlFor="username"
+                className="block text-sm sm:text-base font-medium"
+              >
+                Username
+              </label>
+              <input
+                className="w-full px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3 border bg-gray-200 dark:text-black rounded-md sm:rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                id="username"
+                name="username"
+                type="text"
+                required
+                placeholder="Enter your username"
+              />
+            </div>
+
             <div className="space-y-1 sm:space-y-2">
               <label
                 htmlFor="email"
@@ -115,7 +134,9 @@ export default function LoginForm({ redirect }: LoginFormProps) {
             )}
 
             <div className="pt-2">
-              <SubmitButton />
+              <button className="btn-primary w-full" type="submit">
+                Sign Up
+              </button>
             </div>
 
             <div className="flex items-center my-4 sm:my-6">
@@ -127,10 +148,10 @@ export default function LoginForm({ redirect }: LoginFormProps) {
             </div>
 
             <Link
-              href="/sign-up"
+              href="/login"
               className="btn-secondary w-full text-center block py-2 sm:py-2.5 lg:py-3 text-sm sm:text-base rounded-md sm:rounded-lg transition-all"
             >
-              Create new account
+              Login
             </Link>
           </div>
         </form>

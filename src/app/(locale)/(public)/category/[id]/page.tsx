@@ -1,5 +1,5 @@
-import { ProductGrid } from "@/components/products/product-grid/product-grid";
-import { Title } from "@/components/ui/title/title";
+import { ProductGrid } from "@/components/product/product-grid";
+import { Title } from "@/components/ui/title";
 import { notFound } from "next/navigation";
 import { Category } from "@/interfaces";
 import { getProductsByGender } from "@/services/product-service";

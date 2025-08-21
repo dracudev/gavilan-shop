@@ -1,6 +1,6 @@
 "use client";
 
-import { Title } from "@/components/ui/title/title";
+import { Title } from "@/components/ui/title";
 import { useState } from "react";
 import { useOrderStore } from "@/store/order/order-store";
 import { redirect } from "next/navigation";

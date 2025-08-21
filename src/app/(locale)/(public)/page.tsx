@@ -1,7 +1,7 @@
-import { ProductGrid } from "@/components/products/product-grid/product-grid";
-import { Title } from "@/components/ui/title/title";
-import { HeroSection } from "@/components/ui/hero/hero-section";
-import { HERO_VARIANTS } from "@/components/ui/hero/hero-variants";
+import { ProductGrid } from "@/components/product/product-grid";
+import { Title } from "@/components/ui/title";
+import { HeroSection } from "@/components/layout/hero/hero-section";
+import { HERO_VARIANTS } from "@/components/layout/hero/hero-variants";
 import { Product } from "@/interfaces";
 import { getProducts } from "@/services/product-service";
 

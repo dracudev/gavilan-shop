@@ -1,4 +1,4 @@
-import { ProfilePageUI, UserData } from "@/components/ui/profile/profile-page";
+import { ProfilePageUI, UserData } from "@/components/layout/profile-page";
 import { checkUserRole } from "@/utils/auth";
 
 export default async function ProfilePage() {

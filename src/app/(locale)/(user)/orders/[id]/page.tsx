@@ -1,7 +1,7 @@
 "use client";
 
-import { Title } from "@/components/ui/title/title";
-import Loading from "@/components/ui/loading/loading";
+import { Title } from "@/components/ui/title";
+import Loading from "@/components/ui/loading";
 import { useFetchOrder } from "@/hooks/order/use-fetch-order";
 import clsx from "clsx";
 import Image from "next/image";

@@ -5,7 +5,7 @@ import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect } from "react";
-import SocialMediaLinks from "../social-media/social-media";
+import SocialMediaLinks from "@/components/ui/social-media";
 import { FaRedhat } from "react-icons/fa";
 import {
   IoAccessibilityOutline,

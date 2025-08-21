@@ -1,6 +1,6 @@
 import { metadata } from "@/config/metadata";
 import "./globals.css";
-import { ThemeProvider } from "@/context/theme-context";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { titleFont, bodyFont, serifFont } from "@/config/fonts";
 
 export { metadata };
