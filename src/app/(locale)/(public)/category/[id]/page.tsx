@@ -36,7 +36,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
-      <Title title={labels[id as Category]} className="mb-2 ps-5 sm:ps-0" />
+      <Title title={labels[id as Category]} className="mb-2" />
       <ProductGrid products={categoryProducts} />
     </>
   );
